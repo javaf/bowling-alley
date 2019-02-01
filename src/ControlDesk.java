@@ -39,199 +39,197 @@
  * Class that represents control desk
  *
  */
-
 import java.util.*;
 import java.io.*;
 
 class ControlDesk extends Thread {
 
-	/** The collection of Lanes */
-	private HashSet lanes;
+  /**
+   * The collection of Lanes
+   */
+  private HashSet lanes;
 
-	/** The party wait queue */
-	private Queue partyQueue;
+  /**
+   * The party wait queue
+   */
+  private Queue partyQueue;
 
-	/** The number of lanes represented */
-	private int numLanes;
-	
-	/** The collection of subscribers */
-	private Vector subscribers;
+  /**
+   * The number of lanes represented
+   */
+  private int numLanes;
 
-    /**
-     * Constructor for the ControlDesk class
-     *
-     * @param numlanes	the numbler of lanes to be represented
-     *
-     */
+  /**
+   * The collection of subscribers
+   */
+  private Vector subscribers;
 
-	public ControlDesk(int numLanes) {
-		this.numLanes = numLanes;
-		lanes = new HashSet(numLanes);
-		partyQueue = new Queue();
+  /**
+   * Constructor for the ControlDesk class
+   *
+   * @param numlanes	the numbler of lanes to be represented
+   *
+   */
+  public ControlDesk(int numLanes) {
+    this.numLanes = numLanes;
+    lanes = new HashSet(numLanes);
+    partyQueue = new Queue();
 
-		subscribers = new Vector();
+    subscribers = new Vector();
 
-		for (int i = 0; i < numLanes; i++) {
-			lanes.add(new Lane());
-		}
-		
-		this.start();
+    for (int i = 0; i < numLanes; i++) {
+      lanes.add(new Lane());
+    }
 
-	}
-	
-	/**
-	 * Main loop for ControlDesk's thread
-	 * 
-	 */
-	public void run() {
-		while (true) {
-			
-			assignLane();
-			
-			try {
-				sleep(250);
-			} catch (Exception e) {}
-		}
-	}
-		
+    this.start();
 
-    /**
-     * Retrieves a matching Bowler from the bowler database.
-     *
-     * @param nickName	The NickName of the Bowler
-     *
-     * @return a Bowler object.
-     *
-     */
+  }
 
-	private Bowler registerPatron(String nickName) {
-		Bowler patron = null;
+  /**
+   * Main loop for ControlDesk's thread
+   *
+   */
+  public void run() {
+    while (true) {
 
-		try {
-			// only one patron / nick.... no dupes, no checks
+      assignLane();
 
-			patron = BowlerFile.getBowlerInfo(nickName);
+      try {
+        sleep(250);
+      } catch (Exception e) {
+      }
+    }
+  }
 
-		} catch (FileNotFoundException e) {
-			System.err.println("Error..." + e);
-		} catch (IOException e) {
-			System.err.println("Error..." + e);
-		}
+  /**
+   * Retrieves a matching Bowler from the bowler database.
+   *
+   * @param nickName	The NickName of the Bowler
+   *
+   * @return a Bowler object.
+   *
+   */
+  private Bowler registerPatron(String nickName) {
+    Bowler patron = null;
 
-		return patron;
-	}
+    try {
+      // only one patron / nick.... no dupes, no checks
 
-    /**
-     * Iterate through the available lanes and assign the paties in the wait queue if lanes are available.
-     *
-     */
+      patron = BowlerFile.getBowlerInfo(nickName);
 
-	public void assignLane() {
-		Iterator it = lanes.iterator();
+    } catch (FileNotFoundException e) {
+      System.err.println("Error..." + e);
+    } catch (IOException e) {
+      System.err.println("Error..." + e);
+    }
 
-		while (it.hasNext() && partyQueue.hasMoreElements()) {
-			Lane curLane = (Lane) it.next();
+    return patron;
+  }
 
-			if (curLane.isPartyAssigned() == false) {
-				System.out.println("ok... assigning this party");
-				curLane.assignParty(((Party) partyQueue.next()));
-			}
-		}
-		publish(new ControlDeskEvent(getPartyQueue()));
-	}
+  /**
+   * Iterate through the available lanes and assign the paties in the wait queue
+   * if lanes are available.
+   *
+   */
+  public void assignLane() {
+    Iterator it = lanes.iterator();
 
-    /**
-     */
+    while (it.hasNext() && partyQueue.hasMoreElements()) {
+      Lane curLane = (Lane) it.next();
 
-	public void viewScores(Lane ln) {
-		// TODO: attach a LaneScoreView object to that lane
-	}
+      if (curLane.isPartyAssigned() == false) {
+        System.out.println("ok... assigning this party");
+        curLane.assignParty(((Party) partyQueue.next()));
+      }
+    }
+    publish(new ControlDeskEvent(getPartyQueue()));
+  }
 
-    /**
-     * Creates a party from a Vector of nickNAmes and adds them to the wait queue.
-     *
-     * @param partyNicks	A Vector of NickNames
-     *
-     */
+  /**
+   */
+  public void viewScores(Lane ln) {
+    // TODO: attach a LaneScoreView object to that lane
+  }
 
-	public void addPartyQueue(Vector partyNicks) {
-		Vector partyBowlers = new Vector();
-		for (int i = 0; i < partyNicks.size(); i++) {
-			Bowler newBowler = registerPatron(((String) partyNicks.get(i)));
-			partyBowlers.add(newBowler);
-		}
-		Party newParty = new Party(partyBowlers);
-		partyQueue.add(newParty);
-		publish(new ControlDeskEvent(getPartyQueue()));
-	}
+  /**
+   * Creates a party from a Vector of nickNAmes and adds them to the wait queue.
+   *
+   * @param partyNicks	A Vector of NickNames
+   *
+   */
+  public void addPartyQueue(Vector partyNicks) {
+    Vector partyBowlers = new Vector();
+    for (int i = 0; i < partyNicks.size(); i++) {
+      Bowler newBowler = registerPatron(((String) partyNicks.get(i)));
+      partyBowlers.add(newBowler);
+    }
+    Party newParty = new Party(partyBowlers);
+    partyQueue.add(newParty);
+    publish(new ControlDeskEvent(getPartyQueue()));
+  }
 
-    /**
-     * Returns a Vector of party names to be displayed in the GUI representation of the wait queue.
-	 *
-     * @return a Vecotr of Strings
-     *
-     */
+  /**
+   * Returns a Vector of party names to be displayed in the GUI representation
+   * of the wait queue.
+   *
+   * @return a Vecotr of Strings
+   *
+   */
+  public Vector getPartyQueue() {
+    Vector displayPartyQueue = new Vector();
+    for (int i = 0; i < ((Vector) partyQueue.asVector()).size(); i++) {
+      String nextParty
+              = ((Bowler) ((Vector) ((Party) partyQueue.asVector().get(i)).getMembers())
+                      .get(0))
+                      .getNickName() + "'s Party";
+      displayPartyQueue.addElement(nextParty);
+    }
+    return displayPartyQueue;
+  }
 
-	public Vector getPartyQueue() {
-		Vector displayPartyQueue = new Vector();
-		for ( int i=0; i < ( (Vector)partyQueue.asVector()).size(); i++ ) {
-			String nextParty =
-				((Bowler) ((Vector) ((Party) partyQueue.asVector().get( i ) ).getMembers())
-					.get(0))
-					.getNickName() + "'s Party";
-			displayPartyQueue.addElement(nextParty);
-		}
-		return displayPartyQueue;
-	}
+  /**
+   * Accessor for the number of lanes represented by the ControlDesk
+   *
+   * @return an int containing the number of lanes represented
+   *
+   */
+  public int getNumLanes() {
+    return numLanes;
+  }
 
-    /**
-     * Accessor for the number of lanes represented by the ControlDesk
-     * 
-     * @return an int containing the number of lanes represented
-     *
-     */
+  /**
+   * Allows objects to subscribe as observers
+   *
+   * @param adding	the ControlDeskObserver that will be subscribed
+   *
+   */
+  public void subscribe(ControlDeskObserver adding) {
+    subscribers.add(adding);
+  }
 
-	public int getNumLanes() {
-		return numLanes;
-	}
+  /**
+   * Broadcast an event to subscribing objects.
+   *
+   * @param event	the ControlDeskEvent to broadcast
+   *
+   */
+  public void publish(ControlDeskEvent event) {
+    Iterator eventIterator = subscribers.iterator();
+    while (eventIterator.hasNext()) {
+      ((ControlDeskObserver) eventIterator
+              .next())
+              .receiveControlDeskEvent(
+                      event);
+    }
+  }
 
-    /**
-     * Allows objects to subscribe as observers
-     * 
-     * @param adding	the ControlDeskObserver that will be subscribed
-     *
-     */
-
-	public void subscribe(ControlDeskObserver adding) {
-		subscribers.add(adding);
-	}
-
-    /**
-     * Broadcast an event to subscribing objects.
-     * 
-     * @param event	the ControlDeskEvent to broadcast
-     *
-     */
-
-	public void publish(ControlDeskEvent event) {
-		Iterator eventIterator = subscribers.iterator();
-		while (eventIterator.hasNext()) {
-			(
-				(ControlDeskObserver) eventIterator
-					.next())
-					.receiveControlDeskEvent(
-				event);
-		}
-	}
-
-    /**
-     * Accessor method for lanes
-     * 
-     * @return a HashSet of Lanes
-     *
-     */
-
-	public HashSet getLanes() {
-		return lanes;
-	}
+  /**
+   * Accessor method for lanes
+   *
+   * @return a HashSet of Lanes
+   *
+   */
+  public HashSet getLanes() {
+    return lanes;
+  }
 }
