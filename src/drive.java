@@ -1,20 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+import java.util.Vector;
+import java.io.*;
 
-/**
- *
- * @author wolfram77
- */
 public class drive {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
-    
+	public static void main(String[] args) {
+
+		int numLanes = 3;
+		int maxPatronsPerParty=5;
+
+		Alley a = new Alley( numLanes );
+		ControlDesk controlDesk = a.getControlDesk();
+
+		ControlDeskView cdv = new ControlDeskView( controlDesk, maxPatronsPerParty);
+		controlDesk.subscribe( cdv );
+
+	}
 }
