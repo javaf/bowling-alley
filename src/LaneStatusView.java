@@ -1,38 +1,25 @@
-
-/**
- *
- * To change this generated comment edit the template variable "typecomment":
- * Window>Preferences>Java>Templates.
- * To enable and disable the creation of type comments go to
- * Window>Preferences>Java>Code Generation.
- */
+import iiit.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.event.*;
+
 
 public class LaneStatusView implements ActionListener, LaneObserver, PinsetterObserver {
-
   private JPanel jp;
-
   private JLabel curBowler, foul, pinsDown;
   private JButton viewLane;
   private JButton viewPinSetter, maintenance;
-
   private PinSetterView psv;
   private LaneView lv;
   private Lane lane;
   int laneNum;
-
   boolean laneShowing;
   boolean psShowing;
 
+  
   public LaneStatusView(Lane lane, int laneNum) {
-
     this.lane = lane;
     this.laneNum = laneNum;
-
     laneShowing = false;
     psShowing = false;
 
@@ -52,56 +39,32 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
     JLabel pdLabel = new JLabel("Pins Down: ");
     pinsDown = new JLabel("0");
 
-    // Button Panel
-    JPanel buttonPanel = new JPanel();
-    buttonPanel.setLayout(new FlowLayout());
-
-    Insets buttonMargin = new Insets(4, 4, 4, 4);
-
-    viewLane = new JButton("View Lane");
-    JPanel viewLanePanel = new JPanel();
-    viewLanePanel.setLayout(new FlowLayout());
-    viewLane.addActionListener(this);
-    viewLanePanel.add(viewLane);
-
-    viewPinSetter = new JButton("Pinsetter");
-    JPanel viewPinSetterPanel = new JPanel();
-    viewPinSetterPanel.setLayout(new FlowLayout());
-    viewPinSetter.addActionListener(this);
-    viewPinSetterPanel.add(viewPinSetter);
-
-    maintenance = new JButton("     ");
-    maintenance.setBackground(Color.GREEN);
-    JPanel maintenancePanel = new JPanel();
-    maintenancePanel.setLayout(new FlowLayout());
-    maintenance.addActionListener(this);
-    maintenancePanel.add(maintenance);
-
+    JPanel buttons = new JPanel();
+    buttons.setLayout(new FlowLayout());
+    buttons.add(new JButtonPanel(viewLane = new JButton("View Lane"), this));
+    buttons.add(new JButtonPanel(viewPinSetter = new JButton("Pinsetter"), this));
+    buttons.add(new JButtonPanel(maintenance = new JButton("     "), this));
     viewLane.setEnabled(false);
     viewPinSetter.setEnabled(false);
-
-    buttonPanel.add(viewLanePanel);
-    buttonPanel.add(viewPinSetterPanel);
-    buttonPanel.add(maintenancePanel);
+    maintenance.setBackground(Color.GREEN);
 
     jp.add(cLabel);
     jp.add(curBowler);
-//		jp.add( fLabel );
-//		jp.add( foul );
+    // jp.add( fLabel );
+    // jp.add( foul );
     jp.add(pdLabel);
     jp.add(pinsDown);
-
-    jp.add(buttonPanel);
-
+    jp.add(buttons);
   }
 
   public JPanel showLane() {
     return jp;
   }
 
-  public void actionPerformed(ActionEvent e) {
+  public void actionPerformed(ActionEvent event) {
+    Object source = event.getSource();
     if (lane.isPartyAssigned()) {
-      if (e.getSource().equals(viewPinSetter)) {
+      if (source.equals(viewPinSetter)) {
         if (psShowing == false) {
           psv.show();
           psShowing = true;
@@ -111,7 +74,7 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
         }
       }
     }
-    if (e.getSource().equals(viewLane)) {
+    if (source.equals(viewLane)) {
       if (lane.isPartyAssigned()) {
         if (laneShowing == false) {
           lv.show();
@@ -122,7 +85,7 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
         }
       }
     }
-    if (e.getSource().equals(maintenance)) {
+    if (source.equals(maintenance)) {
       if (lane.isPartyAssigned()) {
         lane.unPauseGame();
         maintenance.setBackground(Color.GREEN);
@@ -146,8 +109,6 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
 
   public void receivePinsetterEvent(PinsetterEvent pe) {
     pinsDown.setText((new Integer(pe.totalPinsDown())).toString());
-//		foul.setText( ( new Boolean(pe.isFoulCommited()) ).toString() );
-
+    // foul.setText( ( new Boolean(pe.isFoulCommited()) ).toString() );
   }
-
 }
