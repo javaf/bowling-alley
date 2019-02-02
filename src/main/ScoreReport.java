@@ -1,3 +1,5 @@
+package main;
+
 import java.io.*;
 import java.util.*;
 import java.net.*;
@@ -12,7 +14,7 @@ public class ScoreReport {
     String full = bowler.fullname;
     Vector v = null;
     try {
-      v = ScoreHistoryFile.getScores(nick);
+      v = ScoreHistoryFileAdapter.getScores(nick);
     } catch (Exception e) {
       System.err.println("Error: " + e);
     }
@@ -85,7 +87,7 @@ public class ScoreReport {
       try {
         job.print();
       } catch (PrinterException e) {
-        System.out.println(e);
+        System.err.println(e);
       }
     }
   }
@@ -98,7 +100,7 @@ public class ScoreReport {
       s = in.readLine();
       // System.out.println(s);
     } catch (Exception e) {
-      e.printStackTrace();
+      System.err.println(e);
     }
   }
 

@@ -1,3 +1,5 @@
+package main;
+
 public class PinsetterEvent {
   private boolean[] pinsStillStanding;
   private boolean foulCommited;

@@ -1,3 +1,5 @@
+package main;
+
 import iiit.util.*;
 import iiit.swing.*;
 import java.awt.*;

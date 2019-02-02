@@ -1,3 +1,5 @@
+package main;
+
 public class Bowler {
   String nickname;
   String fullname;
