@@ -12,6 +12,6 @@ public interface LaneEventInterface extends Remote {
   public int getFrame() throws RemoteException;
   public int getBall() throws RemoteException;
   public int[][] getCumulScore() throws RemoteException;
-  public Party getParty() throws RemoteException;
+  public PartyAdapter getParty() throws RemoteException;
   public Bowler getBowler() throws RemoteException;
 }

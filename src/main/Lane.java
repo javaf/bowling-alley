@@ -1,10 +1,9 @@
 package main;
-
 import java.util.*;
 
 
 public class Lane extends Thread implements PinsetterObserver {
-  private Party party;
+  private PartyAdapter party;
   private PinsetterAdapter setter;
   private HashMap scores;
   private Vector subscribers;
@@ -184,7 +183,7 @@ public class Lane extends Thread implements PinsetterObserver {
     frameNumber = 0;
   }
 
-  public void assignParty(Party theParty) {
+  public void assignParty(PartyAdapter theParty) {
     party = theParty;
     resetBowlerIterator();
     partyAssigned = true;

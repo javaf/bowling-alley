@@ -11,7 +11,7 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
   private JLabel curBowler, foul, pinsDown;
   private JButton viewLane;
   private JButton viewPinSetter, maintenance;
-  private PinSetterView psv;
+  private PinsetterView psv;
   private LaneView lv;
   private Lane lane;
   int laneNum;
@@ -25,7 +25,7 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
     laneShowing = false;
     psShowing = false;
 
-    psv = new PinSetterView(laneNum);
+    psv = new PinsetterView(laneNum);
     PinsetterAdapter ps = lane.getPinsetter();
     ps.subscribe(psv);
 

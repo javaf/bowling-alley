@@ -49,7 +49,7 @@ public class LaneView implements LaneObserver, ActionListener {
     frame.setVisible(false);
   }
 
-  private JPanel makeFrame(Party party) {
+  private JPanel makeFrame(PartyAdapter party) {
     initDone = false;
     bowlers = party.getMembers();
     int numBowlers = bowlers.size();
@@ -94,8 +94,7 @@ public class LaneView implements LaneObserver, ActionListener {
     for (int i = 0; i != numBowlers; i++) {
       pins[i] = new JPanel();
       pins[i].setBorder(
-              BorderFactory.createTitledBorder(
-                      ((Bowler) bowlers.get(i)).nickname));
+              BorderFactory.createTitledBorder(((Bowler) bowlers.get(i)).nickname));
       pins[i].setLayout(new GridLayout(0, 10));
       for (int k = 0; k != 10; k++) {
         scores[i][k] = new JPanel();

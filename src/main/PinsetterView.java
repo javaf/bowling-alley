@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.util.*;
 
 
-public class PinSetterView implements PinsetterObserver {
+public class PinsetterView implements PinsetterObserver {
   private Vector pinVect = new Vector();
   private JPanel firstRoll;
   private JPanel secondRoll;
@@ -20,7 +20,7 @@ public class PinSetterView implements PinsetterObserver {
    */
   private JFrame frame;
 
-  public PinSetterView(int laneNum) {
+  public PinsetterView(int laneNum) {
 
     frame = new JFrame("Lane " + laneNum + ":");
 

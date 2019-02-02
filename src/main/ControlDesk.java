@@ -97,7 +97,7 @@ class ControlDesk extends Thread {
 
       if (curLane.isPartyAssigned() == false) {
         System.out.println("ok... assigning this party");
-        curLane.assignParty(((Party) partyQueue.next()));
+        curLane.assignParty(((PartyAdapter) partyQueue.next()));
       }
     }
     publish(new ControlDeskEvent(getPartyQueue()));
@@ -121,7 +121,7 @@ class ControlDesk extends Thread {
       Bowler newBowler = registerPatron(((String) partyNicks.get(i)));
       partyBowlers.add(newBowler);
     }
-    Party newParty = new Party(partyBowlers);
+    PartyAdapter newParty = new PartyAdapter(partyBowlers);
     partyQueue.add(newParty);
     publish(new ControlDeskEvent(getPartyQueue()));
   }
@@ -137,7 +137,7 @@ class ControlDesk extends Thread {
     Vector displayPartyQueue = new Vector();
     for (int i = 0; i < ((Vector) partyQueue.asVector()).size(); i++) {
       String nextParty
-              = ((Bowler) ((Vector) ((Party) partyQueue.asVector().get(i)).getMembers())
+              = ((Bowler) ((Vector) ((PartyAdapter) partyQueue.asVector().get(i)).getMembers())
                       .get(0))
                       .nickname + "'s Party";
       displayPartyQueue.addElement(nextParty);
