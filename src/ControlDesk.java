@@ -63,6 +63,7 @@ class ControlDesk extends Thread {
    * The collection of subscribers
    */
   private Vector subscribers;
+  private static final BowlerFile BOWLER_FILE = new BowlerFile("BOWLERS.DAT");
 
   /**
    * Constructor for the ControlDesk class
@@ -115,7 +116,7 @@ class ControlDesk extends Thread {
     try {
       // only one patron / nick.... no dupes, no checks
 
-      patron = BowlerFile.getBowlerInfo(nickName);
+      patron = BOWLER_FILE.get(nickName);
 
     } catch (FileNotFoundException e) {
       System.err.println("Error..." + e);

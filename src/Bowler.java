@@ -9,4 +9,14 @@ public class Bowler {
     this.fullname = fullname;
     this.email = email;
   }
+  
+  public static Bowler parse(String line) {
+    // Format is <nickname>\t<fullname>\t<email>
+    String[] fields = line.split("\t");
+    return fields.length>2? new Bowler(fields[0], fields[1], fields[2]):null;
+  }
+  
+  public String stringify() {
+    return nickname+"\t"+fullname+"\t"+email;
+  }
 }

@@ -50,7 +50,15 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
   private ControlDeskView controlDesk;
 
   private String selectedNick, selectedMember;
-
+  private static final BowlerFile BOWLER_FILE = new BowlerFile("BOWLERS.DAT");
+  
+  private static ArrayList bowlerNicknames(Collection<Bowler> bowlers) {
+    ArrayList<String> nicknames = new ArrayList<>();
+    for(Bowler bowler : bowlers)
+      nicknames.add(bowler.nickname);
+    return nicknames;
+  }
+  
   public AddPartyView(ControlDeskView controlDesk, int max) {
 
     this.controlDesk = controlDesk;
@@ -86,9 +94,10 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
     bowlerPanel.setBorder(new TitledBorder("Bowler Database"));
 
     try {
-      bowlerdb = new Vector(BowlerFile.getBowlers());
+      bowlerdb = new Vector(bowlerNicknames(BOWLER_FILE.getAll().values()));
     } catch (Exception e) {
       System.err.println("File Error");
+      System.err.println(e);
       bowlerdb = new Vector();
     }
     allBowlers = new JList(bowlerdb);
@@ -212,13 +221,13 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
    */
   public void updateNewPatron(NewPatronView newPatron) {
     try {
-      Bowler checkBowler = BowlerFile.getBowlerInfo(newPatron.getNick());
+      Bowler checkBowler = BOWLER_FILE.get(newPatron.getNick());
       if (checkBowler == null) {
-        BowlerFile.putBowlerInfo(
+        BOWLER_FILE.add(new Bowler(
                 newPatron.getNick(),
                 newPatron.getFull(),
-                newPatron.getEmail());
-        bowlerdb = new Vector(BowlerFile.getBowlers());
+                newPatron.getEmail()));
+        bowlerdb = new Vector(bowlerNicknames(BOWLER_FILE.getAll().values()));
         allBowlers.setListData(bowlerdb);
         party.add(newPatron.getNick());
         partyList.setListData(party);
