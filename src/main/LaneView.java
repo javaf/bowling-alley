@@ -22,9 +22,9 @@ public class LaneView implements LaneObserver, ActionListener {
   JPanel[] pins;
 
   JButton maintenance;
-  Lane lane;
+  LaneAdapter lane;
 
-  public LaneView(Lane lane, int laneNum) {
+  public LaneView(LaneAdapter lane, int laneNum) {
 
     this.lane = lane;
 

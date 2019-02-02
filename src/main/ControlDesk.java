@@ -36,7 +36,7 @@ class ControlDesk extends Thread {
     subscribers = new Vector();
 
     for (int i = 0; i < numLanes; i++) {
-      lanes.add(new Lane());
+      lanes.add(new LaneAdapter());
     }
 
     this.start();
@@ -93,7 +93,7 @@ class ControlDesk extends Thread {
     Iterator it = lanes.iterator();
 
     while (it.hasNext() && partyQueue.hasMoreElements()) {
-      Lane curLane = (Lane) it.next();
+      LaneAdapter curLane = (LaneAdapter) it.next();
 
       if (curLane.isPartyAssigned() == false) {
         System.out.println("ok... assigning this party");
@@ -105,7 +105,7 @@ class ControlDesk extends Thread {
 
   /**
    */
-  public void viewScores(Lane ln) {
+  public void viewScores(LaneAdapter ln) {
     // TODO: attach a LaneScoreView object to that lane
   }
 
@@ -187,7 +187,7 @@ class ControlDesk extends Thread {
    * @return a HashSet of Lanes
    *
    */
-  public HashSet<Lane> getLanes() {
+  public HashSet<LaneAdapter> getLanes() {
     return lanes;
   }
 }

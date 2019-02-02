@@ -13,13 +13,13 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
   private JButton viewPinSetter, maintenance;
   private PinsetterView psv;
   private LaneView lv;
-  private Lane lane;
+  private LaneAdapter lane;
   int laneNum;
   boolean laneShowing;
   boolean psShowing;
 
   
-  public LaneStatusView(Lane lane, int laneNum) {
+  public LaneStatusView(LaneAdapter lane, int laneNum) {
     this.lane = lane;
     this.laneNum = laneNum;
     laneShowing = false;
