@@ -16,8 +16,8 @@ public class ScoreReport {
   private String content;
 
   public ScoreReport(Bowler bowler, int[] scores, int games) {
-    String nick = bowler.getNick();
-    String full = bowler.getFullName();
+    String nick = bowler.nickname;
+    String full = bowler.fullname;
     Vector v = null;
     try {
       v = ScoreHistoryFile.getScores(nick);
@@ -85,7 +85,6 @@ public class ScoreReport {
 
   public void sendPrintout() {
     PrinterJob job = PrinterJob.getPrinterJob();
-
     PrintableText printobj = new PrintableText(content);
 
     job.setPrintable(printobj);
