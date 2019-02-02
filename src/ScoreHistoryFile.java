@@ -1,23 +1,13 @@
-
-/**
- *
- * To change this generated comment edit the template variable "typecomment":
- * Window>Preferences>Java>Templates.
- * To enable and disable the creation of type comments go to
- * Window>Preferences>Java>Code Generation.
- */
 import java.util.*;
 import java.io.*;
 
-public class ScoreHistoryFile {
 
+public class ScoreHistoryFile {
   private static String SCOREHISTORY_DAT = "SCOREHISTORY.DAT";
 
   public static void addScore(String nick, String date, String score)
-          throws IOException, FileNotFoundException {
-
+    throws IOException {
     String data = nick + "\t" + date + "\t" + score + "\n";
-
     RandomAccessFile out = new RandomAccessFile(SCOREHISTORY_DAT, "rw");
     out.skipBytes((int) out.length());
     out.writeBytes(data);
@@ -25,11 +15,9 @@ public class ScoreHistoryFile {
   }
 
   public static Vector getScores(String nick)
-          throws IOException, FileNotFoundException {
+    throws IOException {
     Vector scores = new Vector();
-
-    BufferedReader in
-            = new BufferedReader(new FileReader(SCOREHISTORY_DAT));
+    BufferedReader in = new BufferedReader(new FileReader(SCOREHISTORY_DAT));
     String data;
     while ((data = in.readLine()) != null) {
       // File format is nick\tfname\te-mail
@@ -41,5 +29,4 @@ public class ScoreHistoryFile {
     }
     return scores;
   }
-
 }

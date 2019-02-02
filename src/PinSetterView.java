@@ -1,24 +1,9 @@
-/*
- * PinSetterView/.java
- *
- * Version:
- *   $Id$
- *
- * Revision:
- *   $Log$
- */
-
-/**
- *  constructs a prototype PinSetter GUI
- *
- */
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import java.util.Vector;
+import java.util.*;
+
 
 public class PinSetterView implements PinsetterObserver {
-
   private Vector pinVect = new Vector();
   private JPanel firstRoll;
   private JPanel secondRoll;

@@ -1,18 +1,10 @@
-
-/**
- *
- * SMTP implementation based on code by Ral Gagnon mailto:real@rgagnon.com
- *
- */
 import java.io.*;
-import java.util.Vector;
-import java.util.Iterator;
+import java.util.*;
 import java.net.*;
-import java.awt.*;
 import java.awt.print.*;
 
-public class ScoreReport {
 
+public class ScoreReport {
   private String content;
 
   public ScoreReport(Bowler bowler, int[] scores, int games) {
@@ -79,7 +71,7 @@ public class ScoreReport {
       sendln(in, out, "QUIT");
       s.close();
     } catch (Exception e) {
-      e.printStackTrace();
+      System.err.println(e);
     }
   }
 
@@ -96,7 +88,6 @@ public class ScoreReport {
         System.out.println(e);
       }
     }
-
   }
 
   public void sendln(BufferedReader in, BufferedWriter out, String s) {
@@ -117,8 +108,7 @@ public class ScoreReport {
       out.flush();
       System.out.println(s);
     } catch (Exception e) {
-      e.printStackTrace();
+      System.err.println(e);
     }
   }
-
 }

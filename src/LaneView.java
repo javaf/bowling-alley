@@ -1,18 +1,11 @@
-/*
- *  constructs a prototype Lane View
- *
- */
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
 
+
 public class LaneView implements LaneObserver, ActionListener {
-
-  private int roll;
   private boolean initDone = true;
-
   JFrame frame;
   Container cpanel;
   Vector bowlers;
@@ -40,24 +33,21 @@ public class LaneView implements LaneObserver, ActionListener {
 
     frame.addWindowListener(new WindowAdapter() {
       public void windowClosing(WindowEvent e) {
-        frame.hide();
+        frame.setVisible(false);
       }
     });
-
     cpanel.add(new JPanel());
-
   }
 
   public void show() {
-    frame.show();
+    frame.setVisible(true);
   }
 
   public void hide() {
-    frame.hide();
+    frame.setVisible(false);
   }
 
   private JPanel makeFrame(Party party) {
-
     initDone = false;
     bowlers = party.getMembers();
     int numBowlers = bowlers.size();
@@ -198,14 +188,14 @@ public class LaneView implements LaneObserver, ActionListener {
           }
         }
       }
-
     }
   }
 
-  public void actionPerformed(ActionEvent e) {
-    if (e.getSource().equals(maintenance)) {
+  @Override
+  public void actionPerformed(ActionEvent event) {
+    Object source = event.getSource();
+    if (source.equals(maintenance)) {
       lane.pauseGame();
     }
   }
-
 }
