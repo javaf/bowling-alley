@@ -24,7 +24,7 @@ import javax.swing.event.*;
 import java.util.*;
 import java.text.*;
 
-public class NewPatronView implements ActionListener {
+public class BowlerRegisterView implements ActionListener {
 
   private int maxSize;
 
@@ -39,7 +39,7 @@ public class NewPatronView implements ActionListener {
   private String selectedNick, selectedMember;
   private AddPartyView addParty;
 
-  public NewPatronView(AddPartyView v) {
+  public BowlerRegisterView(AddPartyView v) {
 
     addParty = v;
     done = false;

@@ -180,7 +180,7 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
       }
     }
     if (e.getSource().equals(newPatron)) {
-      NewPatronView newPatron = new NewPatronView(this);
+      BowlerRegisterView newPatron = new BowlerRegisterView(this);
     }
     if (e.getSource().equals(finished)) {
       if (party != null && party.size() > 0) {
@@ -219,7 +219,7 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
    *
    * @param newPatron the NewPatronView that called this method
    */
-  public void updateNewPatron(NewPatronView newPatron) {
+  public void updateNewPatron(BowlerRegisterView newPatron) {
     try {
       Bowler checkBowler = BOWLER_FILE.get(newPatron.getNick());
       if (checkBowler == null) {
