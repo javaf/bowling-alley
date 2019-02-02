@@ -1,99 +1,53 @@
-
-/**
- *
- * To change this generated comment edit the template variable "typecomment":
- * Window>Preferences>Java>Templates.
- * To enable and disable the creation of type comments go to
- * Window>Preferences>Java>Code Generation.
- */
+import iiit.swing.*;
+import iiit.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.event.*;
 
-import java.util.*;
-import java.text.*;
 
-public class EndGamePrompt implements ActionListener {
+public class EndGamePrompt extends EventEmitter implements ActionListener {
 
-  private JFrame win;
-  private JButton yesButton, noButton;
-
-  private int result;
-
-  private String selectedNick, selectedMember;
+  private final JFrame frame;
+  private final JButtonPanel yes, no;
+  public String result;
 
   public EndGamePrompt(String partyName) {
+    result = "";
+    frame = new JFrame("Another Game for " + partyName + "?");
+    frame.getContentPane().setLayout(new BorderLayout());
+    ((JPanel) frame.getContentPane()).setOpaque(false);
 
-    result = 0;
+    JPanel columns = new JPanel();
+    columns.setLayout(new GridLayout(2, 1));
 
-    win = new JFrame("Another Game for " + partyName + "?");
-    win.getContentPane().setLayout(new BorderLayout());
-    ((JPanel) win.getContentPane()).setOpaque(false);
+    String label = partyName+" has finished bowling.\n"+
+      "Would they like to bowl another game?";
+    JPanel buttons = new JPanel();
+    buttons.setLayout(new GridLayout(1, 2));
+    buttons.add(yes = new JButtonPanel("Yes", this));
+    buttons.add(no = new JButtonPanel("No", this));
 
-    JPanel colPanel = new JPanel();
-    colPanel.setLayout(new GridLayout(2, 1));
+    columns.add(new JLabelPanel(label));
+    columns.add(buttons);
 
-    // Label Panel
-    JPanel labelPanel = new JPanel();
-    labelPanel.setLayout(new FlowLayout());
-
-    JLabel message = new JLabel("Party " + partyName
-            + " has finished bowling.\nWould they like to bowl another game?");
-
-    labelPanel.add(message);
-
-    // Button Panel
-    JPanel buttonPanel = new JPanel();
-    buttonPanel.setLayout(new GridLayout(1, 2));
-
-    Insets buttonMargin = new Insets(4, 4, 4, 4);
-
-    yesButton = new JButton("Yes");
-    JPanel yesButtonPanel = new JPanel();
-    yesButtonPanel.setLayout(new FlowLayout());
-    yesButton.addActionListener(this);
-    yesButtonPanel.add(yesButton);
-
-    noButton = new JButton("No");
-    JPanel noButtonPanel = new JPanel();
-    noButtonPanel.setLayout(new FlowLayout());
-    noButton.addActionListener(this);
-    noButtonPanel.add(noButton);
-
-    buttonPanel.add(yesButton);
-    buttonPanel.add(noButton);
-
-    // Clean up main panel
-    colPanel.add(labelPanel);
-    colPanel.add(buttonPanel);
-
-    win.getContentPane().add("Center", colPanel);
-
-    win.pack();
-
-    // Center Window on Screen
-    Dimension screenSize = (Toolkit.getDefaultToolkit()).getScreenSize();
-    win.setLocation(
-            ((screenSize.width) / 2) - ((win.getSize().width) / 2),
-            ((screenSize.height) / 2) - ((win.getSize().height) / 2));
-    win.show();
-
+    frame.getContentPane().add("Center", columns);
+    frame.pack();
+    JFrames.screenCenter(frame);
+    frame.show();
   }
 
   public void actionPerformed(ActionEvent e) {
-    if (e.getSource().equals(yesButton)) {
-      result = 1;
+    if (e.getSource().equals(yes.button)) {
+      result = "yes";
     }
-    if (e.getSource().equals(noButton)) {
-      result = 2;
+    if (e.getSource().equals(no.button)) {
+      result = "no";
     }
 
   }
 
-  public int getResult() {
-    while (result == 0) {
+  public String getResult() {
+    while (result.length()==0) {
       try {
         Thread.sleep(10);
       } catch (InterruptedException e) {
@@ -103,8 +57,7 @@ public class EndGamePrompt implements ActionListener {
     return result;
   }
 
-  public void distroy() {
-    win.hide();
+  public void destroy() {
+    frame.hide();
   }
-
 }

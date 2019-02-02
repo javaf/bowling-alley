@@ -15,7 +15,7 @@ public class BowlerRegisterView extends EventEmitter implements ActionListener {
   public BowlerRegisterView() {
     frame = new JFrame("New Patron");
     frame.getContentPane().setLayout(new BorderLayout());
-    ((JPanel)frame.getContentPane()).setOpaque(false);
+    ((JPanel) frame.getContentPane()).setOpaque(false);
 
     JPanel columns = new JPanel();
     columns.setLayout(new BorderLayout());

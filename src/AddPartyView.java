@@ -1,48 +1,15 @@
-/* AddPartyView.java
- *
- *  Version:
- * 		 $Id$
- * 
- *  Revisions:
- * 		$Log: AddPartyView.java,v $
- * 		Revision 1.7  2003/02/20 02:05:53  ???
- * 		Fixed addPatron so that duplicates won't be created.
- * 		
- * 		Revision 1.6  2003/02/09 20:52:46  ???
- * 		Added comments.
- * 		
- * 		Revision 1.5  2003/02/02 17:42:09  ???
- * 		Made updates to migrate to observer model.
- * 		
- * 		Revision 1.4  2003/02/02 16:29:52  ???
- * 		Added ControlDeskEvent and ControlDeskObserver. Updated Queue to allow access to Vector so that contents could be viewed without destroying. Implemented observer model for most of ControlDesk.
- * 		
- * 
- */
-
-/**
- * Class for GUI components need to add a party
- *
- */
 import iiit.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
-
 import java.util.*;
-import java.text.*;
 
-/**
- * Constructor for GUI used to Add Parties to the waiting party queue.
- *
- */
+
 public class AddPartyView implements ActionListener, ListSelectionListener {
-
   private int maxSize;
-
-  private JFrame win;
+  private JFrame frame;
   private JButton addPatron, newPatron, remPatron, finished;
   private JList partyList, allBowlers;
   private Vector party, bowlerdb;
@@ -65,9 +32,9 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
     this.controlDesk = controlDesk;
     maxSize = max;
 
-    win = new JFrame("Add Party");
-    win.getContentPane().setLayout(new BorderLayout());
-    ((JPanel) win.getContentPane()).setOpaque(false);
+    frame = new JFrame("Add Party");
+    frame.getContentPane().setLayout(new BorderLayout());
+    ((JPanel) frame.getContentPane()).setOpaque(false);
 
     JPanel colPanel = new JPanel();
     colPanel.setLayout(new GridLayout(1, 3));
@@ -150,13 +117,14 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
     colPanel.add(bowlerPanel);
     colPanel.add(buttonPanel);
 
-    win.getContentPane().add("Center", colPanel);
-    win.pack();
-    JFrames.screenCenter(win);
-    win.show();
+    frame.getContentPane().add("Center", colPanel);
+    frame.pack();
+    JFrames.screenCenter(frame);
+    frame.show();
 
   }
 
+  @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource().equals(addPatron)) {
       if (selectedNick != null && party.size() < maxSize) {
@@ -184,16 +152,12 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
       if (party != null && party.size() > 0) {
         controlDesk.updateAddParty(this);
       }
-      win.hide();
+      frame.hide();
     }
 
   }
 
-  /**
-   * Handler for List actions
-   *
-   * @param e the ListActionEvent that triggered the handler
-   */
+  @Override
   public void valueChanged(ListSelectionEvent e) {
     if (e.getSource().equals(allBowlers)) {
       selectedNick
@@ -205,18 +169,10 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
     }
   }
 
-  /**
-   * Accessor for Party
-   */
   public Vector getNames() {
     return party;
   }
 
-  /**
-   * Called by NewPatronView to notify AddPartyView to update
-   *
-   * @param newPatron the NewPatronView that called this method
-   */
   public void updateNewPatron(Bowler newPatron) {
     try {
       Bowler checkBowler = BOWLER_FILE.get(newPatron.nickname);
@@ -234,9 +190,6 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
     }
   }
 
-  /**
-   * Accessor for Party
-   */
   public Vector getParty() {
     return party;
   }
