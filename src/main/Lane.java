@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Lane extends Thread implements PinsetterObserver {
   private Party party;
-  private Pinsetter setter;
+  private PinsetterAdapter setter;
   private HashMap scores;
   private Vector subscribers;
 
@@ -29,7 +29,7 @@ public class Lane extends Thread implements PinsetterObserver {
   private Bowler currentThrower;			// = the thrower who just took a throw
 
   public Lane() {
-    setter = new Pinsetter();
+    setter = new PinsetterAdapter();
     scores = new HashMap();
     subscribers = new Vector();
     gameIsHalted = false;
@@ -344,7 +344,7 @@ public class Lane extends Thread implements PinsetterObserver {
     }
   }
 
-  public Pinsetter getPinsetter() {
+  public PinsetterAdapter getPinsetter() {
     return setter;
   }
 

@@ -26,7 +26,7 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
     psShowing = false;
 
     psv = new PinSetterView(laneNum);
-    Pinsetter ps = lane.getPinsetter();
+    PinsetterAdapter ps = lane.getPinsetter();
     ps.subscribe(psv);
 
     lv = new LaneView(lane, laneNum);
