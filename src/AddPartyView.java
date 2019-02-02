@@ -180,7 +180,10 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
       }
     }
     if (e.getSource().equals(newPatron)) {
-      BowlerRegisterView newPatron = new BowlerRegisterView(this);
+      BowlerRegisterView newPatron = new BowlerRegisterView();
+      newPatron.on("end", (String event, Object value) -> {
+        updateNewPatron((Bowler)value);
+      });
     }
     if (e.getSource().equals(finished)) {
       if (party != null && party.size() > 0) {
@@ -219,22 +222,19 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
    *
    * @param newPatron the NewPatronView that called this method
    */
-  public void updateNewPatron(BowlerRegisterView newPatron) {
+  public void updateNewPatron(Bowler newPatron) {
     try {
-      Bowler checkBowler = BOWLER_FILE.get(newPatron.getNick());
+      Bowler checkBowler = BOWLER_FILE.get(newPatron.nickname);
       if (checkBowler == null) {
-        BOWLER_FILE.add(new Bowler(
-                newPatron.getNick(),
-                newPatron.getFull(),
-                newPatron.getEmail()));
+        BOWLER_FILE.add(newPatron);
         bowlerdb = new Vector(bowlerNicknames(BOWLER_FILE.getAll().values()));
         allBowlers.setListData(bowlerdb);
-        party.add(newPatron.getNick());
+        party.add(newPatron.nickname);
         partyList.setListData(party);
       } else {
         System.err.println("A Bowler with that name already exists.");
       }
-    } catch (Exception e2) {
+    } catch (Exception e) {
       System.err.println("File I/O Error");
     }
   }
