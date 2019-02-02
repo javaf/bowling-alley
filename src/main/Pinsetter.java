@@ -49,16 +49,16 @@ public class Pinsetter {
   
   public Roll roll(boolean[] pins, boolean foul) {
     turn++;
-    Roll roll = new Roll(pins, foul);
+    Roll roll = new Roll(pins);
     if(foul) return roll;
     int score = drop(pins);
-    int standing = standing();
     roll.strike = score==10;
-    roll.spare = standing==0 && turn>1;
+    roll.spare = standing()==0 && turn>1;
     roll.miss = score==0;
-    boolean spaced = spaced();
-    roll.split = pins[0] && spaced;
-    roll.wide = !pins[0] && spaced;
+    roll.foul = foul;
+    boolean spaced = spaced(this.pins);
+    roll.split = this.pins[0] && spaced;
+    roll.wide = !this.pins[0] && spaced;
     roll.score = score;
     return roll;
   }
@@ -72,7 +72,7 @@ public class Pinsetter {
     return score;
   }
   
-  private boolean spaced() {
+  private static boolean spaced(boolean[] pins) {
     for(int i=0, col=0, row=0; i<pins.length; i++) {
       boolean edgeL = row==0 || col==0;
       boolean edgeR = row==0 || col==row;
@@ -89,7 +89,7 @@ public class Pinsetter {
     return true;
   }
     
-  private double luck(double skill) {
+  private static double luck(double skill) {
     return Math.pow(RANDOM.nextDouble(), 1-skill);
   }
 };

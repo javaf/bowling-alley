@@ -1,9 +1,7 @@
 package main;
-import java.util.*;
 
 
 public class Roll {
-  private static final Random RANDOM = new Random();
   public boolean[] pins; // true => pins dropped
   public boolean strike;
   public boolean spare;
@@ -14,8 +12,7 @@ public class Roll {
   public int score;
   
   
-  public Roll(boolean[] pins, boolean foul) {
+  public Roll(boolean[] pins) {
     this.pins = pins;
-    this.foul = foul;
   }
 }

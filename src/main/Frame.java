@@ -2,10 +2,15 @@ package main;
 import java.util.*;
 
 
-public class Frame {
-  public ArrayList<Roll> rolls;
-  public boolean strike;
-  public boolean spare;
+public class Frame extends ArrayList<Roll> {
+  public int score;
   
   
+  public Frame() {
+    super();
+  }
+  
+  public Frame(Collection<Roll> rolls) {
+    super(rolls);
+  }
 }
