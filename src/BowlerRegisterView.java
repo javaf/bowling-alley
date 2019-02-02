@@ -38,6 +38,7 @@ public class BowlerRegisterView extends EventEmitter implements ActionListener {
     frame.getContentPane().add("Center", columns);
     frame.pack();
     JFrames.screenCenter(frame);
+    frame.show();
   }
 
   @Override
