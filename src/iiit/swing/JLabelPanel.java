@@ -7,9 +7,13 @@ import javax.swing.*;
 public class JLabelPanel extends JPanel {
   public JLabel label;
   
-  public JLabelPanel(String text) {
+  public JLabelPanel(JLabel label) {
     super();
     super.setLayout(new FlowLayout());
-    super.add(label = new JLabel(text));
+    super.add(this.label = label);
+  }
+  
+  public JLabelPanel(String text) {
+    this(new JLabel(text));
   }
 }
