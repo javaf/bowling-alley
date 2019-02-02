@@ -38,13 +38,13 @@ public class BowlerRegisterView extends EventEmitter implements ActionListener {
     frame.getContentPane().add("Center", columns);
     frame.pack();
     JFrames.screenCenter(frame);
-    frame.show();
+    frame.setVisible(true);
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(cancel.button)) {
-      frame.hide();
+      frame.setVisible(false);
     }
     if(e.getSource().equals(register.button)) {
       emit("end", new Bowler(
@@ -52,7 +52,7 @@ public class BowlerRegisterView extends EventEmitter implements ActionListener {
         fullname.textField.getText(),
         email.textField.getText()
       ));
-      frame.hide();
+      frame.setVisible(false);
     }
   }
 }
