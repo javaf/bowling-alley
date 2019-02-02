@@ -24,6 +24,7 @@
  * Class for GUI components need to add a party
  *
  */
+import iiit.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -150,14 +151,8 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
     colPanel.add(buttonPanel);
 
     win.getContentPane().add("Center", colPanel);
-
     win.pack();
-
-    // Center Window on Screen
-    Dimension screenSize = (Toolkit.getDefaultToolkit()).getScreenSize();
-    win.setLocation(
-            ((screenSize.width) / 2) - ((win.getSize().width) / 2),
-            ((screenSize.height) / 2) - ((win.getSize().height) / 2));
+    JFrames.screenCenter(win);
     win.show();
 
   }

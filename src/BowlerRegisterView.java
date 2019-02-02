@@ -1,4 +1,5 @@
 import iiit.util.*;
+import iiit.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -36,11 +37,7 @@ public class BowlerRegisterView extends EventEmitter implements ActionListener {
     columns.add(buttons, "East");
     frame.getContentPane().add("Center", columns);
     frame.pack();
-
-    Dimension size = frame.getSize();
-    Dimension screen = (Toolkit.getDefaultToolkit()).getScreenSize();
-    frame.setLocation((screen.width-size.width)/2, (screen.height-size.height)/2);
-    frame.show();
+    JFrames.screenCenter(frame);
   }
 
   @Override
@@ -56,31 +53,5 @@ public class BowlerRegisterView extends EventEmitter implements ActionListener {
       ));
       frame.hide();
     }
-  }
-}
-
-
-class JInputPanel extends JPanel {
-  public JLabel label;
-  public JTextField textField;
-  
-  public JInputPanel(String text, int columns) {
-    super();
-    super.setLayout(new GridLayout(1, 2));
-    super.add(label = new JLabel(text));
-    super.add(textField = new JTextField("", columns));
-  }
-}
-
-
-class JButtonPanel extends JPanel {
-  public JButton button;
-  
-  public JButtonPanel(String text, ActionListener listener) {
-    super();
-    super.setLayout(new FlowLayout());
-    button = new JButton(text);
-    button.addActionListener(listener);
-    super.add(button);
   }
 }
