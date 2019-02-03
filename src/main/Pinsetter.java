@@ -12,14 +12,22 @@ import java.util.*;
    U=up, L=left, R=right
  */
 public class Pinsetter {
-  public boolean[] pins;
-  public int turn;
+  private final boolean[] pins;
+  private int turn;
   private static final Random RANDOM = new Random();
 
   
   public Pinsetter() {
     pins = new boolean[10];
     turn = 0;
+  }
+  
+  public boolean[] pins() {
+    return pins;
+  }
+  
+  public int turn() {
+    return turn;
   }
   
   public int standing() {
@@ -48,19 +56,9 @@ public class Pinsetter {
   }
   
   public Roll roll(boolean[] pins, boolean foul) {
-    turn++;
-    Roll roll = new Roll(pins);
-    if(foul) return roll;
     int score = drop(pins);
-    roll.strike = score==10;
-    roll.spare = standing()==0 && turn>1;
-    roll.miss = score==0;
-    roll.foul = foul;
-    boolean spaced = spaced();
-    roll.split = this.pins[0] && spaced;
-    roll.wide = !this.pins[0] && spaced;
-    roll.score = score;
-    return roll;
+    if(foul) return new Roll(pins, pins[0], false, foul, turn++, standing(), 0);
+    return new Roll(pins, pins[0], spaced(), foul, turn++, standing(), score);
   }
   
   
@@ -108,7 +106,7 @@ public class Pinsetter {
   
   public StringBuilder stringify(StringBuilder out, String pad) {
     out.append(pad).append("[Pinsetter]\n");
-    out.append(pad).append("turn: ").append(turn).append('\n');
+    out.append(pad).append("turn: ").append(turn()).append('\n');
     out.append(pad).append("standing: ").append(standing()).append('\n');
     out.append(pad).append("pins:\n");
     return stringifyPins(out, pad+"  ", pins);

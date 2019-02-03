@@ -13,8 +13,32 @@ public class Frame extends ArrayList<Roll> {
   public Frame(Collection<Roll> rolls) {
     super(rolls);
   }
+  
+  public int score() {
+    return score;
+  }
+  
+  public Roll last() {
+    return isEmpty()? null : get(size() - 1);
+  }
+  
+  public boolean complete(boolean tenth) {
+    int size = size();
+    if(!tenth) return size==0? false : (size>=2 || last().full());
+    boolean bonus = (size>0 && get(0).full()) || (size>1 && get(1).full());
+    return bonus? size>=3 : size>=2;
+  }
 
+  @Override
+  public boolean add(Roll roll) {
+    return add(roll, false);
+  }
+  
+  public boolean add(Roll roll, boolean tenth) {
+    return complete(tenth)? super.add(roll) : false;
+  }
 
+  
   @Override
   public String toString() {
     return stringify(new StringBuilder(), "").toString();
