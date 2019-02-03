@@ -35,7 +35,7 @@ public class Frame extends ArrayList<Roll> {
   }
   
   public boolean add(Roll roll, boolean tenth) {
-    return complete(tenth)? super.add(roll) : false;
+    return complete(tenth)? false: super.add(roll);
   }
 
   

@@ -11,11 +11,13 @@ public class drive {
   
   public static void main(String[] args) {
     Game game = new Game();
-    Frame frame = new Frame();
     Pinsetter pinsetter = new Pinsetter();
-    Roll roll = pinsetter.roll();
-    frame.add(roll);
-    game.add(frame);
+    for (;;) {
+      Roll roll = pinsetter.roll();
+      game.addRoll(roll);
+      if(game.last().complete(game.size()==10)) pinsetter.reset();
+      if(game.complete()) break;
+    }
     System.out.println(game);
   }
 }
