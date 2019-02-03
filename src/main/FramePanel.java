@@ -46,6 +46,7 @@ public class FramePanel extends JPanel {
     id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     id.setText("1");
+    id.setPreferredSize(new java.awt.Dimension(8, 10));
 
     roll0.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
     roll0.setText(" ");
@@ -64,10 +65,11 @@ public class FramePanel extends JPanel {
     roll2.setMaximumSize(new java.awt.Dimension(50, 50));
     roll2.setMinimumSize(new java.awt.Dimension(50, 50));
 
-    score.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+    score.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
     score.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     score.setText("0");
     score.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+    score.setPreferredSize(new java.awt.Dimension(11, 15));
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
@@ -89,14 +91,14 @@ public class FramePanel extends JPanel {
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
-        .addComponent(id)
+        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(roll0, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(roll1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(roll2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(score))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(score, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
   }// </editor-fold>//GEN-END:initComponents
 

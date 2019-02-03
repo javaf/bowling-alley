@@ -50,21 +50,25 @@ public class PinsetterPanel extends JPanel {
     jLabel5.setText("_");
 
     pinsetterLabel.setBackground(new java.awt.Color(204, 204, 204));
-    pinsetterLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+    pinsetterLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     pinsetterLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     pinsetterLabel.setText("Pinsetter");
     pinsetterLabel.setBorder(new javax.swing.border.MatteBorder(null));
 
-    turnLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    turnLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+    turnLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     turnLabel.setText("Turn");
 
-    turnValue.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    turnValue.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+    turnValue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     turnValue.setText("0");
 
-    standingLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    standingLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+    standingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     standingLabel.setText("Standing");
 
-    standingValue.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    standingValue.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+    standingValue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     standingValue.setText("0");
 
     javax.swing.GroupLayout dataPanelLayout = new javax.swing.GroupLayout(dataPanel);
@@ -72,14 +76,13 @@ public class PinsetterPanel extends JPanel {
     dataPanelLayout.setHorizontalGroup(
       dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataPanelLayout.createSequentialGroup()
-        .addGroup(dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+        .addGroup(dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(turnLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(standingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+          .addComponent(standingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(standingValue, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-          .addComponent(turnValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .addComponent(turnValue, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+          .addComponent(standingValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
     );
     dataPanelLayout.setVerticalGroup(
       dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -44,13 +44,15 @@ public class GamePanel extends JPanel {
 
     frame1.setName(""); // NOI18N
 
-    bowler.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+    bowler.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
     bowler.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     bowler.setText("Bowler's Game");
+    bowler.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-    score.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+    score.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
     score.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     score.setText("0");
+    score.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
@@ -101,8 +103,7 @@ public class GamePanel extends JPanel {
           .addComponent(frame6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(frame7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(frame8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(frame9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .addComponent(frame9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
     );
   }// </editor-fold>//GEN-END:initComponents
 
