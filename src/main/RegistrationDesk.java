@@ -18,8 +18,8 @@ public class RegistrationDesk extends EventEmitter implements ActionListener {
     frame.getContentPane().setLayout(new BorderLayout());
     ((JPanel) frame.getContentPane()).setOpaque(false);
 
-    JPanel columns = new JPanel();
-    columns.setLayout(new BorderLayout());
+    JPanel panel = new JPanel();
+    panel.setLayout(new BorderLayout());
 
     JPanel patron = new JPanel();
     patron.setLayout(new GridLayout(3, 1));
@@ -34,9 +34,9 @@ public class RegistrationDesk extends EventEmitter implements ActionListener {
     buttons.add(register = new JButtonPanel("Register", this));
     buttons.add(cancel = new JButtonPanel("Cancel", this));
 
-    columns.add(patron, "Center");
-    columns.add(buttons, "East");
-    frame.getContentPane().add("Center", columns);
+    panel.add(patron, "Center");
+    panel.add(buttons, "East");
+    frame.getContentPane().add("Center", panel);
     frame.pack();
     JFrames.screenCenter(frame);
     frame.setVisible(true);
@@ -44,10 +44,11 @@ public class RegistrationDesk extends EventEmitter implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    if(e.getSource().equals(cancel.button)) {
+    Object source = e.getSource();
+    if(source.equals(cancel.button)) {
       frame.setVisible(false);
     }
-    if(e.getSource().equals(register.button)) {
+    if(source.equals(register.button)) {
       emit("end", new Bowler(
         id.textField.getText(),
         name.textField.getText(),

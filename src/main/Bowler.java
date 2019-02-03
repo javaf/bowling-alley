@@ -38,13 +38,13 @@ public class Bowler {
   }
   
   
-  public static Bowler parseDat(String line) {
+  public static Bowler parseLine(String line) {
     // Format is <nickname>\t<fullname>\t<email>
     String[] fields = line.split("\t");
     return fields.length>2? new Bowler(fields[0], fields[1], fields[2]):null;
   }
   
-  public String stringifyDat() {
+  public String stringifyLine() {
     return id+"\t"+name+"\t"+email;
   }
   

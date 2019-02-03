@@ -8,11 +8,11 @@ public class Party extends ArrayList<Bowler> {
     return get(0).id+"'s Party";
   }
   
-  public ArrayList<String> nicknames() {
-    ArrayList<String> nicknames = new ArrayList<>();
+  public ArrayList<String> ids() {
+    ArrayList<String> ids = new ArrayList<>();
     for(Bowler bowler : this)
-      nicknames.add(bowler.id);
-    return nicknames;
+      ids.add(bowler.id);
+    return ids;
   }
   
   

@@ -129,7 +129,7 @@ public class ControlDeskView implements ActionListener, ControlDeskObserver {
    *
    */
   public void updateAddParty(PartyDesk addPartyView) {
-    controlDesk.addPartyQueue(addPartyView.getParty());
+    controlDesk.addPartyQueue(addPartyView.partyIds());
   }
 
   /**

@@ -20,7 +20,7 @@ class ControlDesk extends Thread {
    * The collection of subscribers
    */
   private Vector subscribers;
-  private static final BowlerFile BOWLER_FILE = new BowlerFile("BOWLERS.DAT");
+  private static final BowlerMap BOWLER_FILE = new BowlerMap("BOWLERS.DAT");
 
   /**
    * Constructor for the ControlDesk class
@@ -72,11 +72,9 @@ class ControlDesk extends Thread {
 
     try {
       // only one patron / nick.... no dupes, no checks
-
+      BOWLER_FILE.load();
       patron = BOWLER_FILE.get(nickName);
 
-    } catch (FileNotFoundException e) {
-      System.err.println("Error..." + e);
     } catch (IOException e) {
       System.err.println("Error..." + e);
     }
