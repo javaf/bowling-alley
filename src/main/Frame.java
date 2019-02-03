@@ -25,7 +25,7 @@ public class Frame extends ArrayList<Roll> {
     out.append(pad).append("score: ").append(score).append('\n');
     for(int i=0; i<size(); i++) {
       out.append(pad).append("roll[").append(i).append("]:\n");
-      this.get(i).stringify(out, pad+pad).append('\n');
+      get(i).stringify(out, pad+"  ").append('\n');
     }
     return out;
   }

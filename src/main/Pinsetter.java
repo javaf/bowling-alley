@@ -109,11 +109,13 @@ public class Pinsetter {
   public StringBuilder stringify(StringBuilder out, String pad) {
     out.append(pad).append("[Pinsetter]\n");
     out.append(pad).append("turn: ").append(turn).append('\n');
+    out.append(pad).append("standing: ").append(standing()).append('\n');
     out.append(pad).append("pins:\n");
-    return stringifyPins(out, pad+pad, pins);
+    return stringifyPins(out, pad+"  ", pins);
   }
   
   public static StringBuilder stringifyPins(StringBuilder out, String pad, boolean[] pins) {
+    out.append(pad);
     for(int col=0, lastRow=rows(pins.length)-1, row=lastRow; row>=0;) {
       int i = row*(row+1)/2 + col;
       out.append(i).append(pins[i]? '_' : 'A').append("  ");

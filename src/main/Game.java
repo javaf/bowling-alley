@@ -31,4 +31,20 @@ public class Game extends ArrayList<Frame> {
     }
     return score;
   }
+  
+  
+  @Override
+  public String toString() {
+    return stringify(new StringBuilder(), "").toString();
+  }
+  
+  public StringBuilder stringify(StringBuilder out, String pad) {
+    out.append(pad).append("[Game]\n");
+    out.append(pad).append("score: ").append(score()).append('\n');
+    for(var i=0; i<size(); i++) {
+      out.append(pad).append("frame[").append(i).append("]:\n");
+      get(i).stringify(out, pad+"  ").append('\n');
+    }
+    return out;
+  }
 }
