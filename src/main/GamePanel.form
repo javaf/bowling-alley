@@ -16,61 +16,42 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="frame0" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="frame1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="frame2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="frame3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="frame4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="frame5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="frame6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="frame7" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="bowler" max="32767" attributes="0"/>
-              </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <Component id="frame0" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="frame8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="frame9" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="score" max="32767" attributes="0"/>
-              </Group>
+              <Component id="frame1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="frame2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="frame3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="frame4" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="frame5" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="frame6" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="frame7" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="frame8" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="frame9" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="bowler" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="score" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="frame0" min="-2" max="-2" attributes="0"/>
-                  <Component id="frame1" min="-2" max="-2" attributes="0"/>
-                  <Component id="frame2" min="-2" max="-2" attributes="0"/>
-                  <Component id="frame3" min="-2" max="-2" attributes="0"/>
-                  <Component id="frame4" min="-2" max="-2" attributes="0"/>
-                  <Component id="frame5" min="-2" max="-2" attributes="0"/>
-                  <Component id="frame6" min="-2" max="-2" attributes="0"/>
-                  <Component id="frame7" min="-2" max="-2" attributes="0"/>
-                  <Component id="frame8" min="-2" max="-2" attributes="0"/>
-                  <Component id="frame9" min="-2" max="-2" attributes="0"/>
-              </Group>
-          </Group>
+          <Component id="frame0" min="-2" max="-2" attributes="0"/>
+          <Component id="frame1" min="-2" max="-2" attributes="0"/>
+          <Component id="frame2" min="-2" max="-2" attributes="0"/>
+          <Component id="frame3" min="-2" max="-2" attributes="0"/>
+          <Component id="frame4" min="-2" max="-2" attributes="0"/>
+          <Component id="frame5" min="-2" max="-2" attributes="0"/>
+          <Component id="frame6" min="-2" max="-2" attributes="0"/>
+          <Component id="frame7" min="-2" max="-2" attributes="0"/>
+          <Component id="frame8" min="-2" max="-2" attributes="0"/>
+          <Component id="frame9" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -97,26 +78,6 @@
     <Component class="main.FramePanel" name="frame8">
     </Component>
     <Component class="main.FramePanel" name="frame9">
-    </Component>
-    <Component class="javax.swing.JLabel" name="bowler">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
-        </Property>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Bowler&apos;s Game"/>
-        <Property name="horizontalTextPosition" type="int" value="0"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="score">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="3"/>
-        </Property>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="0"/>
-        <Property name="horizontalTextPosition" type="int" value="0"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

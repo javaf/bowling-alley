@@ -11,7 +11,9 @@ public class drive {
   
   public static void main(String[] args) {
     main2(args);
-    Game game = new Game(null);
+    ControlDesk x = new ControlDesk();
+    x.setVisible(true);
+    Game game = new Game();
     Pinsetter pinsetter = new Pinsetter();
     for (;;) {
       Roll roll = pinsetter.roll();

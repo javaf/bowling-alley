@@ -3,10 +3,11 @@ import java.util.*;
 
 
 public class Bowler {
-  String id;
-  String name;
-  String email;
-  private double skill;
+  private final String id;
+  private final String name;
+  private final String email;
+  private final double skill;
+  private final ArrayList<Game> games;
   private static final Random RANDOM = new Random();
   
   
@@ -19,6 +20,7 @@ public class Bowler {
     this.name = name;
     this.email = email;
     this.skill = skill;
+    this.games = new ArrayList<>();
   }
   
   public String id() {
@@ -35,6 +37,10 @@ public class Bowler {
   
   public double skill() {
     return skill;
+  }
+  
+  public ArrayList<Game> games() {
+    return games;
   }
   
   
@@ -60,6 +66,10 @@ public class Bowler {
     out.append(pad).append("name: ").append(name()).append('\n');
     out.append(pad).append("email: ").append(email).append('\n');
     out.append(pad).append("skill: ").append(skill()).append('\n');
+    for(int i=0; i<games.size(); i++) {
+      out.append(pad).append("games[").append(i).append("]:\n");
+      games.get(i).stringify(out, pad+"  ");
+    } 
     return out;
   }
 }

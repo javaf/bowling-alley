@@ -5,13 +5,13 @@ import java.util.*;
 public class Party extends ArrayList<Bowler> {
   
   public String name() {
-    return get(0).id+"'s Party";
+    return isEmpty()? "Empty Party" : get(0).id()+"'s Party";
   }
   
   public ArrayList<String> ids() {
     ArrayList<String> ids = new ArrayList<>();
     for(Bowler bowler : this)
-      ids.add(bowler.id);
+      ids.add(bowler.id());
     return ids;
   }
   

@@ -96,7 +96,7 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
   }
 
   public void receiveLaneEvent(LaneEvent le) {
-    curBowler.setText(((Bowler) le.getBowler()).id);
+    curBowler.setText(((Bowler) le.getBowler()).id());
     if (le.isMechanicalProblem()) {
       maintenance.setBackground(Color.RED);
     }
