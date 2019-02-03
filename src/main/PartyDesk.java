@@ -107,7 +107,7 @@ public class PartyDesk implements ActionListener, ListSelectionListener {
     }
     if (source.equals(newBowler.button)) {
       RegistrationDesk newPatron = new RegistrationDesk();
-      newPatron.on("end", (String event, Object value) -> {
+      newPatron.events.on("register", (String event, Object value) -> {
         updateNewPatron((Bowler)value);
       });
     }

@@ -22,7 +22,7 @@ public class EventEmitter {
     return this;
   }
   
-  protected EventEmitter emit(String event, Object value) {
+  public EventEmitter emit(String event, Object value) {
     for(EventHandler handler : map.getOrDefault(event, new ArrayList<>())) {
       handler.on(event, value);
     }

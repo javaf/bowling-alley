@@ -1,60 +1,158 @@
 package main;
 import iiit.util.*;
-import iiit.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
 
 
-public class RegistrationDesk extends EventEmitter implements ActionListener {
-  private final JFrame frame;
-  private final JInputPanel id, name, email;
-  private final JButtonPanel register, cancel;
-
+public class RegistrationDesk extends JFrame {
+  public final EventEmitter events;
   
   public RegistrationDesk() {
-    frame = new JFrame("Registration Desk");
-    frame.getContentPane().setLayout(new BorderLayout());
-    ((JPanel) frame.getContentPane()).setOpaque(false);
-
-    JPanel panel = new JPanel();
-    panel.setLayout(new BorderLayout());
-
-    JPanel patron = new JPanel();
-    patron.setLayout(new GridLayout(3, 1));
-    patron.setBorder(new TitledBorder("New Patron"));
-
-    patron.add(id = new JInputPanel("Nickname", 15));
-    patron.add(name = new JInputPanel("Fullname", 15));
-    patron.add(email = new JInputPanel("Email", 15));
-
-    JPanel buttons = new JPanel();
-    buttons.setLayout(new GridLayout(4, 1));
-    buttons.add(register = new JButtonPanel("Register", this));
-    buttons.add(cancel = new JButtonPanel("Cancel", this));
-
-    panel.add(patron, "Center");
-    panel.add(buttons, "East");
-    frame.getContentPane().add("Center", panel);
-    frame.pack();
-    JFrames.screenCenter(frame);
-    frame.setVisible(true);
+    initComponents();
+    events = new EventEmitter();
+    setVisible(true);
   }
 
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    Object source = e.getSource();
-    if(source.equals(cancel.button)) {
-      frame.setVisible(false);
-    }
-    if(source.equals(register.button)) {
-      emit("end", new Bowler(
-        id.textField.getText(),
-        name.textField.getText(),
-        email.textField.getText()
-      ));
-      frame.setVisible(false);
-    }
-  }
+  
+  @SuppressWarnings("unchecked")
+  // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+  private void initComponents() {
+
+    newPatron = new javax.swing.JPanel();
+    idLabel = new javax.swing.JLabel();
+    id = new javax.swing.JTextField();
+    nameLabel = new javax.swing.JLabel();
+    name = new javax.swing.JTextField();
+    emailLabel = new javax.swing.JLabel();
+    email = new javax.swing.JTextField();
+    register = new javax.swing.JButton();
+    cancel = new javax.swing.JButton();
+
+    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    setTitle("Registration Desk");
+
+    newPatron.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "New Patron", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+    idLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    idLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    idLabel.setText("Nickname");
+
+    id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+    nameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    nameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    nameLabel.setText("Fullname");
+
+    name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+    emailLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    emailLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    emailLabel.setText("Email");
+
+    email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+    javax.swing.GroupLayout newPatronLayout = new javax.swing.GroupLayout(newPatron);
+    newPatron.setLayout(newPatronLayout);
+    newPatronLayout.setHorizontalGroup(
+      newPatronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(newPatronLayout.createSequentialGroup()
+        .addGroup(newPatronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newPatronLayout.createSequentialGroup()
+            .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newPatronLayout.createSequentialGroup()
+            .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newPatronLayout.createSequentialGroup()
+            .addComponent(idLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
+    newPatronLayout.setVerticalGroup(
+      newPatronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(newPatronLayout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(newPatronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(idLabel)
+          .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(newPatronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(nameLabel)
+          .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(newPatronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(emailLabel)
+          .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
+
+    register.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    register.setText("Register");
+    register.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        registerActionPerformed(evt);
+      }
+    });
+
+    cancel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    cancel.setText("Cancel");
+    cancel.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cancelActionPerformed(evt);
+      }
+    });
+
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(newPatron, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(register, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(cancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        .addContainerGap())
+    );
+    layout.setVerticalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(newPatron, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(register)
+          .addComponent(cancel))
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
+
+    pack();
+  }// </editor-fold>//GEN-END:initComponents
+
+  private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
+    setVisible(false);
+    events.emit("cancel", null);
+  }//GEN-LAST:event_cancelActionPerformed
+
+  private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
+    setVisible(false);
+    events.emit("register", new Bowler(id.getText(), name.getText(), email.getText()));
+  }//GEN-LAST:event_registerActionPerformed
+
+  
+  // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton cancel;
+  private javax.swing.JTextField email;
+  private javax.swing.JLabel emailLabel;
+  private javax.swing.JTextField id;
+  private javax.swing.JLabel idLabel;
+  private javax.swing.JTextField name;
+  private javax.swing.JLabel nameLabel;
+  private javax.swing.JPanel newPatron;
+  private javax.swing.JButton register;
+  // End of variables declaration//GEN-END:variables
 }
