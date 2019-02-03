@@ -25,7 +25,7 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
   private static ArrayList bowlerNicknames(Collection<Bowler> bowlers) {
     ArrayList<String> nicknames = new ArrayList<>();
     for(Bowler bowler : bowlers)
-      nicknames.add(bowler.nickname);
+      nicknames.add(bowler.id);
     return nicknames;
   }
   
@@ -177,12 +177,12 @@ public class AddPartyView implements ActionListener, ListSelectionListener {
 
   public void updateNewPatron(Bowler newPatron) {
     try {
-      Bowler checkBowler = BOWLER_FILE.get(newPatron.nickname);
+      Bowler checkBowler = BOWLER_FILE.get(newPatron.id);
       if (checkBowler == null) {
         BOWLER_FILE.add(newPatron);
         bowlerdb = new Vector(bowlerNicknames(BOWLER_FILE.getAll().values()));
         allBowlers.setListData(bowlerdb);
-        party.add(newPatron.nickname);
+        party.add(newPatron.id);
         partyList.setListData(party);
       } else {
         System.err.println("A Bowler with that name already exists.");

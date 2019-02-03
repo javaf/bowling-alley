@@ -10,6 +10,7 @@ public class drive {
   }
   
   public static void main(String[] args) {
+    main2(args);
     Game game = new Game();
     Pinsetter pinsetter = new Pinsetter();
     for (;;) {

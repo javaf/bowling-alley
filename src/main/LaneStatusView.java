@@ -11,7 +11,7 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
   private JLabel curBowler, foul, pinsDown;
   private JButton viewLane;
   private JButton viewPinSetter, maintenance;
-  private PinsetterView psv;
+  private PinsetterViewAdapter psv;
   private LaneView lv;
   private LaneAdapter lane;
   int laneNum;
@@ -25,7 +25,7 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
     laneShowing = false;
     psShowing = false;
 
-    psv = new PinsetterView(laneNum);
+    psv = new PinsetterViewAdapter(laneNum);
     PinsetterAdapter ps = lane.getPinsetter();
     ps.subscribe(psv);
 
@@ -96,7 +96,7 @@ public class LaneStatusView implements ActionListener, LaneObserver, PinsetterOb
   }
 
   public void receiveLaneEvent(LaneEvent le) {
-    curBowler.setText(((Bowler) le.getBowler()).nickname);
+    curBowler.setText(((Bowler) le.getBowler()).id);
     if (le.isMechanicalProblem()) {
       maintenance.setBackground(Color.RED);
     }

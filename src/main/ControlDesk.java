@@ -139,7 +139,7 @@ class ControlDesk extends Thread {
       String nextParty
               = ((Bowler) ((Vector) ((PartyAdapter) partyQueue.asVector().get(i)).getMembers())
                       .get(0))
-                      .nickname + "'s Party";
+                      .id + "'s Party";
       displayPartyQueue.addElement(nextParty);
     }
     return displayPartyQueue;

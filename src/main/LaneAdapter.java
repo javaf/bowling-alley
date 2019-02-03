@@ -62,7 +62,7 @@ public class LaneAdapter extends Thread implements PinsetterObserver {
             try {
               Date date = new Date();
               String dateString = "" + date.getHours() + ":" + date.getMinutes() + " " + date.getMonth() + "/" + date.getDay() + "/" + (date.getYear() + 1900);
-              ScoreHistoryFileAdapter.addScore(currentThrower.nickname, dateString, new Integer(cumulScores[bowlIndex][9]).toString());
+              ScoreHistoryFileAdapter.addScore(currentThrower.id, dateString, new Integer(cumulScores[bowlIndex][9]).toString());
             } catch (Exception e) {
               System.err.println("Exception in addScore. " + e);
             }
@@ -79,7 +79,7 @@ public class LaneAdapter extends Thread implements PinsetterObserver {
           }
         }
       } else if (partyAssigned && gameFinished) {
-        EndGamePrompt egp = new EndGamePrompt(((Bowler) party.getMembers().get(0)).nickname + "'s Party");
+        EndGamePrompt egp = new EndGamePrompt(((Bowler) party.getMembers().get(0)).id + "'s Party");
         String result = egp.getResult();
         egp.destroy();
         egp = null;
@@ -93,7 +93,7 @@ public class LaneAdapter extends Thread implements PinsetterObserver {
 
         } else if (result.equals("no")) {// no, dont want to play another game
           Vector printVector;
-          EndGameReport egr = new EndGameReport(((Bowler) party.getMembers().get(0)).nickname + "'s Party", party);
+          EndGameReport egr = new EndGameReport(((Bowler) party.getMembers().get(0)).id + "'s Party", party);
           printVector = egr.getResult();
           partyAssigned = false;
           Iterator scoreIt = party.getMembers().iterator();
@@ -109,8 +109,8 @@ public class LaneAdapter extends Thread implements PinsetterObserver {
             sr.sendEmail(thisBowler.email);
             Iterator printIt = printVector.iterator();
             while (printIt.hasNext()) {
-              if (thisBowler.nickname == (String) printIt.next()) {
-                System.out.println("Printing " + thisBowler.nickname);
+              if (thisBowler.id == (String) printIt.next()) {
+                System.out.println("Printing " + thisBowler.id);
                 sr.sendPrintout();
               }
             }

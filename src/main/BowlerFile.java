@@ -17,8 +17,8 @@ class BowlerFile {
     Bowler bowler = null;
     BufferedReader in = new BufferedReader(new FileReader(file));
     for(String line; bowler==null && (line=in.readLine())!=null;) {
-      bowler = Bowler.parse(line);
-      if(bowler!=null && !bowler.nickname.equals(nickname)) bowler = null;
+      bowler = Bowler.parseDat(line);
+      if(bowler!=null && !bowler.id.equals(nickname)) bowler = null;
     }
     in.close();
     return bowler;
@@ -29,8 +29,8 @@ class BowlerFile {
     HashMap bowlers = new HashMap();
     BufferedReader in = new BufferedReader(new FileReader(file));
     for(String line; (line=in.readLine())!=null;) {
-      Bowler bowler = Bowler.parse(line);
-      if(bowler!=null) bowlers.put(bowler.nickname, bowler);
+      Bowler bowler = Bowler.parseDat(line);
+      if(bowler!=null) bowlers.put(bowler.id, bowler);
     }
     in.close();
     return bowlers;
@@ -40,7 +40,7 @@ class BowlerFile {
     throws IOException, FileNotFoundException {
     RandomAccessFile out = new RandomAccessFile(file, "rw");
     out.skipBytes((int)out.length());
-    out.writeBytes(bowler.stringify()+"\n");
+    out.writeBytes(bowler.stringifyDat()+"\n");
     out.close();
   }
 }

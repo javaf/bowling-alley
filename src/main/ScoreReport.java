@@ -9,8 +9,8 @@ public class ScoreReport {
   private String content;
 
   public ScoreReport(Bowler bowler, int[] scores, int games) {
-    String nick = bowler.nickname;
-    String full = bowler.fullname;
+    String nick = bowler.id;
+    String full = bowler.name;
     Vector v = null;
     try {
       v = ScoreHistoryFileAdapter.getScores(nick);

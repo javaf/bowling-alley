@@ -37,6 +37,7 @@ public class BowlerRegisterView extends EventEmitter implements ActionListener {
 
     columns.add(patron, "Center");
     columns.add(buttons, "East");
+    columns.add(new PinsetterPanel());
     frame.getContentPane().add("Center", columns);
     frame.pack();
     JFrames.screenCenter(frame);
