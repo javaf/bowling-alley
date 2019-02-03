@@ -44,11 +44,11 @@ public class Roll {
   }
   
   public boolean spare() {
-    return standing==0 && turn>0;
+    return !foul && standing==0 && turn>0;
   }
   
   public boolean full() {
-    return standing==0;
+    return !foul && standing==0;
   }
   
   public boolean miss() {

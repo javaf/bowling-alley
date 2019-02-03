@@ -23,20 +23,23 @@ public class Game extends ArrayList<Frame> {
     int score = 0;
     Frame frame0 = null, frame1 = null;
     for (Frame frame : this) {
+      frame.score = 0;// 1
       for (Roll roll : frame) {
-        if (frame1 != null) {
+        if (frame1 != null && frame1 != frame) {
           frame1.score += roll.score;
           score += roll.score;
         }
-        if (frame0 != null) {
+        if (frame0 != null && frame0 != frame) {
           frame0.score += roll.score;
           score += roll.score;
         }
         frame0 = roll.spare()? frame : frame1;
-        frame1 = roll.spare()? frame : null;
+        frame1 = roll.strike()? frame : null;
         score += roll.score;
+        frame.score += roll.score;// 1
+        System.out.println(frame.hashCode()+":"+frame.score+" : "+roll.score);
       }
-      frame.score = score;
+      // frame.score = score;
     }
     return score;
   }
