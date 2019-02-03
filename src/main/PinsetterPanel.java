@@ -4,16 +4,14 @@ import javax.swing.*;
 
 
 public class PinsetterPanel extends JPanel {
-  private final Pinsetter pinsetter;
   private JButton[] pins;
   
-  public PinsetterPanel(Pinsetter pinsetter) {
+  public PinsetterPanel() {
     initComponents();
-    this.pinsetter = pinsetter;
     pins = new JButton[] {pin0, pin1, pin2, pin3, pin4, pin5, pin6, pin7, pin8, pin9};
   }
   
-  public void update() {
+  public void update(Pinsetter pinsetter) {
     turnValue.setText(""+pinsetter.turn());
     standingValue.setText(""+pinsetter.standing());
     for(int i=0; i<pins.length; i++)

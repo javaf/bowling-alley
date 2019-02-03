@@ -10,10 +10,6 @@ public class Frame extends ArrayList<Roll> {
     super();
   }
   
-  public Frame(Collection<Roll> rolls) {
-    super(rolls);
-  }
-  
   public int score() {
     return score;
   }

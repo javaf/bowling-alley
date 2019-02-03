@@ -2,12 +2,14 @@ package main;
 import java.util.*;
 
 public class Game extends ArrayList<Frame> {
-  public Game() {
-    super();
+  private final Bowler bowler;
+  
+  public Game(Bowler bowler) {
+    this.bowler = bowler;
   }
   
-  public Game(Collection<Frame> frames) {
-    super(frames);
+  public Bowler bowler() {
+    return bowler;
   }
   
   public Frame last() {
@@ -62,6 +64,9 @@ public class Game extends ArrayList<Frame> {
   
   public StringBuilder stringify(StringBuilder out, String pad) {
     out.append(pad).append("[Game]\n");
+    out.append(pad).append("bowler:");
+    if(bowler==null) out.append(" null\n");
+    else bowler.stringify(out.append('\n'), pad+"");
     out.append(pad).append("score: ").append(score()).append('\n');
     out.append(pad).append("complete: ").append(complete()).append('\n');
     for(var i=0; i<size(); i++) {
