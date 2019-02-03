@@ -1,21 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main;
+import java.awt.Color;
+import javax.swing.*;
 
-/**
- *
- * @author wolfram77
- */
-public class PinsetterPanel extends javax.swing.JPanel {
 
-  /**
-   * Creates new form PinsetterPanel
-   */
-  public PinsetterPanel() {
+public class PinsetterPanel extends JPanel {
+  private final Pinsetter pinsetter;
+  private JButton[] pins;
+  
+  public PinsetterPanel(Pinsetter pinsetter) {
     initComponents();
+    this.pinsetter = pinsetter;
+    pins = new JButton[] {pin0, pin1, pin2, pin3, pin4, pin5, pin6, pin7, pin8, pin9};
+  }
+  
+  public void update() {
+    turnValue.setText(""+pinsetter.turn());
+    standingValue.setText(""+pinsetter.standing());
+    for(int i=0; i<pins.length; i++)
+      pins[i].setBackground(pinsetter.pins()[i]? Color.GRAY : Color.GREEN);
   }
 
   /**
@@ -28,41 +30,26 @@ public class PinsetterPanel extends javax.swing.JPanel {
   private void initComponents() {
 
     jLabel5 = new javax.swing.JLabel();
-    jScrollPane1 = new javax.swing.JScrollPane();
-    pinsTable = new javax.swing.JTable();
     pinsetterLabel = new javax.swing.JLabel();
     dataPanel = new javax.swing.JPanel();
     turnLabel = new javax.swing.JLabel();
     turnValue = new javax.swing.JLabel();
     standingLabel = new javax.swing.JLabel();
     standingValue = new javax.swing.JLabel();
+    jPanel1 = new javax.swing.JPanel();
+    pin6 = new javax.swing.JButton();
+    pin7 = new javax.swing.JButton();
+    pin8 = new javax.swing.JButton();
+    pin9 = new javax.swing.JButton();
+    pin3 = new javax.swing.JButton();
+    pin4 = new javax.swing.JButton();
+    pin5 = new javax.swing.JButton();
+    pin1 = new javax.swing.JButton();
+    pin2 = new javax.swing.JButton();
+    pin0 = new javax.swing.JButton();
 
     jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     jLabel5.setText("_");
-
-    pinsTable.setModel(new javax.swing.table.DefaultTableModel(
-      new Object [][] {
-        {"7", "", "8", "", "9", null, "10"},
-        {null, "", null, "", null, "", null},
-        {null, "4", null, "5", null, "6", null},
-        {null, null, null, null, null, null, null},
-        {null, null, "2", null, "3", null, null},
-        {null, null, null, null, null, null, null},
-        {null, null, null, "1", null, null, null}
-      },
-      new String [] {
-        "C0", "C1", "C2", "C3", "C4", "C5", "C6"
-      }
-    ) {
-      Class[] types = new Class [] {
-        java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-      };
-
-      public Class getColumnClass(int columnIndex) {
-        return types [columnIndex];
-      }
-    });
-    jScrollPane1.setViewportView(pinsTable);
 
     pinsetterLabel.setBackground(new java.awt.Color(204, 204, 204));
     pinsetterLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -110,14 +97,89 @@ public class PinsetterPanel extends javax.swing.JPanel {
 
     standingValue.getAccessibleContext().setAccessibleDescription("");
 
+    pin6.setText("7");
+
+    pin7.setText("8");
+
+    pin8.setText("9");
+
+    pin9.setText("10");
+
+    pin3.setText("4");
+
+    pin4.setText("5");
+
+    pin5.setText("6");
+
+    pin1.setText("2");
+
+    pin2.setText("3");
+
+    pin0.setText("1");
+
+    javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+    jPanel1.setLayout(jPanel1Layout);
+    jPanel1Layout.setHorizontalGroup(
+      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanel1Layout.createSequentialGroup()
+        .addComponent(pin6)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(pin7)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(pin8)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(pin9)
+        .addGap(0, 0, Short.MAX_VALUE))
+      .addGroup(jPanel1Layout.createSequentialGroup()
+        .addGap(48, 48, 48)
+        .addComponent(pin1)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(pin2)
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addComponent(pin3)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(pin4)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(pin5)
+            .addGap(28, 28, 28))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addComponent(pin0)
+            .addGap(69, 69, 69))))
+    );
+    jPanel1Layout.setVerticalGroup(
+      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(jPanel1Layout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(pin6)
+          .addComponent(pin7)
+          .addComponent(pin8)
+          .addComponent(pin9))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(pin5)
+          .addComponent(pin4)
+          .addComponent(pin3))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(pin1)
+          .addComponent(pin2))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(pin0)
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-      .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-        .addComponent(dataPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, Short.MAX_VALUE)
-        .addComponent(pinsetterLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
+      .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .addComponent(pinsetterLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,8 +188,7 @@ public class PinsetterPanel extends javax.swing.JPanel {
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(dataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
 
     dataPanel.getAccessibleContext().setAccessibleName("Data");
@@ -137,8 +198,17 @@ public class PinsetterPanel extends javax.swing.JPanel {
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JPanel dataPanel;
   private javax.swing.JLabel jLabel5;
-  private javax.swing.JScrollPane jScrollPane1;
-  private javax.swing.JTable pinsTable;
+  private javax.swing.JPanel jPanel1;
+  private javax.swing.JButton pin0;
+  private javax.swing.JButton pin1;
+  private javax.swing.JButton pin2;
+  private javax.swing.JButton pin3;
+  private javax.swing.JButton pin4;
+  private javax.swing.JButton pin5;
+  private javax.swing.JButton pin6;
+  private javax.swing.JButton pin7;
+  private javax.swing.JButton pin8;
+  private javax.swing.JButton pin9;
   private javax.swing.JLabel pinsetterLabel;
   private javax.swing.JLabel standingLabel;
   private javax.swing.JLabel standingValue;
