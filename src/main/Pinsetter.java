@@ -22,6 +22,11 @@ public class Pinsetter {
     turn = 0;
   }
   
+  private int rows() {
+    int a = 1, b = 1, c = -2*pins.length;
+    return (int)Math.floor((-b + Math.sqrt(b*b - 4*a*c)) / (2*a));
+  }
+  
   public int standing() {
     int count = 0;
     for(var i=0; i<pins.length; i++)
@@ -56,7 +61,7 @@ public class Pinsetter {
     roll.spare = standing()==0 && turn>1;
     roll.miss = score==0;
     roll.foul = foul;
-    boolean spaced = spaced(this.pins);
+    boolean spaced = spaced();
     roll.split = this.pins[0] && spaced;
     roll.wide = !this.pins[0] && spaced;
     roll.score = score;
@@ -72,24 +77,43 @@ public class Pinsetter {
     return score;
   }
   
-  private static boolean spaced(boolean[] pins) {
+  private boolean spaced() {
     for(int i=0, col=0, row=0; i<pins.length; i++) {
       boolean edgeL = row==0 || col==0;
       boolean edgeR = row==0 || col==row;
-      boolean gapL = edgeL? true : pins[i-row] & pins[i+1];
-      boolean gapR = edgeR? true : pins[i-row-1] & pins[i-1];
-      boolean gapU = pins[i+row+2] & pins[i+row+1];
+      boolean edgeU = i+row+2>=pins.length;
+      boolean gapL = edgeL? true : pins[i-1] & pins[i-row+1];
+      boolean gapR = edgeR? true : pins[i+1] & pins[i-row];
+      boolean gapU = edgeU? true : pins[i+row+2] & pins[i+row+1];
       if(!(gapL & gapR & gapU)) return false;
       col++;
       if(col>row) {
-        row++;
         col = 0;
+        row++;
       }
     }
     return true;
   }
-    
+  
   private static double luck(double skill) {
     return Math.pow(RANDOM.nextDouble(), 1-skill);
+  }
+  
+  @Override
+  public String toString() {
+    StringBuilder string = new StringBuilder("[Pinsetter]\n");
+    string.append("turn: ").append(turn).append('\n');
+    for(int col=0, lastRow=rows()-1, row=lastRow; row>=0;) {
+      int i = row*(row+1)/2 + col;
+      string.append(i).append(pins[i]? '_' : 'A').append("  ");
+      col++;
+      if(col>row) {
+        col = 0;
+        row--;
+        string.append('\n');
+        string.append("  ".repeat(lastRow-row));
+      }
+    }
+    return string.toString();
   }
 };
