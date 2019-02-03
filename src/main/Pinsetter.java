@@ -33,7 +33,7 @@ public class Pinsetter {
   public int standing() {
     int count = 0;
     for(var i=0; i<pins.length; i++)
-      count += pins[i]? 1 : 0;
+      count += pins[i]? 0 : 1;
     return count;
   }
   

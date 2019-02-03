@@ -15,7 +15,7 @@ public class drive {
     for (;;) {
       Roll roll = pinsetter.roll();
       game.addRoll(roll);
-      if(game.last().complete(game.size()==10)) pinsetter.reset();
+      if(roll.full() || game.last().complete(game.size()==10)) pinsetter.reset();
       if(game.complete()) break;
     }
     System.out.println(game);
