@@ -15,18 +15,23 @@ public class Roll {
   public Roll(boolean[] pins) {
     this.pins = pins;
   }
+
   
   @Override
   public String toString() {
-    StringBuilder string = new StringBuilder("[Roll]\n");
-    string.append("strike: ").append(strike).append('\n');
-    string.append("spare: ").append(spare).append('\n');
-    string.append("miss: ").append(miss).append('\n');
-    string.append("foul: ").append(foul).append('\n');
-    string.append("split: ").append(split).append('\n');
-    string.append("wide: ").append(wide).append('\n');
-    string.append("score: ").append(score).append('\n');
-    string.append(Pinsetter.stringifyPins(pins));
-    return string.toString();
+    return stringify(new StringBuilder(), "").toString();
+  }
+  
+  public StringBuilder stringify(StringBuilder out, String pad) {
+    out.append(pad).append("[Roll]\n");
+    out.append(pad).append("strike: ").append(strike).append('\n');
+    out.append(pad).append("spare: ").append(spare).append('\n');
+    out.append(pad).append("miss: ").append(miss).append('\n');
+    out.append(pad).append("foul: ").append(foul).append('\n');
+    out.append(pad).append("split: ").append(split).append('\n');
+    out.append(pad).append("wide: ").append(wide).append('\n');
+    out.append(pad).append("score: ").append(score).append('\n');
+    out.append(pad).append("pins:\n");
+    return Pinsetter.stringifyPins(out, pad, pins);
   }
 }

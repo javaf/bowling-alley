@@ -63,6 +63,7 @@ public class Pinsetter {
     return roll;
   }
   
+  
   private int drop(boolean[] pins) {
     int score = 0;
     for(int i=0; i<pins.length; i++) {
@@ -80,7 +81,7 @@ public class Pinsetter {
       boolean gapL = edgeL? true : pins[i-1] & pins[i-row+1];
       boolean gapR = edgeR? true : pins[i+1] & pins[i-row];
       boolean gapU = edgeU? true : pins[i+row+2] & pins[i+row+1];
-      if(!(gapL & gapR & gapU)) return false;
+      if(!pins[i] && !(gapL & gapR & gapU)) return false;
       col++;
       if(col>row) {
         col = 0;
@@ -90,36 +91,41 @@ public class Pinsetter {
     return true;
   }
   
+  private static int rows(int pins) {
+    int a = 1, b = 1, c = -2*pins;
+    return (int)Math.floor((-b + Math.sqrt(b*b - 4*a*c)) / (2*a));
+  }
+  
   private static double luck(double skill) {
     return Math.pow(RANDOM.nextDouble(), 1-skill);
   }
   
+  
   @Override
   public String toString() {
-    StringBuilder string = new StringBuilder("[Pinsetter]\n");
-    string.append("turn: ").append(turn).append('\n');
-    string.append(stringifyPins(pins));
-    return string.toString();
+    return stringify(new StringBuilder(), "").toString();
   }
   
-  public static String stringifyPins(boolean[] pins) {
-    StringBuilder string = new StringBuilder();
+  public StringBuilder stringify(StringBuilder out, String pad) {
+    out.append(pad).append("[Pinsetter]\n");
+    out.append(pad).append("turn: ").append(turn).append('\n');
+    out.append(pad).append("pins:\n");
+    return stringifyPins(out, pad+pad, pins);
+  }
+  
+  public static StringBuilder stringifyPins(StringBuilder out, String pad, boolean[] pins) {
     for(int col=0, lastRow=rows(pins.length)-1, row=lastRow; row>=0;) {
       int i = row*(row+1)/2 + col;
-      string.append(i).append(pins[i]? '_' : 'A').append("  ");
+      out.append(i).append(pins[i]? '_' : 'A').append("  ");
       col++;
       if(col>row) {
         col = 0;
         row--;
-        string.append('\n');
-        string.append("  ".repeat(lastRow-row));
+        out.append('\n').append(pad);
+        out.append("  ".repeat(lastRow-row));
       }
     }
-    return string.toString();
-  }
-  
-  private static int rows(int pins) {
-    int a = 1, b = 1, c = -2*pins;
-    return (int)Math.floor((-b + Math.sqrt(b*b - 4*a*c)) / (2*a));
+    out.append('\n');
+    return out;
   }
 };
