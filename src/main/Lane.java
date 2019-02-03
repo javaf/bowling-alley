@@ -2,23 +2,25 @@ package main;
 import java.util.*;
 
 
-public class Lane {
-  private String name;
-  private ArrayList<Bowler> bowlers;
-  private ArrayList<Game> games;
-  private Pinsetter pinsetter;
+public class Lane extends ArrayList<Game> {
+  private final Pinsetter pinsetter;
   private int turn;
   
   public Lane() {
-    bowlers = new ArrayList<>();
-    games = new ArrayList<>();
     pinsetter = new Pinsetter();
   }
   
-  public void reset() {
-    name = null;
-    bowlers.clear();
-    games.clear();
+  public Pinsetter pinsetter() {
+    return pinsetter;
+  }
+  
+  public String name() {
+    return null;
+  }
+  
+  @Override
+  public void clear() {
+    super.clear();
     pinsetter.reset();
     turn = 0;
   }

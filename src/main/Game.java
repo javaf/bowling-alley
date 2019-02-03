@@ -8,6 +8,10 @@ public class Game extends ArrayList<Frame> {
     this.bowler = bowler;
   }
   
+  public String name() {
+    return bowler==null? "Anonymous Game" : bowler.name()+"'s Game";
+  }
+  
   public Bowler bowler() {
     return bowler;
   }
