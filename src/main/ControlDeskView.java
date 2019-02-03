@@ -13,9 +13,9 @@ public class ControlDeskView implements ActionListener, ControlDeskObserver {
   private JButton addParty, finished, assign;
   private JList partyList;
   private int maxMembers;
-  private ControlDesk controlDesk;
+  private ControlDeskAdapter controlDesk;
 
-  public ControlDeskView(ControlDesk controlDesk, int maxMembers) {
+  public ControlDeskView(ControlDeskAdapter controlDesk, int maxMembers) {
     this.controlDesk = controlDesk;
     this.maxMembers = maxMembers;
     int numLanes = controlDesk.getNumLanes();

@@ -36,6 +36,7 @@ public class LanePanel extends javax.swing.JPanel {
     game = new javax.swing.JLabel();
     frameLabel = new javax.swing.JLabel();
     frame = new javax.swing.JLabel();
+    maintenance1 = new javax.swing.JButton();
 
     bowlerLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     bowlerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -54,7 +55,7 @@ public class LanePanel extends javax.swing.JPanel {
     pinsStanding.setText("10");
 
     maintenance.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    maintenance.setText("Maintenance");
+    maintenance.setText("Score Station");
 
     gameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     gameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -71,6 +72,9 @@ public class LanePanel extends javax.swing.JPanel {
     frame.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     frame.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     frame.setText("1");
+
+    maintenance1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    maintenance1.setText("Maintenance");
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
@@ -93,11 +97,15 @@ public class LanePanel extends javax.swing.JPanel {
           .addComponent(pinsStandingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(pinsStanding, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addComponent(maintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addComponent(maintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(maintenance1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(maintenance, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addComponent(maintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addComponent(maintenance1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
           .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -127,6 +135,7 @@ public class LanePanel extends javax.swing.JPanel {
   private javax.swing.JLabel game;
   private javax.swing.JLabel gameLabel;
   private javax.swing.JButton maintenance;
+  private javax.swing.JButton maintenance1;
   private javax.swing.JLabel pinsStanding;
   private javax.swing.JLabel pinsStandingLabel;
   // End of variables declaration//GEN-END:variables
