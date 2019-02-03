@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 
-class BowlerMap extends HashMap<String, Bowler> {
+public class BowlerMap extends HashMap<String, Bowler> {
   private String file;
 
   
@@ -16,10 +16,10 @@ class BowlerMap extends HashMap<String, Bowler> {
     return file;
   }
   
-  public ArrayList<String> ids() {
-    ArrayList<String> ids = new ArrayList<>();
-    for(Bowler bowler : values())
-      ids.add(bowler.id());
+  public String[] ids() {
+    String[] ids = new String[size()];
+    for (int i=0; i<ids.length; i++)
+      ids[i] = get(i).id();
     return ids;
   }
   

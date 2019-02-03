@@ -1,152 +1,225 @@
 package main;
 import iiit.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import iiit.util.*;
 import java.io.*;
 import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.event.*;
-import java.util.*;
 
 
-public class PartyDesk implements ActionListener, ListSelectionListener {
-  private final JFrame frame;
-  private final JList partyList, fileList;
-  private final JButtonPanel addBowler, newBowler, removeBowler, finished;
-  private String fileSelect, partySelect;
-  private Party party;
-  private BowlerMap bowlers;
-  private int capacity;
-  private ControlDeskView controlDesk;
-  private static final BowlerMap BOWLER_FILE = new BowlerMap("BOWLERS.DAT");
+public class PartyDesk extends JFrame {
+  public final EventEmitter events;
+  public final BowlerMap bowlerMap;
+  public final Party party;
+  private static final String BOWLERS_FILE = "BOWLERS.DAT";
+
   
-
-  public PartyDesk(ControlDeskView controlDesk, int capacity) {
-    this.controlDesk = controlDesk;
-    this.capacity = capacity;
-
-    frame = new JFrame("Party Desk");
-    frame.getContentPane().setLayout(new BorderLayout());
-    ((JPanel) frame.getContentPane()).setOpaque(false);
-
-    JPanel panel = new JPanel();
-    panel.setLayout(new GridLayout(1, 3));
-
-    JPanel partyPanel = new JPanel();
-    partyPanel.setLayout(new FlowLayout());
-    partyPanel.setBorder(new TitledBorder("Your Party"));
-
+  public PartyDesk() {
+    initComponents();
+    events = new EventEmitter();
+    bowlerMap = new BowlerMap(BOWLERS_FILE);
     party = new Party();
-    Vector empty = new Vector();
-    empty.add("(Empty)");
-
-    partyList = new JList(empty);
-    partyList.setFixedCellWidth(120);
-    partyList.setVisibleRowCount(5);
-    partyList.addListSelectionListener(this);
-    JScrollPane partyPane = new JScrollPane(partyList);
-    partyPanel.add(partyPane);
-
-    JPanel filePanel = new JPanel();
-    filePanel.setLayout(new FlowLayout());
-    filePanel.setBorder(new TitledBorder("Bowler File"));
-
-    bowlers = new BowlerMap(BOWLER_FILE.file());
-    try {
-      bowlers.load();
-    } catch (IOException e) {
-      System.err.println("File Error");
-      System.err.println(e);
-    }
-    fileList = new JList(bowlerIds());
-    fileList.setVisibleRowCount(8);
-    fileList.setFixedCellWidth(120);
-    JScrollPane bowlerPane = new JScrollPane(fileList);
-    bowlerPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-    fileList.addListSelectionListener(this);
-    filePanel.add(bowlerPane);
-
-    JPanel buttons = new JPanel();
-    buttons.setLayout(new GridLayout(4, 1));
-    buttons.add(addBowler = new JButtonPanel("Add to Party", this));
-    buttons.add(removeBowler = new JButtonPanel("Remove from Party", this));
-    buttons.add(newBowler = new JButtonPanel("New Patron", this));
-    buttons.add(finished = new JButtonPanel("Finished", this));
-
-    // Clean up main panel
-    panel.add(partyPanel);
-    panel.add(filePanel);
-    panel.add(buttons);
-
-    frame.getContentPane().add("Center", panel);
-    frame.pack();
-    JFrames.screenCenter(frame);
-    frame.setVisible(true);
+    try { bowlerMap.load(); }
+    catch (IOException e) { System.err.println(e); }
+    partyList.setListData(party.ids());
+    bowlerList.setListData(bowlerMap.ids());
+    JFrames.screenCenter(this);
+    setVisible(true);;
   }
 
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    Object source = e.getSource();
-    if (source.equals(addBowler.button)) {
-      if (fileSelect!=null && party.size()<capacity) {
-        Bowler bowler = bowlers.get(fileSelect);
-        if (party.contains(bowler)) {
-          System.err.println("Member already in Party");
-        } else {
-          party.add(bowler);
-          partyList.setListData(partyIds());
-        }
-      }
-    }
-    if (source.equals(removeBowler.button)) {
-      if (partySelect!=null) {
-        Bowler bowler = bowlers.get(partySelect);
-        party.remove(bowler);
-        partyList.setListData(partyIds());
-      }
-    }
-    if (source.equals(newBowler.button)) {
-      RegistrationDesk newPatron = new RegistrationDesk();
-      newPatron.events.on("register", (String event, Object value) -> {
-        updateNewPatron((Bowler)value);
-      });
-    }
-    if (source.equals(finished.button)) {
-      if (party!=null && party.size()>0)
-        controlDesk.updateAddParty(this);
-      // emit("end", party)
-      frame.setVisible(false);
-    }
-
-  }
-
-  @Override
-  public void valueChanged(ListSelectionEvent e) {
-    Object source = e.getSource();
-    if (source.equals(fileList))
-      fileSelect = (String) ((JList)source).getSelectedValue();
-    if (source.equals(partyList))
-      partySelect = (String) ((JList)source).getSelectedValue();
-  }
-
-  public Vector partyIds() {
-    return new Vector(party.ids());
-  }
   
-  public Vector bowlerIds() {
-    return new Vector(bowlers.ids());
-  }
+  @SuppressWarnings("unchecked")
+  // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+  private void initComponents() {
 
-  private void updateNewPatron(Bowler bowler) {
-    try {
-      if (bowlers.containsKey(bowler))
-        System.err.println("A bowler with that id already exists.");
-      bowlers.add(bowler);
-      fileList.setListData(bowlerIds());
+    partyPanel = new javax.swing.JPanel();
+    jScrollPane1 = new javax.swing.JScrollPane();
+    partyList = new javax.swing.JList<>();
+    bowlersPanel = new javax.swing.JPanel();
+    jScrollPane2 = new javax.swing.JScrollPane();
+    bowlerList = new javax.swing.JList<>();
+    addParty = new javax.swing.JButton();
+    removeParty = new javax.swing.JButton();
+    addBowler = new javax.swing.JButton();
+    finished = new javax.swing.JButton();
+
+    setTitle("Party Desk");
+
+    partyPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Your Party", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+    partyList.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    partyList.setModel(new javax.swing.AbstractListModel<String>() {
+      String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+      public int getSize() { return strings.length; }
+      public String getElementAt(int i) { return strings[i]; }
+    });
+    partyList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    jScrollPane1.setViewportView(partyList);
+
+    javax.swing.GroupLayout partyPanelLayout = new javax.swing.GroupLayout(partyPanel);
+    partyPanel.setLayout(partyPanelLayout);
+    partyPanelLayout.setHorizontalGroup(
+      partyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(partyPanelLayout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+        .addContainerGap())
+    );
+    partyPanelLayout.setVerticalGroup(
+      partyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(partyPanelLayout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+        .addContainerGap())
+    );
+
+    bowlersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bowlers", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+    bowlerList.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    bowlerList.setModel(new javax.swing.AbstractListModel<String>() {
+      String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+      public int getSize() { return strings.length; }
+      public String getElementAt(int i) { return strings[i]; }
+    });
+    bowlerList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    jScrollPane2.setViewportView(bowlerList);
+
+    javax.swing.GroupLayout bowlersPanelLayout = new javax.swing.GroupLayout(bowlersPanel);
+    bowlersPanel.setLayout(bowlersPanelLayout);
+    bowlersPanelLayout.setHorizontalGroup(
+      bowlersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(bowlersPanelLayout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+        .addContainerGap())
+    );
+    bowlersPanelLayout.setVerticalGroup(
+      bowlersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(bowlersPanelLayout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(jScrollPane2)
+        .addContainerGap())
+    );
+
+    addParty.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    addParty.setText("Add Bowler");
+    addParty.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addPartyActionPerformed(evt);
+      }
+    });
+
+    removeParty.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    removeParty.setText("Remove Bowler");
+    removeParty.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        removePartyActionPerformed(evt);
+      }
+    });
+
+    addBowler.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    addBowler.setText("New Patron");
+    addBowler.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addBowlerActionPerformed(evt);
+      }
+    });
+
+    finished.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    finished.setText("Finished");
+    finished.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        finishedActionPerformed(evt);
+      }
+    });
+
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(partyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(bowlersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(addParty, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(removeParty, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(addBowler, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(finished, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
+    layout.setVerticalGroup(
+      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(addParty)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(removeParty)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(addBowler)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(finished)
+            .addGap(0, 0, Short.MAX_VALUE))
+          .addComponent(partyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(bowlersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap())
+    );
+
+    pack();
+  }// </editor-fold>//GEN-END:initComponents
+
+  private void addPartyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartyActionPerformed
+    Bowler bowler = bowlerMap.get(bowlerList.getSelectedValue());
+    if (bowler==null || party.size()>=5) System.err.println("Party already full!");
+    else if (party.contains(bowler)) System.err.println("Bowler already added!");
+    else {
       party.add(bowler);
-      partyList.setListData(partyIds());
-    } catch (IOException e) {
-      System.err.println("File I/O Error");
+      partyList.setListData(party.ids());
     }
-  }
+  }//GEN-LAST:event_addPartyActionPerformed
+
+  private void removePartyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePartyActionPerformed
+    Bowler bowler = bowlerMap.get(partyList.getSelectedValue());
+    if (bowler==null || party.size()==0) System.err.println("Bowler not found!");
+    else {
+      party.remove(bowler);
+      partyList.setListData(party.ids());
+    }
+  }//GEN-LAST:event_removePartyActionPerformed
+
+  private void addBowlerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBowlerActionPerformed
+    RegistrationDesk registrationDesk = new RegistrationDesk();
+    registrationDesk.events.on("register", (event, value) -> {
+      Bowler bowler = (Bowler) value;
+      if (bowler==null || bowler.id().length()==0) System.err.println("Bad Patron name!");
+      else if (bowlerMap.containsKey(bowler.id())) System.err.println("Patron already exists!");
+      else {
+        try { bowlerMap.add(bowler); }
+        catch (IOException e) { System.err.println(e); }
+        party.add(bowler);
+        bowlerList.setListData(bowlerMap.ids());
+        partyList.setListData(party.ids());
+      }      
+    });
+  }//GEN-LAST:event_addBowlerActionPerformed
+
+  private void finishedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishedActionPerformed
+    events.emit("finished", party);
+  }//GEN-LAST:event_finishedActionPerformed
+
+
+  // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton addBowler;
+  private javax.swing.JButton addParty;
+  private javax.swing.JList<String> bowlerList;
+  private javax.swing.JPanel bowlersPanel;
+  private javax.swing.JButton finished;
+  private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JScrollPane jScrollPane2;
+  private javax.swing.JList<String> partyList;
+  private javax.swing.JPanel partyPanel;
+  private javax.swing.JButton removeParty;
+  // End of variables declaration//GEN-END:variables
 }

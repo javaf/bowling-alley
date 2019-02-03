@@ -1,4 +1,5 @@
 package main;
+import iiit.swing.*;
 import iiit.util.*;
 import javax.swing.*;
 
@@ -9,6 +10,7 @@ public class RegistrationDesk extends JFrame {
   public RegistrationDesk() {
     initComponents();
     events = new EventEmitter();
+    JFrames.screenCenter(this);
     setVisible(true);
   }
 
@@ -27,7 +29,6 @@ public class RegistrationDesk extends JFrame {
     register = new javax.swing.JButton();
     cancel = new javax.swing.JButton();
 
-    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setTitle("Registration Desk");
 
     newPatron.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "New Patron", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N

@@ -8,10 +8,10 @@ public class Party extends ArrayList<Bowler> {
     return isEmpty()? "Empty Party" : get(0).id()+"'s Party";
   }
   
-  public ArrayList<String> ids() {
-    ArrayList<String> ids = new ArrayList<>();
-    for(Bowler bowler : this)
-      ids.add(bowler.id());
+  public String[] ids() {
+    String[] ids = new String[size()];
+    for (int i=0; i<ids.length; i++)
+      ids[i] = get(i).id();
     return ids;
   }
   

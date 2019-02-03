@@ -111,7 +111,7 @@ public class ControlDeskView implements ActionListener, ControlDeskObserver {
    */
   public void actionPerformed(ActionEvent e) {
     if (e.getSource().equals(addParty)) {
-      PartyDesk addPartyWin = new PartyDesk(this, maxMembers);
+      PartyDeskAdapter addPartyWin = new PartyDeskAdapter(this, maxMembers);
     }
     if (e.getSource().equals(assign)) {
       controlDesk.assignLane();
@@ -128,7 +128,7 @@ public class ControlDeskView implements ActionListener, ControlDeskObserver {
    * @param addPartyView	the AddPartyView that is providing a new party
    *
    */
-  public void updateAddParty(PartyDesk addPartyView) {
+  public void updateAddParty(PartyDeskAdapter addPartyView) {
     controlDesk.addPartyQueue(addPartyView.partyIds());
   }
 
