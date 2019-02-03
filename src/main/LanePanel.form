@@ -37,17 +37,17 @@
                   <Component id="pinsStanding" min="-2" pref="120" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="maintenance" min="-2" pref="120" max="-2" attributes="0"/>
+              <Component id="scoringStation" min="-2" pref="135" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="maintenance1" min="-2" pref="120" max="-2" attributes="0"/>
+              <Component id="maintenance" pref="128" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+              <Component id="scoringStation" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
               <Component id="maintenance" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-              <Component id="maintenance1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
           </Group>
           <Group type="103" alignment="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
@@ -113,12 +113,12 @@
         <Property name="text" type="java.lang.String" value="10"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="maintenance">
+    <Component class="javax.swing.JButton" name="scoringStation">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Score Station"/>
+        <Property name="text" type="java.lang.String" value="Scoring Station"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="gameLabel">
@@ -157,13 +157,16 @@
         <Property name="text" type="java.lang.String" value="1"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="maintenance1">
+    <Component class="javax.swing.JButton" name="maintenance">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Maintenance"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="maintenanceActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

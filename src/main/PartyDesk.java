@@ -207,6 +207,7 @@ public class PartyDesk extends JFrame {
 
   private void finishedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishedActionPerformed
     events.emit("finished", party);
+    setVisible(false);
   }//GEN-LAST:event_finishedActionPerformed
 
 

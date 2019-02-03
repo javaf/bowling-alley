@@ -13,7 +13,7 @@ public class drive {
     main2(args);
     ControlDesk x = new ControlDesk();
     x.setVisible(true);
-    Game game = new Game();
+    Game game = new Game(null);
     Pinsetter pinsetter = new Pinsetter();
     for (;;) {
       Roll roll = pinsetter.roll();

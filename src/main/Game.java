@@ -2,7 +2,18 @@ package main;
 import java.util.*;
 
 public class Game extends ArrayList<Frame> {
-  public Game() {
+  private final Bowler bowler;
+  
+  public Game(Bowler bowler) {
+    this.bowler = bowler;
+  }
+  
+  public String name() {
+    return bowler==null? "Anonymous Game" : bowler.id()+"'s Game";
+  }
+  
+  public Bowler bowler() {
+    return bowler;
   }
   
   public Frame last() {

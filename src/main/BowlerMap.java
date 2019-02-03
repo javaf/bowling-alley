@@ -17,9 +17,10 @@ public class BowlerMap extends HashMap<String, Bowler> {
   }
   
   public String[] ids() {
+    int i = 0;
     String[] ids = new String[size()];
-    for (int i=0; i<ids.length; i++)
-      ids[i] = get(i).id();
+    for (Bowler bowler : values())
+      ids[i++] = bowler.id();
     return ids;
   }
   
