@@ -19,7 +19,7 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
   private String selectedMember;
 
   
-  public EndGameReport(String partyName, PartyAdapter party) {
+  public EndGameReport(String partyName, Party party) {
 
     result = 0;
     retVal = new Vector();
@@ -36,7 +36,7 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
     partyPanel.setBorder(new TitledBorder("Party Members"));
 
     Vector myVector = new Vector();
-    Iterator iter = (party.getMembers()).iterator();
+    Iterator iter = (party).iterator();
     while (iter.hasNext()) {
       myVector.add(((Bowler) iter.next()).id());
     }
