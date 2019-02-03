@@ -22,11 +22,6 @@ public class Pinsetter {
     turn = 0;
   }
   
-  private int rows() {
-    int a = 1, b = 1, c = -2*pins.length;
-    return (int)Math.floor((-b + Math.sqrt(b*b - 4*a*c)) / (2*a));
-  }
-  
   public int standing() {
     int count = 0;
     for(var i=0; i<pins.length; i++)
@@ -103,7 +98,13 @@ public class Pinsetter {
   public String toString() {
     StringBuilder string = new StringBuilder("[Pinsetter]\n");
     string.append("turn: ").append(turn).append('\n');
-    for(int col=0, lastRow=rows()-1, row=lastRow; row>=0;) {
+    string.append(stringifyPins(pins));
+    return string.toString();
+  }
+  
+  public static String stringifyPins(boolean[] pins) {
+    StringBuilder string = new StringBuilder();
+    for(int col=0, lastRow=rows(pins.length)-1, row=lastRow; row>=0;) {
       int i = row*(row+1)/2 + col;
       string.append(i).append(pins[i]? '_' : 'A').append("  ");
       col++;
@@ -115,5 +116,10 @@ public class Pinsetter {
       }
     }
     return string.toString();
+  }
+  
+  private static int rows(int pins) {
+    int a = 1, b = 1, c = -2*pins;
+    return (int)Math.floor((-b + Math.sqrt(b*b - 4*a*c)) / (2*a));
   }
 };

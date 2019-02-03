@@ -14,6 +14,7 @@ public class drive {
     Frame frame = new Frame();
     Pinsetter pinsetter = new Pinsetter();
     Roll roll = pinsetter.roll();
-    System.out.println(pinsetter);
+    System.out.println(pinsetter+"\n");
+    System.out.println(roll+"\n");
   }
 }
