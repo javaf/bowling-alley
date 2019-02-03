@@ -1,6 +1,7 @@
 package main;
 import iiit.swing.*;
 import iiit.util.*;
+import java.util.*;
 import javax.swing.*;
 
 
@@ -14,6 +15,10 @@ public class ControlDesk extends JFrame {
     events = new EventEmitter();
     JFrames.screenCenter(this);
     setVisible(true);
+  }
+  
+  public void update(ArrayList<Party> partyQueue, ArrayList<Lane> lanes) {
+    this.partyQueue.setListData(null);
   }
 
 

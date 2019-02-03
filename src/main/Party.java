@@ -3,6 +3,7 @@ import java.util.*;
 
 
 public class Party extends ArrayList<Bowler> {
+  private static final int CAPACITY = 5;
   
   public String name() {
     return isEmpty()? "Empty Party" : get(0).id()+"'s Party";
@@ -13,6 +14,11 @@ public class Party extends ArrayList<Bowler> {
     for (int i=0; i<ids.length; i++)
       ids[i] = get(i).id();
     return ids;
+  }
+  
+  @Override
+  public boolean add(Bowler bowler) {
+    return size()>=CAPACITY? false : super.add(bowler);
   }
   
   

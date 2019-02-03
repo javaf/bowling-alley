@@ -54,4 +54,9 @@ public class Lane extends ArrayList<Game> {
     super.clear();
     pinsetter.reset();
   }
+  
+  public void addBowlers(Collection<Bowler> bowlers) {
+    for (Bowler bowler : bowlers)
+      add(new Game(bowler));
+  }
 }
