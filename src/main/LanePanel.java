@@ -16,7 +16,7 @@ public class LanePanel extends JPanel {
   }
   
   public void update(Lane lane) {
-    bowler.setText(lane.bowler().id());
+    bowler.setText(lane.name());
     frame.setText(""+lane.frame());
     pinsStanding.setText(""+lane.pinsetter().standing());
   }

@@ -12,7 +12,9 @@ public class Lane extends ArrayList<Game> {
   }
   
   public String name() {
-    return isEmpty()? "Empty Lane" : get(0).bowler().id()+"'s Party Lane";
+    if (isEmpty()) return "Empty Lane";
+    Bowler bowler = get(0).bowler();
+    return bowler==null? "Anonymous Lane" : bowler.id()+"'s Party Lane";
   }
   
   public String status() {
@@ -28,6 +30,7 @@ public class Lane extends ArrayList<Game> {
   }
   
   public boolean complete() {
+    if (isEmpty()) return true;
     for (Game game : this)
       if (!game.complete()) return false;
     return true;
@@ -40,12 +43,17 @@ public class Lane extends ArrayList<Game> {
     return frame;
   }
   
-  public Bowler bowler() {
+  public Game game() {
     if (isEmpty()) return null;
     int frame = frame();
     for (Game game : this)
-      if(frame > game.size()) return game.bowler();
-    return get(0).bowler();
+      if(frame > game.size()) return game;
+    return get(0);
+  }
+  
+  public Bowler bowler() {
+    Game game = game();
+    return game!=null? game.bowler() : null;
   }
   
   

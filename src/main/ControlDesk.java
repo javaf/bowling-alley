@@ -17,8 +17,10 @@ public class ControlDesk extends JFrame {
     setVisible(true);
   }
   
-  public void update(ArrayList<Party> partyQueue, ArrayList<Lane> lanes) {
-    this.partyQueue.setListData(null);
+  public void update(PartyQueue partyQueue, ArrayList<Lane> lanes) {
+    this.partyQueue.setListData(partyQueue.names());
+    for (int i=0; i<this.lanes.length; i++)
+      this.lanes[i].update(lanes.get(i));
   }
 
 
@@ -43,11 +45,7 @@ public class ControlDesk extends JFrame {
     partyQueueLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     partyQueueLabel.setText("Party Queue");
 
-    partyQueue.setModel(new javax.swing.AbstractListModel<String>() {
-      String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-      public int getSize() { return strings.length; }
-      public String getElementAt(int i) { return strings[i]; }
-    });
+    partyQueue.setFixedCellWidth(75);
     jScrollPane1.setViewportView(partyQueue);
 
     lanesLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
