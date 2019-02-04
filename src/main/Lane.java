@@ -39,7 +39,7 @@ public class Lane extends ArrayList<Game> {
   public int frame() {
     int frame = 0;
     for (Game game : this)
-      frame = Math.max(frame, game.size());
+      frame = Math.max(frame, game.size()-1);
     return frame;
   }
   

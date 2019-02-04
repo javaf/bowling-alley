@@ -4,7 +4,9 @@ import javax.swing.*;
 
 
 public class PinsetterPanel extends JPanel {
-  private JButton[] pins;
+  private final JButton[] pins;
+  private static final Color COLOR_DEFAULT = new Color(240, 240, 240);
+
   
   public PinsetterPanel() {
     initComponents();
@@ -15,7 +17,7 @@ public class PinsetterPanel extends JPanel {
     turnValue.setText(""+pinsetter.turn());
     standingValue.setText(""+pinsetter.standing());
     for(int i=0; i<pins.length; i++)
-      pins[i].setBackground(pinsetter.pins()[i]? Color.GRAY : Color.GREEN);
+      pins[i].setBackground(pinsetter.pins()[i]? COLOR_DEFAULT : Color.GREEN);
   }
 
   /**

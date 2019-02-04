@@ -2,7 +2,7 @@ package main;
 import javax.swing.*;
 
 public class FramePanel extends JPanel {
-  private JLabel[] rolls;
+  private final JLabel[] rolls;
   
   public FramePanel() {
     initComponents();
@@ -12,7 +12,7 @@ public class FramePanel extends JPanel {
   public void update(String id, Frame frame) {
     this.id.setText(id);
     for(int i=0; i<rolls.length; i++)
-      rolls[i].setText(rollText(frame==null? null : frame.get(i)));
+      rolls[i].setText(rollText(frame==null? null : (i<frame.size()? frame.get(i) : null)));
     score.setText(frame==null? "0" : ""+frame.score());
   }
   
@@ -38,22 +38,24 @@ public class FramePanel extends JPanel {
     roll2 = new javax.swing.JLabel();
     score = new javax.swing.JLabel();
 
-    id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     id.setText("1");
     id.setPreferredSize(new java.awt.Dimension(8, 10));
 
-    roll0.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+    roll0.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+    roll0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     roll0.setText(" ");
     roll0.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
     roll0.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-    roll1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+    roll1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+    roll1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     roll1.setText(" ");
     roll1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
     roll1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-    roll2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+    roll2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+    roll2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     roll2.setText(" ");
     roll2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
     roll2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

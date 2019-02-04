@@ -15,7 +15,7 @@ public class GamePanel extends JPanel {
   
   public void update(Game game) {
     for(int i=0; i<frames.length; i++)
-      frames[i].update(""+(i+1), game==null? null : game.get(i));
+      frames[i].update(""+(i+1), game==null? null : (i<game.size()? game.get(i) : null));
   }
 
   @SuppressWarnings("unchecked")

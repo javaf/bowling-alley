@@ -1,4 +1,5 @@
 package main;
+import iiit.swing.*;
 import iiit.util.*;
 import java.awt.Color;
 import javax.swing.*;
@@ -8,11 +9,13 @@ import javax.swing.border.*;
 public class ScoringStation extends JFrame {
   public final EventEmitter events;
   private final GamePanel[] games;
+  private static Color COLOR_DEFAULT = new Color(240, 240, 240);
 
   public ScoringStation() {
     initComponents();
     events = new EventEmitter();
     games = new GamePanel[] {game0, game1, game2, game3, game4};
+    JFrames.screenCenter(this);
   }
   
   public void update(Lane lane) {
@@ -20,9 +23,10 @@ public class ScoringStation extends JFrame {
     frame.setText(""+(lane.frame()+1));
     pinsetter.update(lane.pinsetter());
     for (int i=0; i<games.length; i++) {
-      Game game = lane.get(i);
-      games[i].setBackground(game==null? Color.GRAY : Color.YELLOW);
-      ((TitledBorder) games[i].getBorder()).setTitle(game==null? "" : game.name());
+      Game game = i<lane.size()? lane.get(i) : null;
+      if (game!=null) game.score();
+      games[i].setBackground(game==null? COLOR_DEFAULT : Color.YELLOW);
+      ((TitledBorder) games[i].getBorder()).setTitle(game==null? "No Game" : game.name());
       games[i].update(game);
     }
   }
@@ -46,8 +50,6 @@ public class ScoringStation extends JFrame {
     pause = new javax.swing.JButton();
     abort = new javax.swing.JButton();
     maintenance = new javax.swing.JButton();
-
-    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
     game1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bowler's Game", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
@@ -81,6 +83,9 @@ public class ScoringStation extends JFrame {
 
     pause.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     pause.setText("Pause Game");
+    pause.setMaximumSize(new java.awt.Dimension(110, 25));
+    pause.setMinimumSize(new java.awt.Dimension(110, 25));
+    pause.setPreferredSize(new java.awt.Dimension(110, 25));
 
     abort.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     abort.setText("Abort Game");
@@ -110,9 +115,9 @@ public class ScoringStation extends JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
               .addComponent(pinsetter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(pause, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(abort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(maintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+              .addComponent(pause, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(abort, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(maintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(game0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -151,7 +156,7 @@ public class ScoringStation extends JFrame {
           .addGroup(layout.createSequentialGroup()
             .addComponent(pinsetter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(pause)
+            .addComponent(pause, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(abort)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

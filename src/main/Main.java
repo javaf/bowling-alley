@@ -34,7 +34,7 @@ public class Main extends Thread {
       lane.clear();
       lane.addBowlers(partyQueue.removeFirst());
     });
-    lanes.get(0).add(new Game(null));
+    lanes.get(0).add(new Game(new Bowler("a", "a", "a")));
     new Main().start();
   }
   
@@ -52,9 +52,9 @@ public class Main extends Thread {
         Pinsetter pinsetter = lane.pinsetter();
         Roll roll = pinsetter.roll(bowler!=null? bowler.skill() : Math.random());
         game.addRoll(roll);
+        controlDesk.update(partyQueue, lanes);
         if(roll.full() || game.last().complete(game.size()==10)) pinsetter.reset();
         played = true;
-        controlDesk.update(partyQueue, lanes);
         try { Thread.sleep(2000); }
         catch (InterruptedException e) { System.err.println(e); }
       }
