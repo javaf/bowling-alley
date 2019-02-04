@@ -13,8 +13,20 @@ public class LanePanel extends JPanel {
     initComponents();
     events = new EventEmitter();
     scoringStation = new ScoringStation();
-    events.on("maintenanceNeeded", (event, value) -> {
+    scoringStation.events.on("pauseGame", (event, value) -> {
+      events.emit("pauseGame", null);
+    });
+    scoringStation.events.on("abortGame", (event, value) -> {
+      events.emit("abortGame", null);
+    });
+    scoringStation.events.on("callMaintenance", (event, value) -> {
+      events.emit("callMaintenance", null);
+    });
+    events.on("callMaintenance", (event, value) -> {
       maintenance.setBackground(Color.RED);
+    });
+    events.on("maintenanceDone", (event, value) -> {
+      scoringStation.events.emit("maintenanceDone", null);
     });
   }
   
@@ -141,7 +153,7 @@ public class LanePanel extends JPanel {
   }// </editor-fold>//GEN-END:initComponents
 
   private void maintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maintenanceActionPerformed
-    maintenance.setBackground(Color.GRAY);
+    maintenance.setBackground(null);
     events.emit("maintenanceDone", null);
   }//GEN-LAST:event_maintenanceActionPerformed
 

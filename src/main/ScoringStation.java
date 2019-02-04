@@ -9,13 +9,18 @@ import javax.swing.border.*;
 public class ScoringStation extends JFrame {
   public final EventEmitter events;
   private final GamePanel[] games;
-  private static Color COLOR_DEFAULT = new Color(240, 240, 240);
 
   public ScoringStation() {
     initComponents();
     events = new EventEmitter();
     games = new GamePanel[] {game0, game1, game2, game3, game4};
     JFrames.screenCenter(this);
+    events.on("callMaintenance", (event, value) -> {
+      maintenance.setBackground(Color.RED);
+    });
+    events.on("maintenanceDone", (event, value) -> {
+      maintenance.setBackground(null);
+    });
   }
   
   public void update(Lane lane) {
@@ -25,7 +30,7 @@ public class ScoringStation extends JFrame {
     for (int i=0; i<games.length; i++) {
       Game game = i<lane.size()? lane.get(i) : null;
       if (game!=null) game.score();
-      games[i].setBackground(game==null? COLOR_DEFAULT : Color.YELLOW);
+      games[i].setBackground(game==null? null : Color.YELLOW);
       ((TitledBorder) games[i].getBorder()).setTitle(game==null? "No Game" : game.name());
       games[i].update(game);
     }
@@ -86,12 +91,27 @@ public class ScoringStation extends JFrame {
     pause.setMaximumSize(new java.awt.Dimension(110, 25));
     pause.setMinimumSize(new java.awt.Dimension(110, 25));
     pause.setPreferredSize(new java.awt.Dimension(110, 25));
+    pause.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        pauseActionPerformed(evt);
+      }
+    });
 
     abort.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     abort.setText("Abort Game");
+    abort.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        abortActionPerformed(evt);
+      }
+    });
 
     maintenance.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     maintenance.setText("Call Maintenance");
+    maintenance.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        maintenanceActionPerformed(evt);
+      }
+    });
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -166,6 +186,18 @@ public class ScoringStation extends JFrame {
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
+
+  private void pauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pauseActionPerformed
+    events.emit("pauseGame", null);
+  }//GEN-LAST:event_pauseActionPerformed
+
+  private void abortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abortActionPerformed
+    events.emit("abortGame", null);
+  }//GEN-LAST:event_abortActionPerformed
+
+  private void maintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maintenanceActionPerformed
+    events.emit("callMaintenance", null);
+  }//GEN-LAST:event_maintenanceActionPerformed
 
 
   // Variables declaration - do not modify//GEN-BEGIN:variables

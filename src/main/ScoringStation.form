@@ -225,6 +225,9 @@
           <Dimension value="[110, 25]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pauseActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="abort">
       <Properties>
@@ -233,6 +236,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Abort Game"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="abortActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="maintenance">
       <Properties>
@@ -241,6 +247,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Call Maintenance"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="maintenanceActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

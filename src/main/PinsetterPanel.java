@@ -5,7 +5,6 @@ import javax.swing.*;
 
 public class PinsetterPanel extends JPanel {
   private final JButton[] pins;
-  private static final Color COLOR_DEFAULT = new Color(240, 240, 240);
 
   
   public PinsetterPanel() {
@@ -17,7 +16,7 @@ public class PinsetterPanel extends JPanel {
     turnValue.setText(""+pinsetter.turn());
     standingValue.setText(""+pinsetter.standing());
     for(int i=0; i<pins.length; i++)
-      pins[i].setBackground(pinsetter.pins()[i]? COLOR_DEFAULT : Color.GREEN);
+      pins[i].setBackground(pinsetter.pins()[i]? Color.GRAY : null);
   }
 
   /**
@@ -101,24 +100,34 @@ public class PinsetterPanel extends JPanel {
     standingValue.getAccessibleContext().setAccessibleDescription("");
 
     pin6.setText("7");
+    pin6.setFocusable(false);
 
     pin7.setText("8");
+    pin7.setFocusable(false);
 
     pin8.setText("9");
+    pin8.setFocusable(false);
 
     pin9.setText("10");
+    pin9.setFocusable(false);
 
     pin3.setText("4");
+    pin3.setFocusable(false);
 
     pin4.setText("5");
+    pin4.setFocusable(false);
 
     pin5.setText("6");
+    pin5.setFocusable(false);
 
     pin1.setText("2");
+    pin1.setFocusable(false);
 
     pin2.setText("3");
+    pin2.setFocusable(false);
 
     pin0.setText("1");
+    pin0.setFocusable(false);
 
     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
     jPanel1.setLayout(jPanel1Layout);
