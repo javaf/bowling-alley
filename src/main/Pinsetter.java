@@ -74,7 +74,8 @@ public class Pinsetter {
     return stringifyPins(out, pad+"  ", pins);
   }
   
-  public static StringBuilder stringifyPins(StringBuilder out, String pad, boolean[] pins) {
+  
+  private static StringBuilder stringifyPins(StringBuilder out, String pad, boolean[] pins) {
     out.append(pad);
     for(int col=0, lastRow=rows(pins.length)-1, row=lastRow; row>=0;) {
       int i = row*(row+1)/2 + col;
@@ -89,7 +90,6 @@ public class Pinsetter {
     out.append('\n');
     return out;
   }
-
   
   private static int rows(int pins) {
     int a = 1, b = 1, c = -2*pins;
