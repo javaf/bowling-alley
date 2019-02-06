@@ -28,7 +28,7 @@ public class Score {
   
   @Override
   public String toString() {
-    return stringify(new StringBuilder(), "").toString();
+    return String.format("%-20s %-20s %d", id(), date(), score());
   }
   
   public StringBuilder stringify(StringBuilder out, String pad) {

@@ -1,4 +1,5 @@
 package main;
+import iiit.util.*;
 import java.util.*;
 
 public class Game extends ArrayList<Frame> {
@@ -64,8 +65,22 @@ public class Game extends ArrayList<Frame> {
   
   @Override
   public String toString() {
-    return stringify(new StringBuilder(), "").toString();
+    StringArea out = new StringArea();
+    String frame = get(0).toString();
+    if (!isEmpty()) out.insertAt(1, 0, frame);
+    int columns = out.columns();
+    out.insertAt(0, 0, "Game 00: "+score());
+    for (int i=0, I=size(); i<I; i++) {
+      frame = get(i).toString();
+      String frameId = ""+(i+1);
+      out.insertAt(1, i*(columns-1), frame);
+      out.insertAt(1, i*(columns-1)+2, frameId);
+      System.out.println(frame);
+      System.out.println(out);
+    }
+    return out.toString();
   }
+  
   
   public StringBuilder stringify(StringBuilder out, String pad) {
     out.append(pad).append("[Game]\n");

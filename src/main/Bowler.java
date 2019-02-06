@@ -50,7 +50,11 @@ public class Bowler {
    
   @Override
   public String toString() {
-    return stringify(new StringBuilder(), "").toString();
+    StringBuilder out = new StringBuilder();
+    out.append(String.format("%s aka %s <%s>\n", name(), id(), email()));
+    for (int i=0, I=games.size(); i<I; i++)
+      out.append(games.get(i).toString().replace("00", ""+(i+1)));
+    return out.toString();
   }
   
   public StringBuilder stringify(StringBuilder out, String pad) {

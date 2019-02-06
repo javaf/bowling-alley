@@ -26,7 +26,7 @@ public class PrintableText implements Printable {
     g2d.setPaint(Color.black);
 
     Point2D.Double pen = new Point2D.Double(0.25 * POINTS_PER_INCH, 0.25 * POINTS_PER_INCH);
-    Font font = new Font("courier", Font.PLAIN, 12);
+    Font font = new Font(Font.MONOSPACED, Font.PLAIN, 8);
     FontRenderContext frc = g2d.getFontRenderContext();
 
     String lines[] = text.split("\n");

@@ -66,12 +66,17 @@ public class Roll {
     return headpin && spaced;
   }
   
-  
   @Override
   public String toString() {
-    return stringify(new StringBuilder(), "").toString();
+    if(strike()) return "X";
+    if(spare()) return "/";
+    if(miss()) return "-";
+    if(foul()) return "F";
+    if(split()) return "S"+score();
+    if(wide()) return "W"+score();
+    return ""+score();
   }
-  
+
   public StringBuilder stringify(StringBuilder out, String pad) {
     out.append(pad).append("[Roll]\n");
     out.append(pad).append("score: ").append(score()).append('\n');

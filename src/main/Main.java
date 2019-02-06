@@ -58,7 +58,7 @@ public class Main extends Thread {
         System.out.println(pinsetter);
         lane.update();
         // if (pinsetter.standing()==0 || game.last().complete(game.size()==10)) pinsetter.clear();
-        try { Thread.sleep(1000); }
+        try { Thread.sleep(500); }
         catch (InterruptedException e) {}
       }
     }

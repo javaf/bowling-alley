@@ -33,7 +33,15 @@ public class Frame extends ArrayList<Roll> {
   
   @Override
   public String toString() {
-    return stringify(new StringBuilder(), "").toString();
+    int size = size();
+    String roll0 = size>0? get(0).toString() : "";
+    String roll1 = size>1? get(1).toString() : "";
+    String roll2 = size>2? get(2).toString() : "";
+    StringBuilder out = new StringBuilder();
+    out.append(String.format("|-:::%3d---|\n", score()));
+    out.append(String.format("| %2s %2s %2s |\n", roll0, roll1, roll2));
+    out.append(String.format("|----------|\n"));
+    return out.toString();
   }
   
   public StringBuilder stringify(StringBuilder out, String pad) {

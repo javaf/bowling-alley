@@ -1,4 +1,5 @@
 package main;
+import iiit.util.*;
 import java.io.*;
 import java.util.*;
 import java.net.*;
@@ -14,7 +15,7 @@ public class ScoreReport {
     this.bowler = bowler;
     try {
       for (Game game : bowler.games())
-        SCORE_FILE.add(new Score(bowler.id(), new Date().toString(), game.score()));
+        SCORE_FILE.add(new Score(bowler.id(), new FormattedDate().toString(), game.score()));
       this.scores = SCORE_FILE.get(bowler.id());
     }
     catch (IOException e) { System.err.println(e); }
@@ -32,7 +33,15 @@ public class ScoreReport {
   
   @Override
   public String toString() {
-    return stringify(new StringBuilder(), "").toString();
+    StringBuilder out = new StringBuilder();
+    out.append("Lucky Strikes Bowling Center (LSBC)\n");
+    out.append("===================================\n\n");
+    out.append("Score Report: ").append(new FormattedDate()).append('\n');
+    out.append(bowler).append('\n');
+    out.append("Average score: ").append((int) averageScore(scores)).append('\n');
+    for (Score score : scores)
+      out.append(score).append('\n');
+    return out.toString();
   }
   
   public StringBuilder stringify(StringBuilder out, String pad) {
@@ -46,6 +55,13 @@ public class ScoreReport {
     return out;
   }
   
+  
+  private static double averageScore(ArrayList<Score> scores) {
+    int total = 0;
+    for (Score score : scores)
+      total += score.score();
+    return scores.size()>0? ((double)total)/scores.size() : 0;
+  }
   
   private static void printText(String content) {
     PrinterJob job = PrinterJob.getPrinterJob();

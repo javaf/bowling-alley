@@ -18,13 +18,7 @@ public class FramePanel extends JPanel {
   
   private String rollText(Roll roll) {
     if(roll==null) return "";
-    if(roll.strike()) return "X";
-    if(roll.spare()) return "/";
-    if(roll.miss()) return "-";
-    if(roll.foul()) return "F";
-    if(roll.split()) return "S"+roll.score();
-    if(roll.wide()) return "W"+roll.score();
-    return ""+roll.score();
+    return roll.toString();
   }
   
 

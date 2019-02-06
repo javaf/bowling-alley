@@ -63,7 +63,7 @@ public class Pinsetter {
   
   @Override
   public String toString() {
-    return stringify(new StringBuilder(), "").toString();
+    return stringifyPins(new StringBuilder(), "", pins).toString();
   }
   
   public StringBuilder stringify(StringBuilder out, String pad) {
