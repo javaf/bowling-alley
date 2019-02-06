@@ -15,6 +15,10 @@ public class ControlDesk extends JFrame {
     events = new EventEmitter();
     JFrames.screenCenter(this);
     setVisible(true);
+    events.on("laneComplete", (event, value) -> {
+      int i = (int) value;
+      lanes[i].events.emit(event, value);
+    });
   }
   
   public void update(PartyQueue partyQueue, ArrayList<Lane> lanes) {

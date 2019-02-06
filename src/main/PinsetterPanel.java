@@ -31,8 +31,6 @@ public class PinsetterPanel extends JPanel {
     jLabel5 = new javax.swing.JLabel();
     pinsetterLabel = new javax.swing.JLabel();
     dataPanel = new javax.swing.JPanel();
-    turnLabel = new javax.swing.JLabel();
-    turnValue = new javax.swing.JLabel();
     standingLabel = new javax.swing.JLabel();
     standingValue = new javax.swing.JLabel();
     jPanel1 = new javax.swing.JPanel();
@@ -56,14 +54,6 @@ public class PinsetterPanel extends JPanel {
     pinsetterLabel.setText("Pinsetter");
     pinsetterLabel.setBorder(new javax.swing.border.MatteBorder(null));
 
-    turnLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-    turnLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    turnLabel.setText("Turn");
-
-    turnValue.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-    turnValue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    turnValue.setText("0");
-
     standingLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     standingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     standingLabel.setText("Standing");
@@ -77,24 +67,15 @@ public class PinsetterPanel extends JPanel {
     dataPanelLayout.setHorizontalGroup(
       dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataPanelLayout.createSequentialGroup()
-        .addGroup(dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(turnLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(standingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addComponent(standingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(turnValue, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-          .addComponent(standingValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        .addComponent(standingValue, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
     dataPanelLayout.setVerticalGroup(
       dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(dataPanelLayout.createSequentialGroup()
-        .addGroup(dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(turnLabel)
-          .addComponent(turnValue, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(standingLabel)
-          .addComponent(standingValue, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
+      .addGroup(dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addComponent(standingLabel)
+        .addComponent(standingValue, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
 
     standingValue.getAccessibleContext().setAccessibleDescription("");
@@ -224,7 +205,5 @@ public class PinsetterPanel extends JPanel {
   private javax.swing.JLabel pinsetterLabel;
   private javax.swing.JLabel standingLabel;
   private javax.swing.JLabel standingValue;
-  private javax.swing.JLabel turnLabel;
-  private javax.swing.JLabel turnValue;
   // End of variables declaration//GEN-END:variables
 }

@@ -4,13 +4,14 @@ import java.util.*;
 
 public class EventEmitter {
   private final HashMap<String, ArrayList<EventHandler>> map;
+  private static final ArrayList<EventHandler> NONE = new ArrayList<>();
   
   public EventEmitter() {
     map = new HashMap<>();
   }
   
   public EventEmitter on(String event, EventHandler handler) {
-    ArrayList<EventHandler> handlers = map.getOrDefault(event, new ArrayList<>());
+    ArrayList<EventHandler> handlers = map.getOrDefault(event, NONE);
     if(!handlers.contains(handler)) handlers.add(handler);
     map.put(event, handlers);
     return this;
@@ -23,9 +24,8 @@ public class EventEmitter {
   }
   
   public EventEmitter emit(String event, Object value) {
-    for(EventHandler handler : map.getOrDefault(event, new ArrayList<>())) {
+    for(EventHandler handler : map.getOrDefault(event, map.getOrDefault("*", NONE)))
       handler.on(event, value);
-    }
     return this;
   }
 }

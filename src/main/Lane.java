@@ -4,9 +4,11 @@ import java.util.*;
 
 public class Lane extends ArrayList<Game> {
   private final Pinsetter pinsetter;
+  private boolean pinsetterClear;
   private Party party;
   private int turn;
   private int progress;
+  public String status;
 
   
   public Lane() {
@@ -15,6 +17,10 @@ public class Lane extends ArrayList<Game> {
   
   public String name() {
     return party==null? "Empty Lane" : party.name();
+  }
+  
+  public String status() {
+    return status;
   }
 
   public Pinsetter pinsetter() {
@@ -56,9 +62,15 @@ public class Lane extends ArrayList<Game> {
   public boolean addRoll(Roll roll) {
     if (complete()) return false;
     game().addRoll(roll);
-    if (frame().complete(progress==10)) turn++;
+    pinsetterClear = pinsetter.standing()==0;
+    if (frame().complete(progress+1==10)) { pinsetterClear = true; turn++; }
     if (turn >= size()) { turn = 0; progress++; }
     return true;
+  }
+  
+  public void update() {
+    if (pinsetterClear) pinsetter.clear();
+    pinsetterClear = false;
   }
   
   @Override

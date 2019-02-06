@@ -3,7 +3,6 @@ import iiit.swing.*;
 import iiit.util.*;
 import java.awt.Color;
 import javax.swing.*;
-import javax.swing.border.*;
 
 
 public class ScoringStation extends JFrame {
@@ -15,6 +14,8 @@ public class ScoringStation extends JFrame {
     events = new EventEmitter();
     games = new GamePanel[] {game0, game1, game2, game3, game4};
     JFrames.screenCenter(this);
+    pause.setVisible(false);
+    abort.setVisible(false);
     events.on("maintenanceDone", (event, value) -> {
       maintenance.setBackground(null);
     });
@@ -23,13 +24,10 @@ public class ScoringStation extends JFrame {
   public void update(Lane lane) {
     party.setText(lane.name());
     bowler.setText(lane.isEmpty()? "?" : lane.game().bowler().id());
-    frame.setText(""+(lane.progress()+1));
+    frame.setText(""+Math.min(lane.progress()+1, 10));
     pinsetter.update(lane.pinsetter());
     for (int i=0; i<games.length; i++) {
       Game game = i<lane.size()? lane.get(i) : null;
-      if (game!=null) game.score();
-      games[i].setBackground(game==null? null : Color.LIGHT_GRAY);
-      ((TitledBorder) games[i].getBorder()).setTitle(game==null? "No Game" : game.name());
       games[i].update(game);
     }
   }
@@ -55,16 +53,6 @@ public class ScoringStation extends JFrame {
     maintenance = new javax.swing.JButton();
 
     setTitle("Scoring Station");
-
-    game1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bowler's Game", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
-
-    game0.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bowler's Game", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
-
-    game2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bowler's Game", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
-
-    game3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bowler's Game", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
-
-    game4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bowler's Game", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
     party.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
     party.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -188,11 +176,9 @@ public class ScoringStation extends JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
   private void pauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pauseActionPerformed
-    events.emit("pauseGame", null);
   }//GEN-LAST:event_pauseActionPerformed
 
   private void abortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abortActionPerformed
-    events.emit("abortGame", null);
   }//GEN-LAST:event_abortActionPerformed
 
   private void maintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maintenanceActionPerformed

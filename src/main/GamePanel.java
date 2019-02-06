@@ -1,5 +1,7 @@
 package main;
+import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.*;
 
 
 public class GamePanel extends JPanel {
@@ -14,6 +16,9 @@ public class GamePanel extends JPanel {
   }
   
   public void update(Game game) {
+    if (game!=null) game.score();
+    setBackground(game==null? null : Color.LIGHT_GRAY);
+    ((TitledBorder) getBorder()).setTitle(game==null? "No Game" : game.name());
     for(int i=0; i<frames.length; i++)
       frames[i].update(""+(i+1), game==null? null : (i<game.size()? game.get(i) : null));
   }
@@ -32,6 +37,8 @@ public class GamePanel extends JPanel {
     frame7 = new main.FramePanel();
     frame8 = new main.FramePanel();
     frame9 = new main.FramePanel();
+
+    setBorder(javax.swing.BorderFactory.createTitledBorder(null, "No Game", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
     frame1.setName(""); // NOI18N
 

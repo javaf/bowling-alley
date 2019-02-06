@@ -13,11 +13,8 @@ public class LanePanel extends JPanel {
     initComponents();
     events = new EventEmitter();
     scoringStation = new ScoringStation();
-    scoringStation.events.on("pauseGame", (event, value) -> {
-      events.emit("pauseGame", null);
-    });
-    scoringStation.events.on("abortGame", (event, value) -> {
-      events.emit("abortGame", null);
+    events.on("laneComplete", (event, value) -> {
+      scoringStation.events.emit(event, value);
     });
     scoringStation.events.on("maintenanceNeeded", (event, value) -> {
       maintenance.setBackground(Color.RED);

@@ -18,21 +18,17 @@ public class Main extends Thread {
     controlDesk.update(partyQueue, lanes);
     controlDesk.events.on("addParty", (event, value) -> {
       partyQueue.add((Party) value);
-      Lane lane = completeLane();
-      if (lane!=null) {
-        lane.clear();
-        lane.assign(partyQueue.removeFirst());
-      }
       controlDesk.update(partyQueue, lanes);
     });
     controlDesk.events.on("finished", (event, value) -> {
       System.exit(0);
     });
     controlDesk.events.on("laneComplete", (event, value) -> {
-      Lane lane = (Lane) value;
-      if (partyQueue.isEmpty()) return;
+      Lane lane = lanes.get((int) value);
       lane.clear();
+      if (partyQueue.isEmpty()) return;
       lane.assign(partyQueue.removeFirst());
+      controlDesk.update(partyQueue, lanes);
     });
     new Main().start();
   }
@@ -41,8 +37,10 @@ public class Main extends Thread {
   public void run() {
     for (;;) {
       for (Lane lane : lanes) {
-        if (lane.isEmpty()) continue;
-        if (lane.complete()) continue;
+        if (lane.complete()) {
+          controlDesk.events.emit("laneComplete", lanes.indexOf(lane));
+          continue;
+        }
         Game game = lane.game();
         Bowler bowler = game.bowler();
         Pinsetter pinsetter = lane.pinsetter();
@@ -51,7 +49,8 @@ public class Main extends Thread {
         lane.addRoll(roll);
         controlDesk.update(partyQueue, lanes);
         System.out.println(pinsetter);
-        if (pinsetter.standing()==0 || game.last().complete(game.size()==10)) pinsetter.clear();
+        lane.update();
+        // if (pinsetter.standing()==0 || game.last().complete(game.size()==10)) pinsetter.clear();
         try { Thread.sleep(1000); }
         catch (InterruptedException e) {}
       }

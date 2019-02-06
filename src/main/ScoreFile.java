@@ -4,7 +4,7 @@ import java.util.*;
 
 
 public class ScoreFile {
-  private String file;
+  private final String file;
   
   
   public ScoreFile(String file) {
