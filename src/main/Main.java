@@ -16,8 +16,7 @@ public class Main extends Thread {
       lanes.add(new Lane());
     controlDesk = new ControlDesk();
     controlDesk.events.on("addParty", (event, value) -> {
-      Party party = (Party) value;
-      partyQueue.add(party);
+      partyQueue.add((Party) value);
       Lane lane = completeLane();
       if (lane!=null) {
         lane.clear();
@@ -34,46 +33,29 @@ public class Main extends Thread {
       lane.clear();
       lane.addBowlers(partyQueue.removeFirst());
     });
-    lanes.get(0).add(new Game(new Bowler("a", "a", "a")));
     new Main().start();
   }
   
   @Override
   public void run() {
-    System.out.println(lanes.size());
     for (;;) {
       boolean played = false;
       for (Lane lane : lanes) {
         if (lane.isEmpty()) continue;
         if (lane.complete()) continue;
-        System.out.println(lane.hashCode()+": "+lane.frame());
         Game game = lane.game();
         Bowler bowler = game.bowler();
         Pinsetter pinsetter = lane.pinsetter();
-        Roll roll = pinsetter.roll(bowler!=null? bowler.skill() : Math.random());
+        double skill = bowler!=null? bowler.skill() : Math.random();
+        Roll roll = pinsetter.roll(skill);
         game.addRoll(roll);
         controlDesk.update(partyQueue, lanes);
         if(roll.full() || game.last().complete(game.size()==10)) pinsetter.reset();
         played = true;
         try { Thread.sleep(2000); }
-        catch (InterruptedException e) { System.err.println(e); }
+        catch (InterruptedException e) {}
       }
-      if (!played) break;
     }
-    for (Lane lane : lanes) {
-      for (Game game : lane)
-        System.out.println(game);
-    }
-  }
-  
-  private static void onAddParty(String event, Object value) {
-    Party party = (Party) value;
-    partyQueue.add(party);
-    Lane lane = completeLane();
-    if (lane==null) return;
-    lane.clear();
-    for (Bowler bowler : party)
-      lane.add(new Game(bowler));
   }
   
   private static Lane completeLane() {

@@ -30,6 +30,7 @@ public class LanePanel extends JPanel {
     bowler.setText(b==null? "?" : b.id());
     frame.setText(""+(lane.frame()+1));
     pinsStanding.setText(""+lane.pinsetter().standing());
+    setBackground(lane.complete()? null : Color.LIGHT_GRAY);
     if (scoringStation.isVisible()) scoringStation.update(lane);
   }
   

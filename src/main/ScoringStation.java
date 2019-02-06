@@ -28,7 +28,7 @@ public class ScoringStation extends JFrame {
     for (int i=0; i<games.length; i++) {
       Game game = i<lane.size()? lane.get(i) : null;
       if (game!=null) game.score();
-      games[i].setBackground(game==null? null : Color.YELLOW);
+      games[i].setBackground(game==null? null : Color.LIGHT_GRAY);
       ((TitledBorder) games[i].getBorder()).setTitle(game==null? "No Game" : game.name());
       games[i].update(game);
     }

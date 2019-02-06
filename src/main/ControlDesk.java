@@ -29,14 +29,14 @@ public class ControlDesk extends JFrame {
   private void initComponents() {
 
     partyQueueLabel = new javax.swing.JLabel();
-    jScrollPane1 = new javax.swing.JScrollPane();
-    partyQueue = new javax.swing.JList<>();
     lanesLabel = new javax.swing.JLabel();
     lane0 = new main.LanePanel();
     lane1 = new main.LanePanel();
     lane2 = new main.LanePanel();
     addParty = new javax.swing.JButton();
     finished = new javax.swing.JButton();
+    partyQueuePane = new javax.swing.JScrollPane();
+    partyQueue = new javax.swing.JList<>();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     setTitle("Control Desk");
@@ -44,9 +44,6 @@ public class ControlDesk extends JFrame {
     partyQueueLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     partyQueueLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     partyQueueLabel.setText("Party Queue");
-
-    partyQueue.setFixedCellWidth(75);
-    jScrollPane1.setViewportView(partyQueue);
 
     lanesLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     lanesLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -74,6 +71,10 @@ public class ControlDesk extends JFrame {
       }
     });
 
+    partyQueue.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+    partyQueue.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    partyQueuePane.setViewportView(partyQueue);
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
@@ -82,9 +83,9 @@ public class ControlDesk extends JFrame {
         .addContainerGap()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
           .addComponent(partyQueueLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(jScrollPane1)
           .addComponent(addParty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(finished, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(finished, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+          .addComponent(partyQueuePane, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
           .addComponent(lane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -101,12 +102,12 @@ public class ControlDesk extends JFrame {
           .addComponent(partyQueueLabel)
           .addComponent(lanesLabel))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
             .addComponent(lane0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(lane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(partyQueuePane, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(lane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,12 +136,12 @@ public class ControlDesk extends JFrame {
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton addParty;
   private javax.swing.JButton finished;
-  private javax.swing.JScrollPane jScrollPane1;
   private main.LanePanel lane0;
   private main.LanePanel lane1;
   private main.LanePanel lane2;
   private javax.swing.JLabel lanesLabel;
   private javax.swing.JList<String> partyQueue;
   private javax.swing.JLabel partyQueueLabel;
+  private javax.swing.JScrollPane partyQueuePane;
   // End of variables declaration//GEN-END:variables
 }
