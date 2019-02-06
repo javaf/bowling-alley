@@ -7,10 +7,16 @@ import javax.swing.*;
 
 public class RegistrationDesk extends JFrame {
   public final EventEmitter events;
-  
+  private final BowlerFile bowlerFile;
+
   public RegistrationDesk() {
+    this(null);
+  }
+  
+  public RegistrationDesk(BowlerFile bowlerFile) {
     initComponents();
     events = new EventEmitter();
+    this.bowlerFile = bowlerFile;
     JFrames.screenCenter(this);
     setVisible(true);
   }
@@ -22,11 +28,11 @@ public class RegistrationDesk extends JFrame {
 
     newPatron = new javax.swing.JPanel();
     idLabel = new javax.swing.JLabel();
-    idText = new javax.swing.JTextField();
+    id = new javax.swing.JTextField();
     nameLabel = new javax.swing.JLabel();
-    nameText = new javax.swing.JTextField();
+    name = new javax.swing.JTextField();
     emailLabel = new javax.swing.JLabel();
-    emailText = new javax.swing.JTextField();
+    email = new javax.swing.JTextField();
     message = new javax.swing.JLabel();
     register = new javax.swing.JButton();
     cancel = new javax.swing.JButton();
@@ -39,19 +45,19 @@ public class RegistrationDesk extends JFrame {
     idLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     idLabel.setText("Nickname");
 
-    idText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    id.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
     nameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     nameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     nameLabel.setText("Fullname");
 
-    nameText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    name.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
     emailLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     emailLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     emailLabel.setText("Email");
 
-    emailText.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
     message.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     message.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -68,15 +74,15 @@ public class RegistrationDesk extends JFrame {
               .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newPatronLayout.createSequentialGroup()
                 .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
               .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newPatronLayout.createSequentialGroup()
                 .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
               .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newPatronLayout.createSequentialGroup()
                 .addComponent(idLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(idText, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGap(0, 0, Short.MAX_VALUE))
           .addGroup(newPatronLayout.createSequentialGroup()
             .addContainerGap()
@@ -90,15 +96,15 @@ public class RegistrationDesk extends JFrame {
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(newPatronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(idLabel)
-          .addComponent(idText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(newPatronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(nameLabel)
-          .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(newPatronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(emailLabel)
-          .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
@@ -161,11 +167,12 @@ public class RegistrationDesk extends JFrame {
   
   private Bowler fieldsBowler() {
     String error = null;
-    if (!patternMatches("^\\w+$", idText.getText())) error = "Nickname not valid!";
-    else if (!patternMatches("^[\\w\\s]+$", nameText.getText())) error = "Fullname not valid!";
-    else if (!patternMatches("^.+@.+\\..+$", emailText.getText())) error = "Email not valid!";
+    if (!patternMatches("^\\w+$", id.getText())) error = "Nickname not valid!";
+    else if (!patternMatches("^[\\w\\s]+$", name.getText())) error = "Fullname not valid!";
+    else if (!patternMatches("^.+@.+\\..+$", email.getText())) error = "Email not valid!";
+    else if (bowlerFile.containsKey(id.getText())) error = "Nickname already exists!";
     if (error!=null) { message.setText(error); return null; }
-    return new Bowler(idText.getText(), nameText.getText(), emailText.getText());
+    return new Bowler(id.getText(), name.getText(), email.getText());
   }
   
   private static boolean patternMatches(String pattern, String text) {
@@ -175,13 +182,13 @@ public class RegistrationDesk extends JFrame {
     
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton cancel;
+  private javax.swing.JTextField email;
   private javax.swing.JLabel emailLabel;
-  private javax.swing.JTextField emailText;
+  private javax.swing.JTextField id;
   private javax.swing.JLabel idLabel;
-  private javax.swing.JTextField idText;
   private javax.swing.JLabel message;
+  private javax.swing.JTextField name;
   private javax.swing.JLabel nameLabel;
-  private javax.swing.JTextField nameText;
   private javax.swing.JPanel newPatron;
   private javax.swing.JButton register;
   // End of variables declaration//GEN-END:variables

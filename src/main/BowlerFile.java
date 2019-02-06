@@ -4,11 +4,11 @@ import java.util.*;
 import java.io.*;
 
 
-public class BowlerMap extends HashMap<String, Bowler> {
-  private String file;
+public class BowlerFile extends HashMap<String, Bowler> {
+  private final String file;
 
   
-  public BowlerMap(String file) {
+  public BowlerFile(String file) {
     this.file = file;
   }
   
@@ -25,7 +25,7 @@ public class BowlerMap extends HashMap<String, Bowler> {
   }
   
   
-  public BowlerMap load()
+  public BowlerFile load()
     throws IOException, FileNotFoundException {
     BufferedReader in = new BufferedReader(new FileReader(file));
     for(String line; (line=in.readLine())!=null;) {

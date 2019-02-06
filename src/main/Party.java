@@ -3,7 +3,7 @@ import java.util.*;
 
 
 public class Party extends ArrayList<Bowler> {
-  private static final int CAPACITY = 5;
+  public static final int CAPACITY = 5;
   
   
   public String name() {
@@ -15,6 +15,10 @@ public class Party extends ArrayList<Bowler> {
     for (int i=0; i<ids.length; i++)
       ids[i] = get(i).id();
     return ids;
+  }
+  
+  public boolean full() {
+    return size()>=CAPACITY;
   }
   
   

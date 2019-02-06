@@ -127,13 +127,11 @@ public class ControlDesk extends JFrame {
 
   private void addPartyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartyActionPerformed
     PartyDesk partyDesk = new PartyDesk();
-    partyDesk.events.on("finished", (event, value) -> {
-      events.emit("addParty", value);
-    });
+    partyDesk.events.on("*", (event, value) -> events.emit(event, value));
   }//GEN-LAST:event_addPartyActionPerformed
 
   private void finishedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishedActionPerformed
-    events.emit("finished", null);
+    events.emit("close", null);
   }//GEN-LAST:event_finishedActionPerformed
 
   

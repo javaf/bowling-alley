@@ -16,11 +16,11 @@ public class Main extends Thread {
       lanes.add(new Lane());
     controlDesk = new ControlDesk();
     controlDesk.update(partyQueue, lanes);
-    controlDesk.events.on("addParty", (event, value) -> {
+    controlDesk.events.on("partyAdd", (event, value) -> {
       partyQueue.add((Party) value);
       controlDesk.update(partyQueue, lanes);
     });
-    controlDesk.events.on("finished", (event, value) -> {
+    controlDesk.events.on("close", (event, value) -> {
       System.exit(0);
     });
     controlDesk.events.on("laneComplete", (event, value) -> {
