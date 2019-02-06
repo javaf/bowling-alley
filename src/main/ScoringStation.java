@@ -15,9 +15,6 @@ public class ScoringStation extends JFrame {
     events = new EventEmitter();
     games = new GamePanel[] {game0, game1, game2, game3, game4};
     JFrames.screenCenter(this);
-    events.on("callMaintenance", (event, value) -> {
-      maintenance.setBackground(Color.RED);
-    });
     events.on("maintenanceDone", (event, value) -> {
       maintenance.setBackground(null);
     });
@@ -196,7 +193,9 @@ public class ScoringStation extends JFrame {
   }//GEN-LAST:event_abortActionPerformed
 
   private void maintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maintenanceActionPerformed
-    events.emit("callMaintenance", null);
+    maintenance.setBackground(Color.RED);
+    maintenance.setText("Maintenance called");
+    events.emit("maintenanceNeeded", null);
   }//GEN-LAST:event_maintenanceActionPerformed
 
 

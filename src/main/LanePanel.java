@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class LanePanel extends JPanel {
   public final EventEmitter events;
-  private ScoringStation scoringStation; 
+  private final ScoringStation scoringStation; 
 
   
   public LanePanel() {
@@ -19,21 +19,16 @@ public class LanePanel extends JPanel {
     scoringStation.events.on("abortGame", (event, value) -> {
       events.emit("abortGame", null);
     });
-    scoringStation.events.on("callMaintenance", (event, value) -> {
-      events.emit("callMaintenance", null);
-    });
-    events.on("callMaintenance", (event, value) -> {
+    scoringStation.events.on("maintenanceNeeded", (event, value) -> {
       maintenance.setBackground(Color.RED);
-    });
-    events.on("maintenanceDone", (event, value) -> {
-      scoringStation.events.emit("maintenanceDone", null);
+      maintenance.setText("Maintenance");
     });
   }
   
   public void update(Lane lane) {
     Bowler b = lane.bowler();
     bowler.setText(b==null? "?" : b.id());
-    frame.setText(""+lane.frame());
+    frame.setText(""+(lane.frame()+1));
     pinsStanding.setText(""+lane.pinsetter().standing());
     if (scoringStation.isVisible()) scoringStation.update(lane);
   }
@@ -95,7 +90,7 @@ public class LanePanel extends JPanel {
     frame.setText("1");
 
     maintenance.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    maintenance.setText("Maintenance");
+    maintenance.setText("Lane ok");
     maintenance.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         maintenanceActionPerformed(evt);
@@ -154,7 +149,8 @@ public class LanePanel extends JPanel {
 
   private void maintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maintenanceActionPerformed
     maintenance.setBackground(null);
-    events.emit("maintenanceDone", null);
+    maintenance.setText("Lane ok");
+    scoringStation.events.emit("maintenanceDone", null);
   }//GEN-LAST:event_maintenanceActionPerformed
 
   private void showScoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showScoreActionPerformed
