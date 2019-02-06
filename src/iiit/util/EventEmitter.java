@@ -11,7 +11,7 @@ public class EventEmitter {
   }
   
   public EventEmitter on(String event, EventHandler handler) {
-    ArrayList<EventHandler> handlers = map.getOrDefault(event, NONE);
+    ArrayList<EventHandler> handlers = map.getOrDefault(event, new ArrayList<>());
     if(!handlers.contains(handler)) handlers.add(handler);
     map.put(event, handlers);
     return this;

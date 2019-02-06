@@ -1,4 +1,6 @@
 package main;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.util.*;
 
 
@@ -31,6 +33,7 @@ public class Main extends Thread {
       controlDesk.update(partyQueue, lanes);
     });
     new Main().start();
+    sendPrintout("Hello");
   }
   
   @Override
@@ -51,15 +54,22 @@ public class Main extends Thread {
         System.out.println(pinsetter);
         lane.update();
         // if (pinsetter.standing()==0 || game.last().complete(game.size()==10)) pinsetter.clear();
-        try { Thread.sleep(1000); }
+        try { Thread.sleep(10000); }
         catch (InterruptedException e) {}
       }
     }
   }
   
-  private static Lane completeLane() {
-    for (Lane lane : lanes)
-      if (lane.complete()) return lane;
-    return null;
+    private static void sendPrintout(String content) {
+    PrinterJob job = PrinterJob.getPrinterJob();
+    PrintableText printobj = new PrintableText(content);
+    job.setPrintable(printobj);
+    if (job.printDialog()) {
+      try {
+        job.print();
+      } catch (PrinterException e) {
+        System.err.println(e);
+      }
+    }
   }
 }

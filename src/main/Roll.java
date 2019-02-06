@@ -14,7 +14,7 @@ public class Roll {
   }
   
   public Roll(Pinsetter pinsetter, double skill) {
-    this(pinsetter, outcomes(skill, 0.5, 10), outcome(skill, 0.05));
+    this(pinsetter, outcomes(skill, 10), luck(skill)<0.05);
   }
   
   public Roll(Pinsetter pinsetter, boolean[] hits, boolean foul) {
@@ -88,15 +88,11 @@ public class Roll {
   }
 
   
-  private static boolean[] outcomes(double skill, double chance, int count) {
+  private static boolean[] outcomes(double skill, int count) {
     boolean[] outcomes = new boolean[count];
     for (int i=0; i<count; i++)
-      outcomes[i] = outcome(skill, chance);
+      outcomes[i] = luck(skill)>=0.5;
     return outcomes;
-  }
-  
-  private static boolean outcome(double skill, double chance) {
-    return luck(skill) < chance;
   }
   
   private static double luck(double skill) {
