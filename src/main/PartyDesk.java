@@ -191,7 +191,7 @@ public class PartyDesk extends JFrame {
 
   private void addBowlerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBowlerActionPerformed
     RegistrationDesk registrationDesk = new RegistrationDesk();
-    registrationDesk.events.on("register", (event, value) -> {
+    registrationDesk.events.on("bowlerRegister", (event, value) -> {
       Bowler bowler = (Bowler) value;
       if (bowler==null || bowler.id().length()==0) System.err.println("Bad Patron name!");
       else if (bowlerMap.containsKey(bowler.id())) System.err.println("Patron already exists!");
