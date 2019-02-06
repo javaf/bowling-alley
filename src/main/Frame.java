@@ -6,10 +6,6 @@ public class Frame extends ArrayList<Roll> {
   public int score;
   
   
-  public Frame() {
-    super();
-  }
-  
   public int score() {
     return score;
   }

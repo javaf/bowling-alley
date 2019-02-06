@@ -2,31 +2,16 @@ package main;
 import java.util.*;
 
 public class Game extends ArrayList<Frame> {
-  private final Bowler bowler;
-  
-  public Game(Bowler bowler) {
-    this.bowler = bowler;
-  }
-  
-  public String name() {
-    return bowler==null? "Anonymous Game" : bowler.id()+"'s Game";
-  }
-  
-  public Bowler bowler() {
-    return bowler;
-  }
-  
   public Frame last() {
     return isEmpty()? null : get(size()-1);
   }
   
   public boolean complete() {
-    int size = size();
-    return size==0? false : (size>=10 && last().complete(true));
+    return !isEmpty() && size()>=10 && last().complete(true);
   }
   
   public int score() {
-    scoreEach();
+    scoreFrames();
     int score = 0;
     for (Frame frame : this) {
       score += frame.score;
@@ -35,7 +20,7 @@ public class Game extends ArrayList<Frame> {
     return score;
   }
   
-  private void scoreEach() {
+  private void scoreFrames() {
     Frame frame0 = null, frame1 = null;
     for (Frame frame : this) {
       frame.score = 0;
