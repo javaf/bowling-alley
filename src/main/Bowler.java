@@ -2,11 +2,12 @@ package main;
 import java.util.*;
 
 
-public class Bowler extends ArrayList<Game> {
+public class Bowler {
   private final String id;
   private final String name;
   private final String email;
   private final double skill;
+  private final ArrayList<Game> games;
   
   
   public Bowler() {
@@ -21,7 +22,8 @@ public class Bowler extends ArrayList<Game> {
     this.id = id;
     this.name = name;
     this.email = email;
-    this.skill = 1-skill*skill;
+    this.skill = skill;
+    this.games = new ArrayList<>();
   }
   
   
@@ -39,6 +41,10 @@ public class Bowler extends ArrayList<Game> {
   
   public double skill() {
     return skill;
+  }
+  
+  public ArrayList<Game> games() {
+    return games;
   }
   
    

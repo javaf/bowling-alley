@@ -27,7 +27,7 @@ public class Party extends ArrayList<Bowler> {
     ArrayList<Game> games = new ArrayList<>();
     for (Bowler bowler : this) {
       Game game = new Game(bowler);
-      bowler.add(game);
+      bowler.games().add(game);
       games.add(game);
     }
     return games;
