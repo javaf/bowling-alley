@@ -14,7 +14,7 @@ public class Lane extends ArrayList<Game> {
   public String name() {
     if (isEmpty()) return "Empty Lane";
     Bowler bowler = get(0).bowler();
-    return bowler==null? "Anonymous Lane" : bowler.id()+"'s Party Lane";
+    return bowler==null? "Anonymous Party" : bowler.id()+"'s Party";
   }
   
   public String status() {

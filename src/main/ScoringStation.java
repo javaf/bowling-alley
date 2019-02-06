@@ -21,6 +21,7 @@ public class ScoringStation extends JFrame {
   }
   
   public void update(Lane lane) {
+    party.setText(lane.name());
     bowler.setText(lane.bowler().id());
     frame.setText(""+(lane.frame()+1));
     pinsetter.update(lane.pinsetter());
@@ -44,7 +45,7 @@ public class ScoringStation extends JFrame {
     game2 = new main.GamePanel();
     game3 = new main.GamePanel();
     game4 = new main.GamePanel();
-    jLabel1 = new javax.swing.JLabel();
+    party = new javax.swing.JLabel();
     bowlerLabel = new javax.swing.JLabel();
     frameLabel = new javax.swing.JLabel();
     bowler = new javax.swing.JLabel();
@@ -52,6 +53,8 @@ public class ScoringStation extends JFrame {
     pause = new javax.swing.JButton();
     abort = new javax.swing.JButton();
     maintenance = new javax.swing.JButton();
+
+    setTitle("Scoring Station");
 
     game1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bowler's Game", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
@@ -63,9 +66,9 @@ public class ScoringStation extends JFrame {
 
     game4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bowler's Game", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
-    jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-    jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    jLabel1.setText("Bowler's Party");
+    party.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+    party.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    party.setText("Bowler's Party");
 
     bowlerLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     bowlerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -126,7 +129,7 @@ public class ScoringStation extends JFrame {
               .addComponent(bowler, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
               .addComponent(frame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
           .addGroup(layout.createSequentialGroup()
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(party, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(0, 0, Short.MAX_VALUE))
           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
             .addGap(0, 0, Short.MAX_VALUE)
@@ -150,7 +153,7 @@ public class ScoringStation extends JFrame {
         .addContainerGap()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
           .addGroup(layout.createSequentialGroup()
-            .addComponent(jLabel1)
+            .addComponent(party)
             .addGap(16, 16, 16)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
               .addComponent(bowlerLabel)
@@ -210,8 +213,8 @@ public class ScoringStation extends JFrame {
   private main.GamePanel game2;
   private main.GamePanel game3;
   private main.GamePanel game4;
-  private javax.swing.JLabel jLabel1;
   private javax.swing.JButton maintenance;
+  private javax.swing.JLabel party;
   private javax.swing.JButton pause;
   private main.PinsetterPanel pinsetter;
   // End of variables declaration//GEN-END:variables
