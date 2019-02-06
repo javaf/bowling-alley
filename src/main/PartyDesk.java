@@ -172,9 +172,10 @@ public class PartyDesk extends JFrame {
 
   private void addPartyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartyActionPerformed
     Bowler bowler = bowlerMap.get(bowlerList.getSelectedValue());
+    System.out.println("addPartyActionPerformed: "+bowler);
     if (bowler==null || party.size()>=5) System.err.println("Party already full!");
-    else if (party.contains(bowler)) System.err.println("Bowler already added!");
     else {
+      if (party.contains(bowler)) System.err.println("Bowler already added!");
       party.add(bowler);
       partyList.setListData(party.ids());
     }
@@ -182,7 +183,7 @@ public class PartyDesk extends JFrame {
 
   private void removePartyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePartyActionPerformed
     Bowler bowler = bowlerMap.get(partyList.getSelectedValue());
-    if (bowler==null || party.size()==0) System.err.println("Bowler not found!");
+    if (bowler==null || party.isEmpty()) System.err.println("Bowler not found!");
     else {
       party.remove(bowler);
       partyList.setListData(party.ids());

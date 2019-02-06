@@ -26,9 +26,8 @@ public class LanePanel extends JPanel {
   }
   
   public void update(Lane lane) {
-    Bowler b = lane.bowler();
-    bowler.setText(b==null? "?" : b.id());
-    frame.setText(""+(lane.frame()+1));
+    bowler.setText(lane.isEmpty()? "?" : lane.game().bowler().id());
+    frame.setText(""+(lane.isEmpty()? 0 : lane.progress()+1));
     pinsStanding.setText(""+lane.pinsetter().standing());
     setBackground(lane.complete()? null : Color.LIGHT_GRAY);
     if (scoringStation.isVisible()) scoringStation.update(lane);
@@ -44,8 +43,6 @@ public class LanePanel extends JPanel {
     pinsStandingLabel = new javax.swing.JLabel();
     pinsStanding = new javax.swing.JLabel();
     showScore = new javax.swing.JButton();
-    gameLabel = new javax.swing.JLabel();
-    game = new javax.swing.JLabel();
     frameLabel = new javax.swing.JLabel();
     frame = new javax.swing.JLabel();
     maintenance = new javax.swing.JButton();
@@ -74,14 +71,6 @@ public class LanePanel extends JPanel {
       }
     });
 
-    gameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    gameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    gameLabel.setText("Game");
-
-    game.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    game.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    game.setText("1");
-
     frameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     frameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     frameLabel.setText("Frame");
@@ -103,10 +92,6 @@ public class LanePanel extends JPanel {
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(gameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(game, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(frameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(frame, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -121,7 +106,7 @@ public class LanePanel extends JPanel {
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addComponent(showScore, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(maintenance, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
+        .addComponent(maintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,13 +115,9 @@ public class LanePanel extends JPanel {
         .addComponent(maintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
-          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-            .addComponent(gameLabel)
-            .addComponent(frameLabel))
+          .addComponent(frameLabel)
           .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-            .addComponent(game)
-            .addComponent(frame)))
+          .addComponent(frame))
         .addGroup(layout.createSequentialGroup()
           .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
             .addComponent(bowlerLabel)
@@ -164,8 +145,6 @@ public class LanePanel extends JPanel {
   private javax.swing.JLabel bowlerLabel;
   private javax.swing.JLabel frame;
   private javax.swing.JLabel frameLabel;
-  private javax.swing.JLabel game;
-  private javax.swing.JLabel gameLabel;
   private javax.swing.JButton maintenance;
   private javax.swing.JLabel pinsStanding;
   private javax.swing.JLabel pinsStandingLabel;

@@ -3,8 +3,10 @@ import java.util.*;
 
 
 public class Lane extends ArrayList<Game> {
-  private String status;
   private final Pinsetter pinsetter;
+  private Party party;
+  private int turn;
+  private int progress;
 
   
   public Lane() {
@@ -12,59 +14,59 @@ public class Lane extends ArrayList<Game> {
   }
   
   public String name() {
-    if (isEmpty()) return "Empty Lane";
-    Bowler bowler = get(0).bowler();
-    return bowler==null? "Anonymous Party" : bowler.id()+"'s Party";
-  }
-  
-  public String status() {
-    return status;
-  }
-  
-  public String status(String status) {
-    return this.status = status;
+    return party==null? "Empty Lane" : party.name();
   }
 
   public Pinsetter pinsetter() {
     return pinsetter;
   }
   
-  public boolean complete() {
-    if (isEmpty()) return true;
-    for (Game game : this)
-      if (!game.complete()) return false;
-    return true;
+  public Party party() {
+    return party;
   }
   
-  public int frame() {
-    int frame = 0;
-    for (Game game : this)
-      frame = Math.max(frame, game.size()-1);
-    return frame;
+  public int turn() {
+    return turn;
   }
   
   public Game game() {
-    if (isEmpty()) return null;
-    int frame = frame();
-    for (Game game : this)
-      if(frame > game.size()) return game;
-    return get(0);
+    return turn<size()? get(turn) : null;
   }
   
-  public Bowler bowler() {
-    Game game = game();
-    return game!=null? game.bowler() : null;
+  public int progress() {
+    return progress;
   }
   
+  public Frame frame() {
+    return game().get(progress);
+  }
+  
+  public boolean complete() {
+    return isEmpty() || progress==10;
+  }
+  
+  
+  public void assign(Party party) {
+    clear();
+    this.party = party;
+    for (Game game : party.play())
+      add(game);
+  }
+  
+  public boolean addRoll(Roll roll) {
+    if (complete()) return false;
+    game().addRoll(roll);
+    if (pinsetter.standing()==0) pinsetter.clear();
+    if (frame().complete(progress==10)) { pinsetter.clear(); turn++; }
+    if (turn >= size()) { turn = 0; progress++; }
+    return true;
+  }
   
   @Override
   public void clear() {
     super.clear();
-    pinsetter.reset();
-  }
-  
-  public void addBowlers(Collection<Bowler> bowlers) {
-    for (Bowler bowler : bowlers)
-      add(new Game(bowler));
+    pinsetter.clear();
+    turn = progress = 0;
+    party = null;
   }
 }

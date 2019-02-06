@@ -5,6 +5,7 @@ import java.util.*;
 public class Party extends ArrayList<Bowler> {
   private static final int CAPACITY = 5;
   
+  
   public String name() {
     return isEmpty()? "Empty Party" : get(0).id()+"'s Party";
   }
@@ -16,9 +17,20 @@ public class Party extends ArrayList<Bowler> {
     return ids;
   }
   
+  
   @Override
   public boolean add(Bowler bowler) {
     return size()>=CAPACITY? false : super.add(bowler);
+  }
+  
+  public ArrayList<Game> play() {
+    ArrayList<Game> games = new ArrayList<>();
+    for (Bowler bowler : this) {
+      Game game = new Game(bowler);
+      bowler.add(game);
+      games.add(game);
+    }
+    return games;
   }
   
   

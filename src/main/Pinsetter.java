@@ -49,7 +49,7 @@ public class Pinsetter {
     return true;
   }
 
-  public void reset() {
+  public void clear() {
     Arrays.fill(pins, true);
   }
   

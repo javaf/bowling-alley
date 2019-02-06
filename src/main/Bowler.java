@@ -1,7 +1,8 @@
 package main;
+import java.util.*;
 
 
-public class Bowler {
+public class Bowler extends ArrayList<Game> {
   private final String id;
   private final String name;
   private final String email;
@@ -9,7 +10,7 @@ public class Bowler {
   
   
   public Bowler() {
-    this("unknown", "unknown", "unknown");
+    this("Unknown", "Unknown", "Unknown");
   }
   
   public Bowler(String id, String name, String email) {
