@@ -8,6 +8,7 @@ import javax.swing.*;
 public class ScoringStation extends JFrame {
   public final EventEmitter events;
   private final GamePanel[] games;
+  private Lane lane;
 
   public ScoringStation() {
     initComponents();
@@ -22,6 +23,7 @@ public class ScoringStation extends JFrame {
   }
   
   public void update(Lane lane) {
+    this.lane = lane;
     party.setText(lane.name());
     bowler.setText(lane.isEmpty()? "?" : lane.game().bowler().id());
     frame.setText(""+Math.min(lane.progress()+1, 10));
@@ -182,6 +184,7 @@ public class ScoringStation extends JFrame {
   }//GEN-LAST:event_abortActionPerformed
 
   private void maintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maintenanceActionPerformed
+    if (lane!=null) lane.status = "paused";
     maintenance.setBackground(Color.RED);
     maintenance.setText("Maintenance called");
     events.emit("maintenanceNeeded", null);

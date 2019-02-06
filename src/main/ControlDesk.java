@@ -6,8 +6,8 @@ import javax.swing.*;
 
 
 public class ControlDesk extends JFrame {
-  private final LanePanel[] lanes;
   public final EventEmitter events;
+  private final LanePanel[] lanes;
 
   public ControlDesk() {
     initComponents();

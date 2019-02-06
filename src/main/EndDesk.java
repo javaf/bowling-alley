@@ -16,6 +16,7 @@ public class EndDesk extends JFrame {
     initComponents();
     this.party = party;
     events = new EventEmitter();
+    ask.setText(party.name()+" game complete!");
     partyList.setListData(party.ids());
     JFrames.screenCenter(this);
     setVisible(true);

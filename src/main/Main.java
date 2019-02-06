@@ -44,6 +44,7 @@ public class Main extends Thread {
   public void run() {
     for (;;) {
       for (Lane lane : lanes) {
+        if ("paused".equals(lane.status())) continue;
         if (lane.complete()) {
           controlDesk.events.emit("laneComplete", lanes.indexOf(lane));
           continue;
@@ -57,10 +58,9 @@ public class Main extends Thread {
         controlDesk.update(partyQueue, lanes);
         System.out.println(pinsetter);
         lane.update();
-        // if (pinsetter.standing()==0 || game.last().complete(game.size()==10)) pinsetter.clear();
-        try { Thread.sleep(500); }
-        catch (InterruptedException e) {}
       }
+      try { Thread.sleep(500); }
+      catch (InterruptedException e) {}
     }
   }
 }

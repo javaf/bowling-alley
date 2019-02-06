@@ -7,6 +7,7 @@ import javax.swing.*;
 public class LanePanel extends JPanel {
   public final EventEmitter events;
   private final ScoringStation scoringStation; 
+  private Lane lane;
 
   
   public LanePanel() {
@@ -23,6 +24,7 @@ public class LanePanel extends JPanel {
   }
   
   public void update(Lane lane) {
+    this.lane = lane;
     bowler.setText(lane.isEmpty()? "?" : lane.game().bowler().id());
     frame.setText(""+(lane.isEmpty()? 0 : Math.min(lane.progress()+1, 10)));
     pinsStanding.setText(""+lane.pinsetter().standing());
@@ -127,6 +129,7 @@ public class LanePanel extends JPanel {
   }// </editor-fold>//GEN-END:initComponents
 
   private void maintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maintenanceActionPerformed
+    if (lane!=null) lane.status = "ok";
     maintenance.setBackground(null);
     maintenance.setText("Lane ok");
     scoringStation.events.emit("maintenanceDone", null);
