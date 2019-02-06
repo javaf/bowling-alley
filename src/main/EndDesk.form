@@ -28,12 +28,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="ask" max="32767" attributes="0"/>
                   <Component id="partyListPane" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="playAnother" min="-2" pref="100" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="playAnother" min="-2" pref="125" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="printReport" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="printReport" min="-2" pref="125" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="emailReport" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Component id="emailReport" min="-2" pref="125" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Component id="message" alignment="0" max="32767" attributes="0"/>

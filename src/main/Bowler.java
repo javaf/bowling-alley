@@ -59,6 +59,10 @@ public class Bowler {
     out.append(pad).append("name: ").append(name()).append('\n');
     out.append(pad).append("email: ").append(email()).append('\n');
     out.append(pad).append("skill: ").append(skill()).append('\n');
+    for (int i=0; i<games.size(); i++) {
+      out.append(pad).append("game[").append(i).append("]:\n");
+      games.get(i).stringify(out, pad+"  ");
+    }
     return out;
   }
   

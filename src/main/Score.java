@@ -1,39 +1,51 @@
 package main;
 
 public class Score {
-  public String id;
-  public String date;
-  public String score;
+  private final String id;
+  private final String date;
+  private final int score;
 
 
-  public Score(String id, String date, String score) {
+  public Score(String id, String date, int score) {
     this.id = id;
     this.date = date;
     this.score = score;
   }
   
-  public static Score parse(String line) {
-    String[] fields = line.trim().split("\t");
-    return fields.length > 2? new Score(fields[0], fields[1], fields[2]) : null;
-  }
   
-  public String stringify() {
-    return id + "\t" + date + "\t" + score;
-  }
-  
-  public String getNickName() {
+  public String id() {
     return id;
   }
 
-  public String getDate() {
+  public String date() {
     return date;
   }
 
-  public String getScore() {
+  public int score() {
     return score;
   }
 
+  
+  @Override
   public String toString() {
-    return stringify();
+    return stringify(new StringBuilder(), "").toString();
+  }
+  
+  public StringBuilder stringify(StringBuilder out, String pad) {
+    out.append(pad).append("[Score]\n");
+    out.append(pad).append("id: ").append(id()).append('\n');
+    out.append(pad).append("date: ").append(date()).append('\n');
+    out.append(pad).append("score: ").append(score()).append('\n');
+    return out;
+  }
+  
+
+  public static Score parseLine(String line) {
+    String[] fields = line.trim().split("\t");
+    return fields.length > 2? new Score(fields[0], fields[1], Integer.parseInt(fields[2])) : null;
+  }
+  
+  public String stringifyLine() {
+    return id + "\t" + date + "\t" + score;
   }
 }

@@ -6,7 +6,7 @@ import java.io.*;
 public class ScoreHistoryFileAdapter {
   private static ScoreFile SCORE_FILE = new ScoreFile("SCORE_HISTORY.DAT");
   
-  public static void addScore(String nick, String date, String score)
+  public static void addScore(String nick, String date, int score)
     throws IOException {
     SCORE_FILE.add(new Score(nick, date, score));
   }

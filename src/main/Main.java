@@ -1,6 +1,4 @@
 package main;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 import java.util.*;
 
 
@@ -27,13 +25,19 @@ public class Main extends Thread {
     });
     controlDesk.events.on("laneComplete", (event, value) -> {
       Lane lane = lanes.get((int) value);
+      Party party = lane.party();
       lane.clear();
-      if (partyQueue.isEmpty()) return;
-      lane.assign(partyQueue.removeFirst());
-      controlDesk.update(partyQueue, lanes);
+      if (!partyQueue.isEmpty()) {
+        lane.assign(partyQueue.removeFirst());
+        controlDesk.update(partyQueue, lanes);
+      }
+      if (party==null) return;
+      EndDesk endDesk = new EndDesk(party);
+      endDesk.events.on("partyQueue", (e, v) -> partyQueue.addLast((Party) v));
+      endDesk.events.on("bowlerPrint", (e, v) -> new ScoreReport((Bowler) v).print());
+      endDesk.events.on("bowlerEmail", (e, v) -> new ScoreReport((Bowler) v).email());
     });
     new Main().start();
-    sendPrintout("Hello");
   }
   
   @Override
@@ -54,21 +58,8 @@ public class Main extends Thread {
         System.out.println(pinsetter);
         lane.update();
         // if (pinsetter.standing()==0 || game.last().complete(game.size()==10)) pinsetter.clear();
-        try { Thread.sleep(10000); }
+        try { Thread.sleep(1000); }
         catch (InterruptedException e) {}
-      }
-    }
-  }
-  
-    private static void sendPrintout(String content) {
-    PrinterJob job = PrinterJob.getPrinterJob();
-    PrintableText printobj = new PrintableText(content);
-    job.setPrintable(printobj);
-    if (job.printDialog()) {
-      try {
-        job.print();
-      } catch (PrinterException e) {
-        System.err.println(e);
       }
     }
   }
