@@ -2,57 +2,56 @@ package main;
 
 
 public class Roll {
-  private final boolean[] pins;
   private final boolean headpin;
   private final boolean spaced;
   private final boolean foul;
-  private final int turn;
   private final int standing;
-  public final int score;
+  private final int dropped;
   
+
+  public Roll(Pinsetter pinsetter) {
+    this(pinsetter, Math.random());
+  }
   
-  public Roll(
-      boolean[] pins, boolean headpin, boolean spaced, boolean foul,
-      int turn, int standing, int score) {
-    this.pins = pins;
-    this.headpin = headpin;
-    this.spaced = spaced;
+  public Roll(Pinsetter pinsetter, double skill) {
+    this(pinsetter, outcomes(skill, 0.5, 10), outcome(skill, 0.05));
+  }
+  
+  public Roll(Pinsetter pinsetter, boolean[] hits, boolean foul) {
+    this.dropped = pinsetter.drop(hits);
+    this.standing = pinsetter.standing();
+    this.headpin = pinsetter.pins()[0];
+    this.spaced = pinsetter.spaced();
     this.foul = foul;
-    this.turn = turn;
-    this.standing = standing;
-    this.score = score;
   }
   
-  public boolean[] pins() {
-    return pins;
+  
+  public int score() {
+    return foul? 0 : dropped;
   }
   
-  public int turn() {
-    return turn;
+  public int dropped() {
+    return dropped;
   }
   
   public int standing() {
     return standing;
   }
   
-  public int score() {
-    return score;
-  }
-  
   public boolean strike() {
-    return score==10;
+    return foul? false : dropped==10;
   }
   
   public boolean spare() {
-    return !foul && standing==0 && turn>0;
+    return foul? false : standing==0 && dropped<10;
   }
   
   public boolean full() {
-    return !foul && standing==0;
+    return foul? false : standing==0;
   }
   
   public boolean miss() {
-    return score==0;
+    return dropped==0;
   }
   
   public boolean foul() {
@@ -60,38 +59,13 @@ public class Roll {
   }
   
   public boolean split() {
-    return headpin && spaced;
+    return !headpin && spaced;
   }
   
   public boolean wide() {
-    return !headpin && spaced;
-  }
-
-  public Roll roll() {
-    return roll(RANDOM.nextDouble());
+    return headpin && spaced;
   }
   
-  public Roll roll(double skill) {
-    boolean[] pins = new boolean[10];
-    boolean foul = luck(skill)<0.05;
-    for (int i=0; i<pins.length; i++)
-      pins[i] = luck(skill)>=0.5;
-    return roll(pins, foul);
-  }
-  
-  public Roll roll(boolean[] pins, boolean foul) {
-    int score = drop(pins);
-    if(foul) return new Roll(pins, pins[0], false, foul, turn++, standing(), 0);
-    return new Roll(pins, pins[0], spaced(), foul, turn++, standing(), score);
-  }
-  
-  
-  
-  
-  private static double luck(double skill) {
-    return Math.pow(RANDOM.nextDouble(), 1-skill);
-  }
-
   
   @Override
   public String toString() {
@@ -100,9 +74,9 @@ public class Roll {
   
   public StringBuilder stringify(StringBuilder out, String pad) {
     out.append(pad).append("[Roll]\n");
-    out.append(pad).append("turn: ").append(turn()).append('\n');
-    out.append(pad).append("standing: ").append(standing()).append('\n');
     out.append(pad).append("score: ").append(score()).append('\n');
+    out.append(pad).append("dropped: ").append(dropped()).append('\n');
+    out.append(pad).append("standing: ").append(standing()).append('\n');
     out.append(pad).append("strike: ").append(strike()).append('\n');
     out.append(pad).append("spare: ").append(spare()).append('\n');
     out.append(pad).append("full: ").append(full()).append('\n');
@@ -110,7 +84,22 @@ public class Roll {
     out.append(pad).append("foul: ").append(foul()).append('\n');
     out.append(pad).append("split: ").append(split()).append('\n');
     out.append(pad).append("wide: ").append(wide()).append('\n');
-    out.append(pad).append("pins:\n");
-    return Pinsetter.stringifyPins(out, pad, pins);
+    return out;
+  }
+
+  
+  private static boolean[] outcomes(double skill, double chance, int count) {
+    boolean[] outcomes = new boolean[count];
+    for (int i=0; i<count; i++)
+      outcomes[i] = outcome(skill, chance);
+    return outcomes;
+  }
+  
+  private static boolean outcome(double skill, double chance) {
+    return luck(skill) < chance;
+  }
+  
+  private static double luck(double skill) {
+    return Math.pow(Math.random(), 1-skill);
   }
 }

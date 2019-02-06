@@ -40,11 +40,11 @@ public class Game extends ArrayList<Frame> {
     for (Frame frame : this) {
       frame.score = 0;
       for (Roll roll : frame) {
-        if (frame1 != null && frame1 != frame) frame1.score += roll.score;
-        if (frame0 != null && frame0 != frame) frame0.score += roll.score;
+        if (frame1 != null && frame1 != frame) frame1.score += roll.score();
+        if (frame0 != null && frame0 != frame) frame0.score += roll.score();
         frame0 = roll.spare()? frame : frame1;
         frame1 = roll.strike()? frame : null;
-        frame.score += roll.score;
+        frame.score += roll.score();
       }
     }
   }

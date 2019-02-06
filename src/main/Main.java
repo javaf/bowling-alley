@@ -47,10 +47,10 @@ public class Main extends Thread {
         Bowler bowler = game.bowler();
         Pinsetter pinsetter = lane.pinsetter();
         double skill = bowler!=null? bowler.skill() : Math.random();
-        Roll roll = pinsetter.roll(skill);
+        Roll roll = new Roll(pinsetter, skill);
         game.addRoll(roll);
         controlDesk.update(partyQueue, lanes);
-        if(roll.full() || game.last().complete(game.size()==10)) pinsetter.reset();
+        if(pinsetter.standing()==0 || game.last().complete(game.size()==10)) pinsetter.reset();
         played = true;
         try { Thread.sleep(2000); }
         catch (InterruptedException e) {}
