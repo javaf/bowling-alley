@@ -50,7 +50,9 @@ public class Main extends Thread {
         Roll roll = new Roll(pinsetter, skill);
         lane.addRoll(roll);
         controlDesk.update(partyQueue, lanes);
-        try { Thread.sleep(2000); }
+        System.out.println(pinsetter);
+        if (pinsetter.standing()==0 || game.last().complete(game.size()==10)) pinsetter.clear();
+        try { Thread.sleep(1000); }
         catch (InterruptedException e) {}
       }
     }

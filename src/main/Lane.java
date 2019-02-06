@@ -56,8 +56,7 @@ public class Lane extends ArrayList<Game> {
   public boolean addRoll(Roll roll) {
     if (complete()) return false;
     game().addRoll(roll);
-    if (pinsetter.standing()==0) pinsetter.clear();
-    if (frame().complete(progress==10)) { pinsetter.clear(); turn++; }
+    if (frame().complete(progress==10)) turn++;
     if (turn >= size()) { turn = 0; progress++; }
     return true;
   }

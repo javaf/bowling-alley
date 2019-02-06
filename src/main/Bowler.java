@@ -21,7 +21,7 @@ public class Bowler extends ArrayList<Game> {
     this.id = id;
     this.name = name;
     this.email = email;
-    this.skill = skill;
+    this.skill = 1-skill*skill;
   }
   
   

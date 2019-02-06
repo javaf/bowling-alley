@@ -79,7 +79,7 @@ public class Pinsetter {
     out.append(pad);
     for(int col=0, lastRow=rows(pins.length)-1, row=lastRow; row>=0;) {
       int i = row*(row+1)/2 + col;
-      out.append(i).append(pins[i]? '_' : 'A').append("  ");
+      out.append(i).append(pins[i]? 'A' : '_').append("  ");
       col++;
       if(col>row) {
         col = 0; row--;
