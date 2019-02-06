@@ -2,8 +2,8 @@ package main;
 
 
 public class Roll {
-  private final boolean[] pins; // true => drop pins
-  private final boolean headpin; // true => headpin not standing
+  private final boolean[] pins;
+  private final boolean headpin;
   private final boolean spaced;
   private final boolean foul;
   private final int turn;
@@ -65,6 +65,31 @@ public class Roll {
   
   public boolean wide() {
     return !headpin && spaced;
+  }
+
+  public Roll roll() {
+    return roll(RANDOM.nextDouble());
+  }
+  
+  public Roll roll(double skill) {
+    boolean[] pins = new boolean[10];
+    boolean foul = luck(skill)<0.05;
+    for (int i=0; i<pins.length; i++)
+      pins[i] = luck(skill)>=0.5;
+    return roll(pins, foul);
+  }
+  
+  public Roll roll(boolean[] pins, boolean foul) {
+    int score = drop(pins);
+    if(foul) return new Roll(pins, pins[0], false, foul, turn++, standing(), 0);
+    return new Roll(pins, pins[0], spaced(), foul, turn++, standing(), score);
+  }
+  
+  
+  
+  
+  private static double luck(double skill) {
+    return Math.pow(RANDOM.nextDouble(), 1-skill);
   }
 
   

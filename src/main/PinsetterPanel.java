@@ -13,7 +13,7 @@ public class PinsetterPanel extends JPanel {
   }
   
   public void update(Pinsetter pinsetter) {
-    turnValue.setText(""+pinsetter.turn());
+    // turnValue.setText(""+pinsetter.turn());
     standingValue.setText(""+pinsetter.standing());
     for(int i=0; i<pins.length; i++)
       pins[i].setBackground(pinsetter.pins()[i]? Color.GRAY : null);

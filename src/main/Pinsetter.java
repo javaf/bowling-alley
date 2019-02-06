@@ -3,7 +3,6 @@ import java.util.*;
 
 
 /* PINS:
-   true => pins dropped
     6   7U   8U   9
       3L   4   5R
         1L   2R
@@ -13,73 +12,34 @@ import java.util.*;
  */
 public class Pinsetter {
   private final boolean[] pins;
-  private int turn;
-  private static final Random RANDOM = new Random();
 
   
   public Pinsetter() {
     pins = new boolean[10];
-    turn = 0;
+    Arrays.fill(pins, true);
   }
+
   
   public boolean[] pins() {
     return pins;
   }
   
-  public int turn() {
-    return turn;
-  }
-  
   public int standing() {
-    int count = 0;
+    int standing = 0;
     for(var i=0; i<pins.length; i++)
-      count += pins[i]? 0 : 1;
-    return count;
+      if(pins[i]) standing++;
+    return standing;
   }
   
-  public void reset() {
-    for (int i=0; i<pins.length; i++)
-      pins[i] = false;
-    turn = 0;
-  }
-  
-  public Roll roll() {
-    return roll(RANDOM.nextDouble());
-  }
-  
-  public Roll roll(double skill) {
-    boolean[] pins = new boolean[10];
-    boolean foul = luck(skill)<0.05;
-    for (int i=0; i<pins.length; i++)
-      pins[i] = luck(skill)>=0.5;
-    return roll(pins, foul);
-  }
-  
-  public Roll roll(boolean[] pins, boolean foul) {
-    int score = drop(pins);
-    if(foul) return new Roll(pins, pins[0], false, foul, turn++, standing(), 0);
-    return new Roll(pins, pins[0], spaced(), foul, turn++, standing(), score);
-  }
-  
-  
-  private int drop(boolean[] pins) {
-    int score = 0;
-    for(int i=0; i<pins.length; i++) {
-      score += !this.pins[i] && pins[i]? 1 : 0;
-      this.pins[i] |= pins[i];
-    }
-    return score;
-  }
-  
-  private boolean spaced() {
+  public boolean spaced() {
     for(int i=0, col=0, row=0; i<pins.length; i++) {
-      boolean edgeL = row==0 || col==0;
-      boolean edgeR = row==0 || col==row;
-      boolean edgeU = i+row+2>=pins.length;
-      boolean gapL = edgeL? true : pins[i-1] & pins[i-row+1];
-      boolean gapR = edgeR? true : pins[i+1] & pins[i-row];
-      boolean gapU = edgeU? true : pins[i+row+2] & pins[i+row+1];
-      if(!pins[i] && !(gapL & gapR & gapU)) return false;
+      boolean lend = row==0 || col==0;
+      boolean rend = row==0 || col==row;
+      boolean uend = i+row+2>=pins.length;
+      boolean l = lend? false : pins[i-1] | pins[i-row+1];
+      boolean r = rend? false : pins[i+1] | pins[i-row];
+      boolean u = uend? false : pins[i+row+2] | pins[i+row+1];
+      if(pins[i] && (l | r | u)) return false;
       col++;
       if(col>row) {
         col = 0;
@@ -88,14 +48,16 @@ public class Pinsetter {
     }
     return true;
   }
-  
-  private static int rows(int pins) {
-    int a = 1, b = 1, c = -2*pins;
-    return (int)Math.floor((-b + Math.sqrt(b*b - 4*a*c)) / (2*a));
+
+  public void reset() {
+    Arrays.fill(pins, true);
   }
   
-  private static double luck(double skill) {
-    return Math.pow(RANDOM.nextDouble(), 1-skill);
+  public int drop(boolean[] hits) {
+    int dropped = 0;
+    for(int i=0; i<pins.length; i++)
+      if (pins[i] && hits[i]) { pins[i] = false; dropped++; }
+    return dropped;
   }
   
   
@@ -106,8 +68,8 @@ public class Pinsetter {
   
   public StringBuilder stringify(StringBuilder out, String pad) {
     out.append(pad).append("[Pinsetter]\n");
-    out.append(pad).append("turn: ").append(turn()).append('\n');
     out.append(pad).append("standing: ").append(standing()).append('\n');
+    out.append(pad).append("spaced: ").append(spaced()).append('\n');
     out.append(pad).append("pins:\n");
     return stringifyPins(out, pad+"  ", pins);
   }
@@ -119,13 +81,18 @@ public class Pinsetter {
       out.append(i).append(pins[i]? '_' : 'A').append("  ");
       col++;
       if(col>row) {
-        col = 0;
-        row--;
+        col = 0; row--;
         out.append('\n').append(pad);
         out.append("  ".repeat(lastRow-row));
       }
     }
     out.append('\n');
     return out;
+  }
+
+  
+  private static int rows(int pins) {
+    int a = 1, b = 1, c = -2*pins;
+    return (int)Math.floor((-b + Math.sqrt(b*b - 4*a*c)) / (2*a));
   }
 };
