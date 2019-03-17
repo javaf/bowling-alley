@@ -9,7 +9,16 @@ public class Frame extends ArrayList<Roll> {
   public int score() {
     return score;
   }
-
+  
+  public boolean penalty() {
+    boolean prev = false;
+    for(Roll roll : this) {
+      if(roll.gutter() && prev) return true;
+      prev = roll.gutter();
+    }
+    return false;
+  }
+  
   public boolean complete(boolean tenth) {
     int size = size();
     if(!tenth) return size==0? false : (size>=2 || last().full());

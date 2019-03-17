@@ -38,6 +38,7 @@ public class Game extends ArrayList<Frame> {
   }
   
   private void scoreFrames() {
+    int max = 0;
     Frame frame0 = null, frame1 = null;
     for (Frame frame : this) {
       frame.score = 0;
@@ -48,6 +49,11 @@ public class Game extends ArrayList<Frame> {
         frame1 = roll.strike()? frame : null;
         frame.score += roll.score();
       }
+      // NOTE: maybe we can use strategy pattern to dynamically choose:
+      // - whether to do it the default way
+      // - or give penalty for consecutive gutters
+      max = Math.max(max, frame.score);
+      if(frame.penalty()) frame.score -= max/2;
     }
   }
   

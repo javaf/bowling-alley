@@ -4,6 +4,7 @@ package main;
 public class Roll {
   private final boolean headpin;
   private final boolean spaced;
+  private final boolean gutter;
   private final boolean foul;
   private final int standing;
   private final int dropped;
@@ -14,14 +15,15 @@ public class Roll {
   }
   
   public Roll(Pinsetter pinsetter, double skill) {
-    this(pinsetter, outcomes(skill, 10), luck(skill)<0.05);
+    this(pinsetter, outcomes(skill, 10), luck(skill)<0.1, luck(skill)<0.05);
   }
   
-  public Roll(Pinsetter pinsetter, boolean[] hits, boolean foul) {
-    this.dropped = pinsetter.drop(hits);
+  public Roll(Pinsetter pinsetter, boolean[] hits, boolean gutter, boolean foul) {
+    this.dropped = gutter? 0 : pinsetter.drop(hits);
     this.standing = pinsetter.standing();
     this.headpin = pinsetter.pins()[0];
     this.spaced = pinsetter.spaced();
+    this.gutter = gutter;
     this.foul = foul;
   }
   
@@ -54,6 +56,10 @@ public class Roll {
     return dropped==0;
   }
   
+  public boolean gutter() {
+    return gutter;
+  }
+  
   public boolean foul() {
     return foul;
   }
@@ -71,6 +77,7 @@ public class Roll {
     if(strike()) return "X";
     if(spare()) return "/";
     if(miss()) return "-";
+    if(gutter()) return "G";
     if(foul()) return "F";
     if(split()) return "S"+score();
     if(wide()) return "W"+score();
@@ -86,6 +93,7 @@ public class Roll {
     out.append(pad).append("spare: ").append(spare()).append('\n');
     out.append(pad).append("full: ").append(full()).append('\n');
     out.append(pad).append("miss: ").append(miss()).append('\n');
+    out.append(pad).append("gutter: ").append(gutter()).append('\n');
     out.append(pad).append("foul: ").append(foul()).append('\n');
     out.append(pad).append("split: ").append(split()).append('\n');
     out.append(pad).append("wide: ").append(wide()).append('\n');
