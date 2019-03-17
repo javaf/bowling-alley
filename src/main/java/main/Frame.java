@@ -2,7 +2,7 @@ package main;
 import java.util.*;
 
 
-public class Frame extends ArrayList<Roll> {
+public class Frame extends ArrayList<Roll> implements Comparable<Frame> {
   public static final Frame EMPTY = new Frame(false);
   private final boolean special;
   public int capacity = 2;
@@ -81,5 +81,11 @@ public class Frame extends ArrayList<Roll> {
       get(i).stringify(out, pad+"  ").append('\n');
     }
     return out;
+  }
+
+  @Override
+  public int compareTo(Frame other) {
+    int diff = score()-other.score();
+    return diff!=0? diff : strikes()-other.strikes();
   }
 }
