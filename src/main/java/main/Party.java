@@ -3,7 +3,7 @@ import java.util.*;
 
 
 public class Party extends ArrayList<Bowler> {
-  public static final int CAPACITY = 5;
+  public static final int CAPACITY = 6;
   
   
   public String name() {
