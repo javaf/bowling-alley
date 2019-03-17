@@ -24,6 +24,10 @@ public class Frame extends ArrayList<Roll> implements Comparable<Frame> {
   }
   
   
+  public boolean special() {
+    return special;
+  }
+  
   public int capacity() {
     return capacity;
   }
@@ -85,6 +89,8 @@ public class Frame extends ArrayList<Roll> implements Comparable<Frame> {
   
   public StringBuilder stringify(StringBuilder out, String pad) {
     out.append(pad).append("[Frame]\n");
+    out.append(pad).append("special: ").append(special()).append('\n');
+    out.append(pad).append("capacity: ").append(capacity()).append('\n');
     out.append(pad).append("score: ").append(score()).append('\n');
     for(int i=0; i<size(); i++) {
       out.append(pad).append("roll[").append(i).append("]:\n");
