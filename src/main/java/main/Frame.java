@@ -3,13 +3,14 @@ import java.util.*;
 
 
 public class Frame extends ArrayList<Roll> {
-  public static final Frame EMPTY = new Frame(0);
-  private final int capacity;
+  public static final Frame EMPTY = new Frame(false);
+  private final boolean special;
+  public int capacity = 2;
   public int score;
   
   
-  public Frame(int capacity) {
-    this.capacity = capacity;
+  public Frame(boolean special) {
+    this.special = special;
   }
   
   
@@ -43,23 +44,19 @@ public class Frame extends ArrayList<Roll> {
     return false;
   }
   
-  public boolean complete(boolean tenth) {
+  public boolean complete() {
     int size = size();
-    if (!tenth) return size==0 && size<capacity? false : (size>=capacity || last().full());
+    if (!special) return size>=capacity || last().full();
     return full()? size>=capacity+1 : size>=capacity;
   }
   
   public Roll last() {
-    return isEmpty()? null : get(size() - 1);
+    return isEmpty()? Roll.EMPTY : get(size() - 1);
   }
 
   @Override
   public boolean add(Roll roll) {
-    return add(roll, false);
-  }
-  
-  public boolean add(Roll roll, boolean tenth) {
-    return complete(tenth)? false: super.add(roll);
+    return complete()? false: super.add(roll);
   }
 
   
