@@ -41,7 +41,7 @@ public class Lane extends ArrayList<Game> {
   public int progress() {
     int progress = 0;
     for (Game game : this)
-      if (!game.complete()) progress = Math.min(progress, game.size());
+      if (!game.complete()) progress = Math.max(progress, game.size());
     return progress;
   }
   

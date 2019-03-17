@@ -45,7 +45,14 @@
               <Component id="frame8" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="frame9" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="frame10" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="frame11" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="frame12" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="frame13" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -61,6 +68,10 @@
           <Component id="frame7" min="-2" max="-2" attributes="0"/>
           <Component id="frame8" min="-2" max="-2" attributes="0"/>
           <Component id="frame9" min="-2" max="-2" attributes="0"/>
+          <Component id="frame10" min="-2" max="-2" attributes="0"/>
+          <Component id="frame11" min="-2" max="-2" attributes="0"/>
+          <Component id="frame12" min="-2" max="-2" attributes="0"/>
+          <Component id="frame13" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -87,6 +98,14 @@
     <Component class="main.FramePanel" name="frame8">
     </Component>
     <Component class="main.FramePanel" name="frame9">
+    </Component>
+    <Component class="main.FramePanel" name="frame10">
+    </Component>
+    <Component class="main.FramePanel" name="frame11">
+    </Component>
+    <Component class="main.FramePanel" name="frame12">
+    </Component>
+    <Component class="main.FramePanel" name="frame13">
     </Component>
   </SubComponents>
 </Form>

@@ -11,7 +11,8 @@ public class GamePanel extends JPanel {
     initComponents();
     frames = new FramePanel[] {
       frame0, frame1, frame2, frame3, frame4,
-      frame5, frame6, frame7, frame8, frame9
+      frame5, frame6, frame7, frame8, frame9,
+      frame10, frame11, frame12, frame13
     };
   }
   
@@ -37,6 +38,10 @@ public class GamePanel extends JPanel {
     frame7 = new main.FramePanel();
     frame8 = new main.FramePanel();
     frame9 = new main.FramePanel();
+    frame10 = new main.FramePanel();
+    frame11 = new main.FramePanel();
+    frame12 = new main.FramePanel();
+    frame13 = new main.FramePanel();
 
     setBorder(javax.swing.BorderFactory.createTitledBorder(null, "No Game", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
@@ -66,7 +71,14 @@ public class GamePanel extends JPanel {
         .addComponent(frame8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(frame9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(0, 0, Short.MAX_VALUE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(frame10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(frame11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(frame12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(frame13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,6 +92,10 @@ public class GamePanel extends JPanel {
       .addComponent(frame7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
       .addComponent(frame8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
       .addComponent(frame9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+      .addComponent(frame10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+      .addComponent(frame11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+      .addComponent(frame12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+      .addComponent(frame13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
     );
   }// </editor-fold>//GEN-END:initComponents
 
@@ -87,6 +103,10 @@ public class GamePanel extends JPanel {
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private main.FramePanel frame0;
   private main.FramePanel frame1;
+  private main.FramePanel frame10;
+  private main.FramePanel frame11;
+  private main.FramePanel frame12;
+  private main.FramePanel frame13;
   private main.FramePanel frame2;
   private main.FramePanel frame3;
   private main.FramePanel frame4;

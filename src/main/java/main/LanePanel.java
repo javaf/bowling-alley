@@ -26,7 +26,7 @@ public class LanePanel extends JPanel {
   public void update(Lane lane) {
     this.lane = lane;
     bowler.setText(lane.isEmpty()? "?" : lane.game().bowler().id());
-    frame.setText(""+(lane.isEmpty()? 0 : lane.progress()+1));
+    frame.setText(""+(lane.isEmpty()? 0 : lane.progress()));
     pinsStanding.setText(""+lane.pinsetter().standing());
     setBackground(lane.complete()? null : Color.LIGHT_GRAY);
     if (scoringStation.isVisible()) scoringStation.update(lane);

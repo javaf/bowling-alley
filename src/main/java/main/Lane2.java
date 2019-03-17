@@ -1,4 +1,5 @@
 package main;
+import java.util.*;
 
 
 public class Lane2 extends Lane {
@@ -6,7 +7,10 @@ public class Lane2 extends Lane {
   
   @Override
   public boolean complete() {
-    return isEmpty() || (state>=2 && super.complete());
+    if (isEmpty()) return true;
+    if (state==0 && size()<2) return super.complete();
+    if (state==1 && super.complete()) return get(1).score()<get(0).score();
+    return state>=2 && super.complete();
   }
   
   @Override
@@ -15,17 +19,15 @@ public class Lane2 extends Lane {
       System.out.print(i+":"+get(i).size()+"/"+get(i).capacity()+"."+get(i).complete()+"  ");
     System.out.println();
     if (!super.complete()) return super.addRoll(roll);
-    System.out.println("super.complete, state: "+state);
-    sort(null);
+    Collections.sort(this, Comparator.reverseOrder());
     if (size()<2) return noRank2();
     if (state==0) rank2Chance();
-    else if (state==1) rank1VsRank2();
-    super.addRoll(roll);
-    return true;
+    else if (state==1 && get(1).score()>=get(0).score()) rank1VsRank2();
+    return super.addRoll(roll);
   }
   
   private boolean noRank2() {
-    state = 3;
+    state = 2;
     return false;
   }
   
@@ -40,5 +42,11 @@ public class Lane2 extends Lane {
     state = 2;
     get(0).capacity += 3;
     get(1).capacity += 3;
+  }
+  
+  @Override
+  public void clear() {
+    super.clear();
+    state = 0;
   }
 }

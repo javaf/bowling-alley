@@ -60,7 +60,7 @@ public class Main extends Thread {
         controlDesk.update(partyQueue, lanes);
         lane.update();
       }
-      try { Thread.sleep(50); }
+      try { Thread.sleep(500); }
       catch (InterruptedException e) {}
     }
   }
