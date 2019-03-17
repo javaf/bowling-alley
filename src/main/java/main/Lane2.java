@@ -14,7 +14,7 @@ public class Lane2 extends Lane {
     for (int i=0; i<size(); i++)
       System.out.println(i+".complete: "+get(i).complete());
     if (!super.complete()) return super.addRoll(roll);
-    System.out.println("super.complete");
+    System.out.println("super.complete, state: "+state);
     sort(null);
     if (size()<2) return noRank2();
     if (state==0) rank2Chance();

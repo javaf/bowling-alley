@@ -58,10 +58,9 @@ public class Main extends Thread {
         Roll roll = new Roll(pinsetter, skill);
         lane.addRoll(roll);
         controlDesk.update(partyQueue, lanes);
-        System.out.println(pinsetter);
         lane.update();
       }
-      try { Thread.sleep(500); }
+      try { Thread.sleep(50); }
       catch (InterruptedException e) {}
     }
   }
