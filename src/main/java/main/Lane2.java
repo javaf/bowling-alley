@@ -12,14 +12,16 @@ public class Lane2 extends Lane {
   @Override
   public boolean addRoll(Roll roll) {
     for (int i=0; i<size(); i++)
-      System.out.println(i+".complete: "+get(i).complete());
+      System.out.print(i+":"+get(i).size()+"/"+get(i).capacity()+"."+get(i).complete()+"  ");
+    System.out.println();
     if (!super.complete()) return super.addRoll(roll);
     System.out.println("super.complete, state: "+state);
     sort(null);
     if (size()<2) return noRank2();
     if (state==0) rank2Chance();
     else if (state==1) rank1VsRank2();
-    return super.addRoll(roll);
+    super.addRoll(roll);
+    return true;
   }
   
   private boolean noRank2() {

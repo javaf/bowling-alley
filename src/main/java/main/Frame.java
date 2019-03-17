@@ -60,7 +60,7 @@ public class Frame extends ArrayList<Roll> implements Comparable<Frame> {
   
   public boolean complete() {
     int size = size();
-    if (!special) return size>=capacity || last().full();
+    if (!special) return size>=capacity && last().full();
     return full()? size>=capacity+1 : size>=capacity;
   }
   

@@ -7,7 +7,6 @@ public class Lane extends ArrayList<Game> {
   private boolean pinsetterClear;
   private Party party;
   private int turn;
-  private int progress;
   public String status;
 
   
@@ -36,15 +35,18 @@ public class Lane extends ArrayList<Game> {
   }
   
   public Game game() {
-    return turn<size()? get(turn) : null;
+    return turn<size()? get(turn) : Game.EMPTY;
   }
   
   public int progress() {
+    int progress = 0;
+    for (Game game : this)
+      if (!game.complete()) progress = Math.min(progress, game.size());
     return progress;
   }
   
   public Frame frame() {
-    return game().get(progress);
+    return game().last();
   }
   
   public boolean complete() {
@@ -65,28 +67,28 @@ public class Lane extends ArrayList<Game> {
     if (complete()) return false;
     game().addRoll(roll);
     pinsetterClear = pinsetter.standing()==0;
-    if (frame().complete()) nextTurn();
     return true;
+  }
+  
+  public void update() {
+    if (frame().complete()) nextTurn();
+    if (pinsetterClear) pinsetter.clear();
+    pinsetterClear = false;
   }
   
   private void nextTurn() {
     pinsetterClear = true;
     for (int i=0, I=size(); i<I; i++) {
-      if (++turn >= I) { turn = 0; progress++; }
+      turn = (turn+1) % I;
       if (!get(turn).complete()) return;
     }
-  }
-  
-  public void update() {
-    if (pinsetterClear) pinsetter.clear();
-    pinsetterClear = false;
   }
   
   @Override
   public void clear() {
     super.clear();
     pinsetter.clear();
-    turn = progress = 0;
+    turn = 0;
     party = null;
   }
 }
