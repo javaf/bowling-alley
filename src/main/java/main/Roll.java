@@ -2,6 +2,7 @@ package main;
 
 
 public class Roll {
+  public static final Roll EMPTY = new Roll(0, 0, false, false, false, false);
   private final boolean headpin;
   private final boolean spaced;
   private final boolean gutter;
@@ -23,6 +24,15 @@ public class Roll {
     this.standing = pinsetter.standing();
     this.headpin = pinsetter.pins()[0];
     this.spaced = pinsetter.spaced();
+    this.gutter = gutter;
+    this.foul = foul;
+  }
+  
+  public Roll(int dropped, int standing, boolean headpin, boolean spaced, boolean gutter, boolean foul) {
+    this.dropped = dropped;
+    this.standing = standing;
+    this.headpin = headpin;
+    this.spaced = spaced;
     this.gutter = gutter;
     this.foul = foul;
   }
