@@ -2,6 +2,7 @@ package main;
 import iiit.util.*;
 import java.util.*;
 
+
 public class Game extends ArrayList<Frame> implements Comparable<Game> {
   public static final Game EMPTY = new Game(null, 0);
   private final Bowler bowler;
@@ -82,7 +83,8 @@ public class Game extends ArrayList<Frame> implements Comparable<Game> {
   }
   
   public boolean addRoll(Roll roll) {
-    if(isEmpty() || last().complete()) add(new Frame());
+    boolean special = size()+1==10;
+    if(isEmpty() || last().complete()) add(new Frame(special));
     return last().add(roll);
   }
   
