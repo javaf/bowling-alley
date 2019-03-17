@@ -25,7 +25,8 @@ public class Game extends ArrayList<Frame> implements Comparable<Game> {
   }
   
   public boolean complete() {
-    return !isEmpty() && size()>=capacity && last().complete(true);
+    int size = size();
+    return size>=capacity && last().complete(size+1==10);
   }
   
   public int capacity() {

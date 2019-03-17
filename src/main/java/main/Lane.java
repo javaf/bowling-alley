@@ -48,7 +48,9 @@ public class Lane extends ArrayList<Game> {
   }
   
   public boolean complete() {
-    return isEmpty() || progress==10;
+    for (Game game : this)
+      if (!game.complete()) return false;
+    return true;
   }
   
   
@@ -63,9 +65,16 @@ public class Lane extends ArrayList<Game> {
     if (complete()) return false;
     game().addRoll(roll);
     pinsetterClear = pinsetter.standing()==0;
-    if (frame().complete(progress+1==10)) { pinsetterClear = true; turn++; }
-    if (turn >= size()) { turn = 0; progress++; }
+    if (frame().complete(progress+1==10)) nextTurn();
     return true;
+  }
+  
+  private void nextTurn() {
+    pinsetterClear = true;
+    for (int i=0, I=size(); i<I; i++) {
+      if (++turn >= I) { turn = 0; progress++; }
+      if (!get(turn).complete()) return;
+    }
   }
   
   public void update() {

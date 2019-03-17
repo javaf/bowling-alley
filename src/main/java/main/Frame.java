@@ -3,8 +3,14 @@ import java.util.*;
 
 
 public class Frame extends ArrayList<Roll> {
-  public int capacity = 2;
+  public static final Frame EMPTY = new Frame(0);
+  private final int capacity;
   public int score;
+  
+  
+  public Frame(int capacity) {
+    this.capacity = capacity;
+  }
   
   
   public int capacity() {
@@ -13,6 +19,12 @@ public class Frame extends ArrayList<Roll> {
   
   public int score() {
     return score;
+  }
+  
+  public boolean full() {
+    for (Roll roll : this)
+      if (roll.full()) return true;
+    return false;
   }
   
   public int strikes() {
@@ -33,9 +45,8 @@ public class Frame extends ArrayList<Roll> {
   
   public boolean complete(boolean tenth) {
     int size = size();
-    if (!tenth) return size==0? false : (size>=2 || last().full());
-    boolean bonus = (size>0 && get(0).full()) || (size>1 && get(1).full());
-    return bonus? size>=capacity+1 : size>=capacity;
+    if (!tenth) return size==0 && size<capacity? false : (size>=capacity || last().full());
+    return full()? size>=capacity+1 : size>=capacity;
   }
   
   public Roll last() {

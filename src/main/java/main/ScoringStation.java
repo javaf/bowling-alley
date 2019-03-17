@@ -26,7 +26,7 @@ public class ScoringStation extends JFrame {
     this.lane = lane;
     party.setText(lane.name());
     bowler.setText(lane.isEmpty()? "?" : lane.game().bowler().id());
-    frame.setText(""+Math.min(lane.progress()+1, 10));
+    frame.setText(""+(lane.progress()+1));
     pinsetter.update(lane.pinsetter());
     for (int i=0; i<games.length; i++) {
       Game game = i<lane.size()? lane.get(i) : null;
