@@ -92,6 +92,10 @@ public class Frame extends ArrayList<Roll> implements Comparable<Frame> {
     out.append(pad).append("special: ").append(special()).append('\n');
     out.append(pad).append("capacity: ").append(capacity()).append('\n');
     out.append(pad).append("score: ").append(score()).append('\n');
+    out.append(pad).append("full: ").append(full()).append('\n');
+    out.append(pad).append("strikes: ").append(strikes()).append('\n');
+    out.append(pad).append("penalty: ").append(penalty()).append('\n');
+    out.append(pad).append("complete: ").append(complete()).append('\n');
     for(int i=0; i<size(); i++) {
       out.append(pad).append("roll[").append(i).append("]:\n");
       get(i).stringify(out, pad+"  ").append('\n');
