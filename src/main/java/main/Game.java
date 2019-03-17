@@ -26,10 +26,6 @@ public class Game extends ArrayList<Frame> implements Comparable<Game> {
     return bowler;
   }
   
-  public Frame last() {
-    return isEmpty()? Frame.EMPTY : get(size()-1);
-  }
-  
   public boolean complete() {
     return size()>=capacity && last().complete();
   }
@@ -75,6 +71,10 @@ public class Game extends ArrayList<Frame> implements Comparable<Game> {
     return strikes;
   }
   
+  public Frame last() {
+    return isEmpty()? Frame.EMPTY : get(size()-1);
+  }
+  
   
   @Override
   public boolean add(Frame frame) {
@@ -108,8 +108,13 @@ public class Game extends ArrayList<Frame> implements Comparable<Game> {
   
   public StringBuilder stringify(StringBuilder out, String pad) {
     out.append(pad).append("[Game]\n");
-    out.append(pad).append("score: ").append(score()).append('\n');
+    out.append(pad).append("name: ").append(name()).append('\n');
     out.append(pad).append("complete: ").append(complete()).append('\n');
+    out.append(pad).append("capacity: ").append(capacity()).append('\n');
+    out.append(pad).append("score: ").append(score()).append('\n');
+    out.append(pad).append("strikes: ").append(strikes()).append('\n');
+    out.append(pad).append("bowler:\n");
+    bowler().stringify(out, pad+"  ");
     for(var i=0; i<size(); i++) {
       out.append(pad).append("frame[").append(i).append("]:\n");
       get(i).stringify(out, pad+"  ").append('\n');
