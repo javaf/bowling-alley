@@ -65,7 +65,7 @@ public class Lane extends ArrayList<Game> {
     if (complete()) return false;
     game().addRoll(roll);
     pinsetterClear = pinsetter.standing()==0;
-    if (frame().complete(progress+1==10)) nextTurn();
+    if (frame().complete()) nextTurn();
     return true;
   }
   
