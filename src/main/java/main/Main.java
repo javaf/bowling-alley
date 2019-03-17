@@ -13,7 +13,7 @@ public class Main extends Thread {
     partyQueue = new PartyQueue();
     lanes = new ArrayList<>();
     for (int i=0; i<numLanes; i++)
-      lanes.add(new Lane());
+      lanes.add(new Lane2());
     controlDesk = new ControlDesk();
     controlDesk.update(partyQueue, lanes);
     controlDesk.events.on("partyAdd", (event, value) -> {

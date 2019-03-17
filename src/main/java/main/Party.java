@@ -3,7 +3,7 @@ import java.util.*;
 
 
 public class Party extends ArrayList<Bowler> {
-  public static final int CAPACITY = 6;
+  public int capacity = 6;
   
   
   public String name() {
@@ -18,13 +18,13 @@ public class Party extends ArrayList<Bowler> {
   }
   
   public boolean full() {
-    return size()>=CAPACITY;
+    return size()>=capacity;
   }
   
   
   @Override
   public boolean add(Bowler bowler) {
-    return size()>=CAPACITY? false : super.add(bowler);
+    return size()>=capacity? false : super.add(bowler);
   }
   
   public ArrayList<Game> play() {

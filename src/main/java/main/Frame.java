@@ -3,16 +3,28 @@ import java.util.*;
 
 
 public class Frame extends ArrayList<Roll> {
+  public int capacity = 2;
   public int score;
   
+  
+  public int capacity() {
+    return capacity;
+  }
   
   public int score() {
     return score;
   }
   
+  public int strikes() {
+    int strikes = 0;
+    for (Roll roll : this)
+      strikes += roll.strike()? 1 : 0;
+    return strikes;
+  }
+  
   public boolean penalty() {
     boolean prev = false;
-    for(Roll roll : this) {
+    for (Roll roll : this) {
       if(roll.gutter() && prev) return true;
       prev = roll.gutter();
     }
@@ -21,9 +33,9 @@ public class Frame extends ArrayList<Roll> {
   
   public boolean complete(boolean tenth) {
     int size = size();
-    if(!tenth) return size==0? false : (size>=2 || last().full());
+    if (!tenth) return size==0? false : (size>=2 || last().full());
     boolean bonus = (size>0 && get(0).full()) || (size>1 && get(1).full());
-    return bonus? size>=3 : size>=2;
+    return bonus? size>=capacity+1 : size>=capacity;
   }
   
   public Roll last() {

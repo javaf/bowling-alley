@@ -2,8 +2,9 @@ package main;
 import iiit.util.*;
 import java.util.*;
 
-public class Game extends ArrayList<Frame> {
+public class Game extends ArrayList<Frame> implements Comparable<Game> {
   private final Bowler bowler;
+  public int capacity = 10;
   
   
   public Game(Bowler bowler) {
@@ -24,7 +25,11 @@ public class Game extends ArrayList<Frame> {
   }
   
   public boolean complete() {
-    return !isEmpty() && size()>=10 && last().complete(true);
+    return !isEmpty() && size()>=capacity && last().complete(true);
+  }
+  
+  public int capacity() {
+    return capacity;
   }
   
   public int score() {
@@ -57,15 +62,22 @@ public class Game extends ArrayList<Frame> {
     }
   }
   
+  public int strikes() {
+    int strikes = 0;
+    for (Frame frame : this)
+      strikes += frame.strikes();
+    return strikes;
+  }
+  
   
   @Override
   public boolean add(Frame frame) {
-    return size()<10? super.add(frame) : false;
+    return size()<capacity? super.add(frame) : false;
   }
   
   public boolean addRoll(Roll roll) {
-    if(isEmpty() || last().complete(size()==10)) add(new Frame());
-    return last().add(roll, size()==10);
+    if(isEmpty() || last().complete(size()==capacity)) add(new Frame());
+    return last().add(roll, size()==capacity);
   }
   
   
@@ -97,5 +109,11 @@ public class Game extends ArrayList<Frame> {
       get(i).stringify(out, pad+"  ").append('\n');
     }
     return out;
+  }
+
+  @Override
+  public int compareTo(Game other) {
+    int diff = this.score()-other.score();
+    return diff!=0? diff : this.strikes()-other.strikes();
   }
 }
