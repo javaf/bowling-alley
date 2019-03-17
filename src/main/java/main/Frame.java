@@ -3,14 +3,24 @@ import java.util.*;
 
 
 public class Frame extends ArrayList<Roll> implements Comparable<Frame> {
-  public static final Frame EMPTY = new Frame(false);
+  public static final Frame EMPTY = new Frame(false, 0, 0);
   private final boolean special;
-  public int capacity = 2;
+  public int capacity;
   public int score;
   
   
+  public Frame() {
+    this(false);
+  }
+  
   public Frame(boolean special) {
+    this(special, 2, 0);
+  }
+  
+  public Frame(boolean special, int capacity, int score) {
     this.special = special;
+    this.capacity = capacity;
+    this.score = 0;
   }
   
   

@@ -3,12 +3,18 @@ import iiit.util.*;
 import java.util.*;
 
 public class Game extends ArrayList<Frame> implements Comparable<Game> {
+  public static final Game EMPTY = new Game(null, 0);
   private final Bowler bowler;
-  public int capacity = 10;
+  public int capacity;
   
   
   public Game(Bowler bowler) {
+    this(bowler, 10);
+  }
+  
+  public Game(Bowler bowler, int capacity) {
     this.bowler = bowler;
+    this.capacity = capacity;
   }
   
   
@@ -21,12 +27,11 @@ public class Game extends ArrayList<Frame> implements Comparable<Game> {
   }
   
   public Frame last() {
-    return isEmpty()? null : get(size()-1);
+    return isEmpty()? Frame.EMPTY : get(size()-1);
   }
   
   public boolean complete() {
-    int size = size();
-    return size>=capacity && last().complete(size+1==10);
+    return size()>=capacity && last().complete();
   }
   
   public int capacity() {
@@ -77,8 +82,8 @@ public class Game extends ArrayList<Frame> implements Comparable<Game> {
   }
   
   public boolean addRoll(Roll roll) {
-    if(isEmpty() || last().complete(size()==capacity)) add(new Frame());
-    return last().add(roll, size()==capacity);
+    if(isEmpty() || last().complete()) add(new Frame());
+    return last().add(roll);
   }
   
   
