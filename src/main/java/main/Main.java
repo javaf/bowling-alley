@@ -46,6 +46,7 @@ public class Main extends Thread {
       for (Lane lane : lanes) {
         if ("paused".equals(lane.status())) continue;
         if (lane.complete()) {
+          lane.sort(null);
           controlDesk.events.emit("laneComplete", lanes.indexOf(lane));
           continue;
         }
