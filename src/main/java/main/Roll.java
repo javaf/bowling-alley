@@ -1,7 +1,7 @@
 package main;
 
 
-public class Roll {
+public class Roll implements Comparable<Roll> {
   public static final Roll EMPTY = new Roll(0, 0, false, false, false, false);
   private final boolean headpin;
   private final boolean spaced;
@@ -120,5 +120,11 @@ public class Roll {
   
   private static double luck(double skill) {
     return Math.pow(Math.random(), 1-skill);
+  }
+
+  @Override
+  public int compareTo(Roll other) {
+    int diff = score()-other.score();
+    return diff!=0? diff : (strike()? 1:0) - (other.strike()? 1:0);
   }
 }
