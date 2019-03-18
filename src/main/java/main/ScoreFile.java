@@ -13,10 +13,10 @@ public class ScoreFile extends ScoreData {
   
   @Override
   public void add(Score score) throws IOException {
-    RandomAccessFile out = new RandomAccessFile(file, "rw");
-    out.skipBytes((int) out.length());
-    out.writeBytes(score.stringifyLine()+"\n");
-    out.close();
+    try (RandomAccessFile out = new RandomAccessFile(file, "rw")) {
+      out.skipBytes((int) out.length());
+      out.writeBytes(score.stringifyLine()+"\n");
+    }
   }
   
   @Override
