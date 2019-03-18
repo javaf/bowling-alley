@@ -7,7 +7,7 @@ public class Bowler {
   private final String name;
   private final String email;
   private final double skill;
-  private final ArrayList<Game> games;
+  private final List<Game> games;
   
   
   public Bowler() {
@@ -43,7 +43,7 @@ public class Bowler {
     return skill;
   }
   
-  public ArrayList<Game> games() {
+  public List<Game> games() {
     return games;
   }
   

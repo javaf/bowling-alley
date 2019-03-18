@@ -27,8 +27,8 @@ public class Party extends ArrayList<Bowler> {
     return size()>=capacity? false : super.add(bowler);
   }
   
-  public ArrayList<Game> play() {
-    ArrayList<Game> games = new ArrayList<>();
+  public List<Game> play() {
+    List<Game> games = new ArrayList<>();
     for (Bowler bowler : this) {
       Game game = new Game(bowler);
       bowler.games().add(game);

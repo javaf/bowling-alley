@@ -19,9 +19,9 @@ public class ScoreFile {
     out.close();
   }
   
-  public ArrayList<Score> get(String id)
+  public List<Score> get(String id)
     throws IOException {
-    ArrayList<Score> scores = new ArrayList<>();
+    List<Score> scores = new ArrayList<>();
     BufferedReader in = new BufferedReader(new FileReader(file));
     for (String line; (line=in.readLine()) != null;) {
       Score score = Score.parseLine(line);

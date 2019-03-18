@@ -8,7 +8,7 @@ import java.awt.print.*;
 
 public class ScoreReport {
   private final Bowler bowler;
-  private ArrayList<Score> scores;
+  private List<Score> scores;
   private static final ScoreFile SCORE_FILE = new ScoreFile("SCOREHISTORY.DAT");
   
   public ScoreReport(Bowler bowler) {
@@ -56,7 +56,7 @@ public class ScoreReport {
   }
   
   
-  private static double averageScore(ArrayList<Score> scores) {
+  private static double averageScore(List<Score> scores) {
     int total = 0;
     for (Score score : scores)
       total += score.score();

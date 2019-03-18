@@ -21,7 +21,7 @@ public class ControlDesk extends JFrame {
     });
   }
   
-  public void update(PartyQueue partyQueue, ArrayList<Lane> lanes) {
+  public void update(PartyQueue partyQueue, List<Lane> lanes) {
     this.partyQueue.setListData(partyQueue.names());
     for (int i=0; i<this.lanes.length; i++)
       this.lanes[i].update(lanes.get(i));

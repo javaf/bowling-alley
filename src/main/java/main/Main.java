@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Main extends Thread {
   private static PartyQueue partyQueue;
-  private static ArrayList<Lane> lanes;
+  private static List<Lane> lanes;
   private static ControlDesk controlDesk;
   
   
