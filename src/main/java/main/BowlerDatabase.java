@@ -1,5 +1,6 @@
 package main;
 import java.sql.*;
+import java.util.*;
 
 
 public class BowlerDatabase extends BowlerData {
@@ -44,6 +45,13 @@ public class BowlerDatabase extends BowlerData {
     s.setString(1, bowler.name());
     s.setString(2, bowler.email());
     s.executeUpdate();
+    put(bowler.name(), bowler);
+  }
+  
+  public List<Bowler> query(String query) throws SQLException {
+    String sql = String.format("SELECT * FROM \"%s\" %s", table, query);
+    PreparedStatement s = db.prepareStatement(sql);
+    return query(s);
   }
   
   
@@ -51,5 +59,18 @@ public class BowlerDatabase extends BowlerData {
     String sql = String.format("CREATE TABLE IF NOT EXISTS \"%s\"(%s, %s, %s)", table, ID, NAME, EMAIL);
     PreparedStatement s = db.prepareStatement(sql);
     s.executeUpdate();
+  }
+  
+  private static List<Bowler> query(PreparedStatement s) throws SQLException {
+    List<Bowler> bowlers = new ArrayList<>();
+    ResultSet rows = s.executeQuery();
+    while (rows.next()) {
+      String id = rows.getString("id");
+      String name = rows.getString("name");
+      String email = rows.getString("email");
+      Bowler bowler = new Bowler(id, name, email);
+      bowlers.add(bowler);
+    }
+    return bowlers;
   }
 }
