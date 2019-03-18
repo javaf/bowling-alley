@@ -37,6 +37,6 @@ public class ScoreFile extends ScoreData {
   }
   
   private static String stringifyLine(Score s) {
-    return s.id()+"\t"+s.date()+"\t"+s.score();
+    return s.id()+"\t"+s.date()+"\t"+s.value();
   }
 }

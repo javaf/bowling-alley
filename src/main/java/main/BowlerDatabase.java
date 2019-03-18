@@ -10,19 +10,19 @@ public class BowlerDatabase extends BowlerData {
   private final String table;
   
   
-  public BowlerDatabase(Connection db) {
+  public BowlerDatabase(Connection db) throws SQLException {
     this(db, "bowlers");
   }
   
-  public BowlerDatabase(Connection db, String table) {
+  public BowlerDatabase(Connection db, String table) throws SQLException {
     this.db = db;
     this.table = table;
+    createTableIfNotExists();
   }
   
   
   @Override
   public BowlerData load() throws SQLException {
-    createTableIfNotExists();
     String sql = String.format("SELECT * FROM \"\"", table);
     PreparedStatement s = db.prepareStatement(sql);
     ResultSet rows = s.executeQuery();

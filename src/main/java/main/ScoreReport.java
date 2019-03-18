@@ -59,7 +59,7 @@ public class ScoreReport {
   private static double averageScore(List<Score> scores) {
     int total = 0;
     for (Score score : scores)
-      total += score.score();
+      total += score.value();
     return scores.size()>0? ((double)total)/scores.size() : 0;
   }
   
