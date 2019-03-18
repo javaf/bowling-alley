@@ -1,6 +1,5 @@
 package main;
 import java.util.*;
-import java.io.*;
 
 
 public abstract class BowlerData extends HashMap<String, Bowler> {
