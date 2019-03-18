@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.*;
 
 
-public class ScoreFile {
+public class ScoreFile extends ScoreData {
   private final String file;
   
   
@@ -11,16 +11,16 @@ public class ScoreFile {
     this.file = file;
   }
   
-  public void add(Score score)
-    throws IOException {
+  @Override
+  public void add(Score score) throws IOException {
     RandomAccessFile out = new RandomAccessFile(file, "rw");
     out.skipBytes((int) out.length());
     out.writeBytes(score.stringifyLine()+"\n");
     out.close();
   }
   
-  public List<Score> get(String id)
-    throws IOException {
+  @Override
+  public List<Score> get(String id) throws IOException {
     List<Score> scores = new ArrayList<>();
     BufferedReader in = new BufferedReader(new FileReader(file));
     for (String line; (line=in.readLine()) != null;) {
