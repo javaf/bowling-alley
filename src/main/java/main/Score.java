@@ -38,14 +38,4 @@ public class Score {
     out.append(pad).append("score: ").append(score()).append('\n');
     return out;
   }
-  
-
-  public static Score parseLine(String line) {
-    String[] fields = line.trim().split("\t");
-    return fields.length > 2? new Score(fields[0], fields[1], Integer.parseInt(fields[2])) : null;
-  }
-  
-  public String stringifyLine() {
-    return id + "\t" + date + "\t" + score;
-  }
 }
