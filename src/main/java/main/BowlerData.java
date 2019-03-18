@@ -14,6 +14,6 @@ public abstract class BowlerData extends HashMap<String, Bowler> {
   }
   
   
-  public abstract BowlerData load() throws IOException;
-  public abstract void add(Bowler bowler) throws IOException;
+  public abstract BowlerData load() throws Exception;
+  public abstract void add(Bowler bowler) throws Exception;
 }
