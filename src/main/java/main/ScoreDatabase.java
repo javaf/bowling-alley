@@ -11,14 +11,15 @@ public class ScoreDatabase extends ScoreData {
   private final String table;
   
   
-  public ScoreDatabase(Connection db) throws SQLException {
+  public ScoreDatabase(Connection db) {
     this(db, "scores");
   }
   
-  public ScoreDatabase(Connection db, String table) throws SQLException {
+  public ScoreDatabase(Connection db, String table) {
     this.db = db;
     this.table = table;
-    createTableIfNotExists();
+    try { createTableIfNotExists(); }
+    catch (SQLException e) {}
   }
   
   @Override

@@ -1,8 +1,13 @@
 package main;
+import java.sql.*;
 import javax.swing.*;
+import javax.swing.table.*;
 
 
 public class ScoreDesk extends JFrame {
+  private static final ScoreDatabase db = new ScoreDatabase(Database.connection());
+  
+  
   public ScoreDesk() {
     initComponents();
   }
@@ -12,16 +17,12 @@ public class ScoreDesk extends JFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    queryLabel = new javax.swing.JLabel();
     query = new javax.swing.JTextField();
     jScrollPane1 = new javax.swing.JScrollPane();
     rows = new javax.swing.JTable();
+    queryButton = new javax.swing.JButton();
 
     setTitle("Score Desk");
-
-    queryLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    queryLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    queryLabel.setText("Query");
 
     query.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -50,6 +51,14 @@ public class ScoreDesk extends JFrame {
     });
     jScrollPane1.setViewportView(rows);
 
+    queryButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    queryButton.setText("Query");
+    queryButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        queryButtonActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
@@ -59,9 +68,9 @@ public class ScoreDesk extends JFrame {
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
           .addGroup(layout.createSequentialGroup()
-            .addComponent(queryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(query)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(query)))
+            .addComponent(queryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
         .addContainerGap())
     );
     layout.setVerticalGroup(
@@ -70,19 +79,30 @@ public class ScoreDesk extends JFrame {
         .addContainerGap()
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(query, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(queryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(queryButton))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+        .addComponent(jScrollPane1)
         .addContainerGap())
     );
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
+  private void queryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_queryButtonActionPerformed
+    try {
+      DefaultTableModel model = (DefaultTableModel) rows.getModel();
+      model.setRowCount(0);
+      for (Score score : db.query(query.getText()))
+        model.addRow(new Object[] {score.id(), score.date(), score.value()});
+      model.fireTableStructureChanged();
+    }
+    catch (SQLException e) {}
+  }//GEN-LAST:event_queryButtonActionPerformed
+
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JTextField query;
-  private javax.swing.JLabel queryLabel;
+  private javax.swing.JButton queryButton;
   private javax.swing.JTable rows;
   // End of variables declaration//GEN-END:variables
 }

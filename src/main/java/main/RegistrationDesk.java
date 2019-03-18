@@ -7,16 +7,16 @@ import javax.swing.*;
 
 public class RegistrationDesk extends JFrame {
   public final EventEmitter events;
-  private final BowlerFile bowlerFile;
+  private final BowlerData bowlers;
 
   public RegistrationDesk() {
     this(null);
   }
   
-  public RegistrationDesk(BowlerFile bowlerFile) {
+  public RegistrationDesk(BowlerData bowlers) {
     initComponents();
     events = new EventEmitter();
-    this.bowlerFile = bowlerFile;
+    this.bowlers = bowlers;
     JFrames.screenCenter(this);
     setVisible(true);
   }
@@ -170,7 +170,7 @@ public class RegistrationDesk extends JFrame {
     if (!patternMatches("^\\w+$", id.getText())) error = "Nickname not valid!";
     else if (!patternMatches("^[\\w\\s]+$", name.getText())) error = "Fullname not valid!";
     else if (!patternMatches("^.+@.+\\..+$", email.getText())) error = "Email not valid!";
-    else if (bowlerFile.containsKey(id.getText())) error = "Nickname already exists!";
+    else if (bowlers.containsKey(id.getText())) error = "Nickname already exists!";
     if (error!=null) { message.setText(error); return null; }
     return new Bowler(id.getText(), name.getText(), email.getText());
   }

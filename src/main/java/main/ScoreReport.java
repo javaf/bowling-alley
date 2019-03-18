@@ -9,16 +9,16 @@ import java.awt.print.*;
 public class ScoreReport {
   private final Bowler bowler;
   private List<Score> scores;
-  private static final ScoreFile SCORE_FILE = new ScoreFile("SCOREHISTORY.DAT");
+  private static final ScoreData SCORES = new ScoreDatabase(Database.connection());
   
   public ScoreReport(Bowler bowler) {
     this.bowler = bowler;
     try {
       for (Game game : bowler.games())
-        SCORE_FILE.add(new Score(bowler.id(), new FormattedDate().toString(), game.score()));
-      this.scores = SCORE_FILE.get(bowler.id());
+        SCORES.add(new Score(bowler.id(), new FormattedDate().toString(), game.score()));
+      this.scores = SCORES.get(bowler.id());
     }
-    catch (IOException e) { System.err.println(e); }
+    catch (Exception e) { System.err.println(e); }
   }
   
   

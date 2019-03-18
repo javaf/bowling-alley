@@ -11,14 +11,15 @@ public class BowlerDatabase extends BowlerData {
   private final String table;
   
   
-  public BowlerDatabase(Connection db) throws SQLException {
+  public BowlerDatabase(Connection db) {
     this(db, "bowlers");
   }
   
-  public BowlerDatabase(Connection db, String table) throws SQLException {
+  public BowlerDatabase(Connection db, String table) {
     this.db = db;
     this.table = table;
-    createTableIfNotExists();
+    try { createTableIfNotExists(); }
+    catch (SQLException e) {}
   }
   
   

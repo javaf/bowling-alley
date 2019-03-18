@@ -8,17 +8,17 @@ import javax.swing.*;
 public class PartyDesk extends JFrame {
   public final EventEmitter events;
   public final Party party;
-  private static final BowlerFile BOWLER_FILE = new BowlerFile("BOWLERS.DAT");
+  private static final BowlerData BOWLERS = new BowlerDatabase(Database.connection());
 
   
   public PartyDesk() {
     initComponents();
     events = new EventEmitter();
     party = new Party();
-    try { if(BOWLER_FILE.isEmpty()) BOWLER_FILE.load(); }
-    catch (IOException e) { System.err.println(e); }
+    try { if(BOWLERS.isEmpty()) BOWLERS.load(); }
+    catch (Exception e) { System.err.println(e); }
     partyList.setListData(party.ids());
-    bowlerList.setListData(BOWLER_FILE.ids());
+    bowlerList.setListData(BOWLERS.ids());
     JFrames.screenCenter(this);
     setVisible(true);;
   }
@@ -179,7 +179,7 @@ public class PartyDesk extends JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
   private void addPartyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartyActionPerformed
-    Bowler bowler = BOWLER_FILE.get(bowlerList.getSelectedValue());
+    Bowler bowler = BOWLERS.get(bowlerList.getSelectedValue());
     if (party.full()) { message.setText("Party is full!"); return; }
     if (bowler==null) { message.setText("Bowler not found!"); return; }
     if (party.contains(bowler)) { message.setText("Bowler already added!"); return; }
@@ -188,7 +188,7 @@ public class PartyDesk extends JFrame {
   }//GEN-LAST:event_addPartyActionPerformed
 
   private void removePartyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePartyActionPerformed
-    Bowler bowler = BOWLER_FILE.get(partyList.getSelectedValue());
+    Bowler bowler = BOWLERS.get(partyList.getSelectedValue());
     if (party.isEmpty()) { message.setText("Party is empty!"); return; }
     if (bowler==null) { message.setText("Bowler not found!"); return; }
     party.remove(bowler);
@@ -196,13 +196,13 @@ public class PartyDesk extends JFrame {
   }//GEN-LAST:event_removePartyActionPerformed
 
   private void addBowlerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBowlerActionPerformed
-    RegistrationDesk registrationDesk = new RegistrationDesk(BOWLER_FILE);
+    RegistrationDesk registrationDesk = new RegistrationDesk(BOWLERS);
     registrationDesk.events.on("bowlerRegister", (event, value) -> {
       Bowler bowler = (Bowler) value;
-      try { BOWLER_FILE.add(bowler); }
-      catch (IOException e) { System.err.println(e); }
+      try { BOWLERS.add(bowler); }
+      catch (Exception e) { System.err.println(e); }
       party.add(bowler);
-      bowlerList.setListData(BOWLER_FILE.ids());
+      bowlerList.setListData(BOWLERS.ids());
       partyList.setListData(party.ids());
     });
   }//GEN-LAST:event_addBowlerActionPerformed

@@ -9,7 +9,6 @@ public class Main extends Thread {
   
   
   public static void main(String[] args) {
-    Test.connect();
     int numLanes = 3;
     partyQueue = new PartyQueue();
     lanes = new ArrayList<>();
