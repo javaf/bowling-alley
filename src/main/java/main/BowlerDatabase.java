@@ -4,34 +4,34 @@ import java.util.*;
 
 
 public class BowlerDatabase extends BowlerData {
-  private static final String ID = "\"id\" TEXT PRIMARY KEY";
-  private static final String NAME = "\"name\" TEXT";
-  private static final String EMAIL = "\"email\" TEXT";
+  private static final String TABLE = "bowlers";
+  private static final String ID = "id";
+  private static final String NAME = "name";
+  private static final String EMAIL = "email";
   private final Connection db;
   private final String table;
   
   
-  public BowlerDatabase(Connection db) {
-    this(db, "bowlers");
+  public BowlerDatabase(Connection db) throws SQLException {
+    this(db, TABLE);
   }
   
-  public BowlerDatabase(Connection db, String table) {
+  public BowlerDatabase(Connection db, String table) throws SQLException {
     this.db = db;
     this.table = table;
-    try { createTableIfNotExists(); }
-    catch (SQLException e) {}
+    createTableIfNotExists();
   }
   
   
   @Override
   public BowlerData load() throws SQLException {
-    String sql = String.format("SELECT * FROM \"\"", table);
+    String sql = String.format("SELECT * FROM \"%s\"", table);
     PreparedStatement s = db.prepareStatement(sql);
     ResultSet rows = s.executeQuery();
     while (rows.next()) {
-      String id = rows.getString("id");
-      String name = rows.getString("name");
-      String email = rows.getString("email");
+      String id = rows.getString(ID);
+      String name = rows.getString(NAME);
+      String email = rows.getString(EMAIL);
       Bowler bowler = new Bowler(id, name, email);
       put(bowler.name(), bowler);
     }
@@ -40,7 +40,7 @@ public class BowlerDatabase extends BowlerData {
 
   @Override
   public void add(Bowler bowler) throws SQLException {
-    String sql = String.format("INSERT OR REPLACE INTO \"%s\" (\"id\", \"name\", \"email\") VALUES (?, ?, ?)", table);
+    String sql = String.format("REPLACE INTO \"%s\" (\"%s\", \"%s\", \"%s\") VALUES (?, ?, ?)", table, ID, NAME, EMAIL);
     PreparedStatement s = db.prepareStatement(sql);
     s.setString(0, bowler.id());
     s.setString(1, bowler.name());
@@ -52,23 +52,23 @@ public class BowlerDatabase extends BowlerData {
   public List<Bowler> query(String query) throws SQLException {
     String sql = String.format("SELECT * FROM \"%s\" %s", table, query);
     PreparedStatement s = db.prepareStatement(sql);
-    return query(s);
+    return queryBowlers(s);
   }
   
   
   private void createTableIfNotExists() throws SQLException {
-    String sql = String.format("CREATE TABLE IF NOT EXISTS \"%s\"(%s, %s, %s)", table, ID, NAME, EMAIL);
+    String sql = String.format("CREATE TABLE IF NOT EXISTS \"%s\" (\"%s\" TEXT PRIMARY KEY, \"%s\" TEXT, \"%s\" TEXT)", table, ID, NAME, EMAIL);
     PreparedStatement s = db.prepareStatement(sql);
     s.executeUpdate();
   }
   
-  private static List<Bowler> query(PreparedStatement s) throws SQLException {
+  private static List<Bowler> queryBowlers(PreparedStatement s) throws SQLException {
     List<Bowler> bowlers = new ArrayList<>();
     ResultSet rows = s.executeQuery();
     while (rows.next()) {
-      String id = rows.getString("id");
-      String name = rows.getString("name");
-      String email = rows.getString("email");
+      String id = rows.getString(ID);
+      String name = rows.getString(NAME);
+      String email = rows.getString(EMAIL);
       Bowler bowler = new Bowler(id, name, email);
       bowlers.add(bowler);
     }

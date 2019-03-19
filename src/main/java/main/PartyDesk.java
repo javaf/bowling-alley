@@ -8,7 +8,7 @@ import javax.swing.*;
 public class PartyDesk extends JFrame {
   public final EventEmitter events;
   public final Party party;
-  private static final BowlerData BOWLERS = new BowlerDatabase(Database.connection());
+  private static final BowlerData BOWLERS = null; // new BowlerDatabase(Database.connection());
 
   
   public PartyDesk() {
