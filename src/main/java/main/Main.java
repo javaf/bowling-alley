@@ -1,4 +1,5 @@
 package main;
+import java.sql.*;
 import java.util.*;
 
 
@@ -8,8 +9,11 @@ public class Main extends Thread {
   private static ControlDesk controlDesk;
   
   
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     int numLanes = 3;
+    Connection db = Database.connection();
+    BowlerData bowlerData = new BowlerDatabase(db);
+    RecordData recordData = new RecordDatabase(db);
     partyQueue = new PartyQueue();
     lanes = new ArrayList<>();
     for (int i=0; i<numLanes; i++)
@@ -34,8 +38,8 @@ public class Main extends Thread {
       if (party==null) return;
       EndDesk endDesk = new EndDesk(party);
       endDesk.events.on("partyQueue", (e, v) -> partyQueue.addLast((Party) v));
-      endDesk.events.on("bowlerPrint", (e, v) -> new ScoreReport((Bowler) v).print());
-      endDesk.events.on("bowlerEmail", (e, v) -> new ScoreReport((Bowler) v).email());
+      endDesk.events.on("bowlerPrint", (e, v) -> new ScoreReport(recordData, (Bowler) v).print());
+      endDesk.events.on("bowlerEmail", (e, v) -> new ScoreReport(recordData, (Bowler) v).email());
     });
     new Main().start();
   }

@@ -1,5 +1,6 @@
 package main;
 
+
 public class Record {
   private final String id;
   private final String date;

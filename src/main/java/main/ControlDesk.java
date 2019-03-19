@@ -126,6 +126,7 @@ public class ControlDesk extends JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
   private void addPartyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartyActionPerformed
+    // NOTE: give bowlerData to partyDesk
     PartyDesk partyDesk = new PartyDesk();
     partyDesk.events.on("*", (event, value) -> events.emit(event, value));
   }//GEN-LAST:event_addPartyActionPerformed

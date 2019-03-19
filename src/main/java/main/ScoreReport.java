@@ -9,14 +9,13 @@ import java.awt.print.*;
 public class ScoreReport {
   private final Bowler bowler;
   private List<Record> scores;
-  private static final RecordData SCORES = null; // new RecordDatabase(Database.connection());
   
-  public ScoreReport(Bowler bowler) {
+  public ScoreReport(RecordData recordData, Bowler bowler) {
     this.bowler = bowler;
     try {
       for (Game game : bowler.games())
-        SCORES.add(new Record(bowler.id(), new FormattedDate().toString(), game.score()));
-      this.scores = SCORES.get(bowler.id());
+        recordData.add(new Record(bowler.id(), new FormattedDate().toString(), game.score()));
+      this.scores = recordData.get(bowler.id());
     }
     catch (Exception e) { System.err.println(e); }
   }

@@ -7,15 +7,20 @@ import javax.swing.*;
 public class PartyDesk extends JFrame {
   public final EventEmitter events;
   public final Party party;
-  private static final BowlerData BOWLERS = null; // new BowlerDatabase(Database.connection());
+  private final BowlerData bowlerData;
 
   
   public PartyDesk() {
+    this(null);
+  }
+  
+  public PartyDesk(BowlerData bowlerData) {
     initComponents();
     events = new EventEmitter();
     party = new Party();
+    this.bowlerData = bowlerData;
     partyList.setListData(party.ids());
-    bowlerList.setListData(BOWLERS.ids());
+    if (bowlerData!=null) bowlerList.setListData(bowlerData.ids());
     JFrames.screenCenter(this);
     setVisible(true);
   }
@@ -176,7 +181,7 @@ public class PartyDesk extends JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
   private void addPartyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartyActionPerformed
-    Bowler bowler = BOWLERS.get(bowlerList.getSelectedValue());
+    Bowler bowler = bowlerData.get(bowlerList.getSelectedValue());
     if (party.full()) { message.setText("Party is full!"); return; }
     if (bowler==null) { message.setText("Bowler not found!"); return; }
     if (party.contains(bowler)) { message.setText("Bowler already added!"); return; }
@@ -185,7 +190,7 @@ public class PartyDesk extends JFrame {
   }//GEN-LAST:event_addPartyActionPerformed
 
   private void removePartyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePartyActionPerformed
-    Bowler bowler = BOWLERS.get(partyList.getSelectedValue());
+    Bowler bowler = bowlerData.get(partyList.getSelectedValue());
     if (party.isEmpty()) { message.setText("Party is empty!"); return; }
     if (bowler==null) { message.setText("Bowler not found!"); return; }
     party.remove(bowler);
@@ -193,13 +198,13 @@ public class PartyDesk extends JFrame {
   }//GEN-LAST:event_removePartyActionPerformed
 
   private void addBowlerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBowlerActionPerformed
-    RegistrationDesk registrationDesk = new RegistrationDesk(BOWLERS);
+    RegistrationDesk registrationDesk = new RegistrationDesk(bowlerData);
     registrationDesk.events.on("bowlerRegister", (event, value) -> {
       Bowler bowler = (Bowler) value;
-      try { BOWLERS.add(bowler); }
+      try { bowlerData.add(bowler); }
       catch (Exception e) { System.err.println(e); }
       party.add(bowler);
-      bowlerList.setListData(BOWLERS.ids());
+      bowlerList.setListData(bowlerData.ids());
       partyList.setListData(party.ids());
     });
   }//GEN-LAST:event_addBowlerActionPerformed
