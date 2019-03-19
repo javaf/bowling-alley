@@ -1,5 +1,4 @@
 package main;
-import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
@@ -15,6 +14,7 @@ public class ScoreDesk extends JFrame {
   public ScoreDesk(RecordData recordData) {
     initComponents();
     this.recordData = recordData;
+    setVisible(true);
   }
 
 
@@ -97,8 +97,10 @@ public class ScoreDesk extends JFrame {
     try {
       DefaultTableModel model = (DefaultTableModel) rows.getModel();
       model.setRowCount(0);
-      for (Record score : recordData.query(query.getText()))
-        model.addRow(new Object[] {score.id(), score.date(), score.score()});
+      for (Record record : recordData.query(query.getText())) {
+        model.addRow(new Object[] {record.id(), record.date(), record.score()});
+        System.out.println(record);
+      }
       model.fireTableStructureChanged();
     }
     catch (Exception e) {}
