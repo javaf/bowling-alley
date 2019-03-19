@@ -12,7 +12,7 @@ public class ScoreFile extends ScoreData {
   }
   
   @Override
-  public void add(Score score) throws IOException {
+  public void add(Record score) throws IOException {
     try (RandomAccessFile out = new RandomAccessFile(file, "rw")) {
       out.skipBytes((int) out.length());
       out.writeBytes(stringifyLine(score)+"\n");
@@ -20,23 +20,23 @@ public class ScoreFile extends ScoreData {
   }
   
   @Override
-  public List<Score> get(String id) throws IOException {
-    List<Score> scores = new ArrayList<>();
+  public List<Record> get(String id) throws IOException {
+    List<Record> scores = new ArrayList<>();
     BufferedReader in = new BufferedReader(new FileReader(file));
     for (String line; (line=in.readLine()) != null;) {
-      Score score = parseLine(line);
+      Record score = parseLine(line);
       if(score!=null && score.id().equals(id)) scores.add(score);
     }
     return scores;
   }
   
 
-  private static Score parseLine(String line) {
+  private static Record parseLine(String line) {
     String[] fields = line.trim().split("\t");
-    return fields.length > 2? new Score(fields[0], fields[1], Integer.parseInt(fields[2])) : null;
+    return fields.length > 2? new Record(fields[0], fields[1], Integer.parseInt(fields[2])) : null;
   }
   
-  private static String stringifyLine(Score s) {
-    return s.id()+"\t"+s.date()+"\t"+s.value();
+  private static String stringifyLine(Record s) {
+    return s.id()+"\t"+s.date()+"\t"+s.score();
   }
 }

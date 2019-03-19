@@ -92,8 +92,8 @@ public class ScoreDesk extends JFrame {
     try {
       DefaultTableModel model = (DefaultTableModel) rows.getModel();
       model.setRowCount(0);
-      for (Score score : db.query(query.getText()))
-        model.addRow(new Object[] {score.id(), score.date(), score.value()});
+      for (Record score : db.query(query.getText()))
+        model.addRow(new Object[] {score.id(), score.date(), score.score()});
       model.fireTableStructureChanged();
     }
     catch (SQLException e) {}

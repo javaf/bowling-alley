@@ -8,14 +8,14 @@ import java.awt.print.*;
 
 public class ScoreReport {
   private final Bowler bowler;
-  private List<Score> scores;
+  private List<Record> scores;
   private static final ScoreData SCORES = new ScoreDatabase(Database.connection());
   
   public ScoreReport(Bowler bowler) {
     this.bowler = bowler;
     try {
       for (Game game : bowler.games())
-        SCORES.add(new Score(bowler.id(), new FormattedDate().toString(), game.score()));
+        SCORES.add(new Record(bowler.id(), new FormattedDate().toString(), game.score()));
       this.scores = SCORES.get(bowler.id());
     }
     catch (Exception e) { System.err.println(e); }
@@ -39,7 +39,7 @@ public class ScoreReport {
     out.append("Score Report: ").append(new FormattedDate()).append('\n');
     out.append(bowler).append('\n');
     out.append("Average score: ").append((int) averageScore(scores)).append('\n');
-    for (Score score : scores)
+    for (Record score : scores)
       out.append(score).append('\n');
     return out.toString();
   }
@@ -56,10 +56,10 @@ public class ScoreReport {
   }
   
   
-  private static double averageScore(List<Score> scores) {
+  private static double averageScore(List<Record> scores) {
     int total = 0;
-    for (Score score : scores)
-      total += score.value();
+    for (Record score : scores)
+      total += score.score();
     return scores.size()>0? ((double)total)/scores.size() : 0;
   }
   
