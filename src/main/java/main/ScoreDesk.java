@@ -5,7 +5,7 @@ import javax.swing.table.*;
 
 
 public class ScoreDesk extends JFrame {
-  private static final RecordDatabase db = new RecordDatabase(Database.connection());
+  private static final RecordDatabase db = null; // new RecordDatabase(Database.connection());
   
   
   public ScoreDesk() {
