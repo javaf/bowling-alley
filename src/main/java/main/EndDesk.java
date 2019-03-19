@@ -6,15 +6,17 @@ import javax.swing.*;
 public class EndDesk extends JFrame {
   public final EventEmitter events;
   private final Party party;
+  private final RecordData recordData;
 
   
   public EndDesk() {
-    this(null);
+    this(null, null);
   }
   
-  public EndDesk(Party party) {
+  public EndDesk(Party party, RecordData recordData) {
     initComponents();
     this.party = party;
+    this.recordData = recordData;
     events = new EventEmitter();
     ask.setText(party.name()+" game complete!");
     partyList.setListData(party.ids());
@@ -32,7 +34,7 @@ public class EndDesk extends JFrame {
     printReport = new javax.swing.JButton();
     partyListPane = new javax.swing.JScrollPane();
     partyList = new javax.swing.JList<>();
-    emailReport = new javax.swing.JButton();
+    viewRecords = new javax.swing.JButton();
     message = new javax.swing.JLabel();
 
     setTitle("End Desk");
@@ -61,11 +63,11 @@ public class EndDesk extends JFrame {
     partyList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
     partyListPane.setViewportView(partyList);
 
-    emailReport.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-    emailReport.setText("Email Report");
-    emailReport.addActionListener(new java.awt.event.ActionListener() {
+    viewRecords.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+    viewRecords.setText("View Records");
+    viewRecords.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        emailReportActionPerformed(evt);
+        viewRecordsActionPerformed(evt);
       }
     });
 
@@ -86,7 +88,7 @@ public class EndDesk extends JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(printReport, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(emailReport, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(viewRecords, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(0, 0, Short.MAX_VALUE))
           .addComponent(message, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addContainerGap())
@@ -104,7 +106,7 @@ public class EndDesk extends JFrame {
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(playAnother)
           .addComponent(printReport)
-          .addComponent(emailReport))
+          .addComponent(viewRecords))
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
@@ -121,10 +123,9 @@ public class EndDesk extends JFrame {
     if (bowler!=null) events.emit("bowlerPrint", bowler);
   }//GEN-LAST:event_printReportActionPerformed
 
-  private void emailReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailReportActionPerformed
-    Bowler bowler = partyListBowler();
-    if (bowler!=null) events.emit("partyEmail", party);
-  }//GEN-LAST:event_emailReportActionPerformed
+  private void viewRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewRecordsActionPerformed
+    ScoreDesk scoreDesk = new ScoreDesk(recordData);
+  }//GEN-LAST:event_viewRecordsActionPerformed
 
 
   private Bowler partyListBowler() {
@@ -137,11 +138,11 @@ public class EndDesk extends JFrame {
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JLabel ask;
-  private javax.swing.JButton emailReport;
   private javax.swing.JLabel message;
   private javax.swing.JList<String> partyList;
   private javax.swing.JScrollPane partyListPane;
   private javax.swing.JButton playAnother;
   private javax.swing.JButton printReport;
+  private javax.swing.JButton viewRecords;
   // End of variables declaration//GEN-END:variables
 }

@@ -202,7 +202,7 @@ public class PartyDesk extends JFrame {
     registrationDesk.events.on("bowlerRegister", (event, value) -> {
       Bowler bowler = (Bowler) value;
       try { bowlerData.add(bowler); }
-      catch (Exception e) { System.err.println(e); }
+      catch (Exception e) { e.printStackTrace(); }
       party.add(bowler);
       bowlerList.setListData(bowlerData.ids());
       partyList.setListData(party.ids());

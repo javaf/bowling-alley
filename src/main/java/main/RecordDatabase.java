@@ -26,9 +26,9 @@ public class RecordDatabase extends RecordData {
   public void add(Record record) throws SQLException {
     String sql = String.format("INSERT INTO \"%s\" (\"%s\", \"%s\", \"%s\") VALUES (?, ?, ?)", table, ID, DATE, SCORE);
     PreparedStatement s = db.prepareStatement(sql);
-    s.setString(0, record.id());
-    s.setString(1, record.date());
-    s.setInt(2, record.score());
+    s.setString(1, record.id());
+    s.setString(2, record.date());
+    s.setInt(3, record.score());
     s.executeUpdate();
   }
 
@@ -36,7 +36,7 @@ public class RecordDatabase extends RecordData {
   public List<Record> get(String id) throws SQLException {
     String sql = String.format("SELECT * FROM \"%s\" WHERE \"%s\"=?", table, ID);
     PreparedStatement s = db.prepareStatement(sql);
-    s.setString(0, id);
+    s.setString(1, id);
     return queryRecords(s);
   }
   
@@ -49,7 +49,7 @@ public class RecordDatabase extends RecordData {
   
   
   private void createTableIfNotExists() throws SQLException {
-    String sql = String.format("CREATE TABLE \"%s\" IF NOT EXISTS (\"%s\" TEXT, \"%s\" TEXT, \"%s\" INT)", table, ID, DATE, SCORE);
+    String sql = String.format("CREATE TABLE IF NOT EXISTS \"%s\" (\"%s\" TEXT, \"%s\" TEXT, \"%s\" INT)", table, ID, DATE, SCORE);
     PreparedStatement s = db.prepareStatement(sql);
     s.executeUpdate();
   }

@@ -36,7 +36,7 @@ public class Main extends Thread {
         controlDesk.update(partyQueue, lanes);
       }
       if (party==null) return;
-      EndDesk endDesk = new EndDesk(party);
+      EndDesk endDesk = new EndDesk(party, recordData);
       endDesk.events.on("partyQueue", (e, v) -> partyQueue.addLast((Party) v));
       endDesk.events.on("bowlerPrint", (e, v) -> new ScoreReport(recordData, (Bowler) v).print());
       endDesk.events.on("bowlerEmail", (e, v) -> new ScoreReport(recordData, (Bowler) v).email());

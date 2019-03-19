@@ -28,9 +28,9 @@ public class BowlerDatabase extends BowlerData {
   public void add(Bowler bowler) throws SQLException {
     String sql = String.format("REPLACE INTO \"%s\" (\"%s\", \"%s\", \"%s\") VALUES (?, ?, ?)", table, ID, NAME, EMAIL);
     PreparedStatement s = db.prepareStatement(sql);
-    s.setString(0, bowler.id());
-    s.setString(1, bowler.name());
-    s.setString(2, bowler.email());
+    s.setString(1, bowler.id());
+    s.setString(2, bowler.name());
+    s.setString(3, bowler.email());
     s.executeUpdate();
     put(bowler.name(), bowler);
   }

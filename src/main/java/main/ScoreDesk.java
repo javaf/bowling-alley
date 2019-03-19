@@ -5,11 +5,16 @@ import javax.swing.table.*;
 
 
 public class ScoreDesk extends JFrame {
-  private static final RecordDatabase db = null; // new RecordDatabase(Database.connection());
+  private final RecordData recordData;
   
   
   public ScoreDesk() {
+    this(null);
+  }
+  
+  public ScoreDesk(RecordData recordData) {
     initComponents();
+    this.recordData = recordData;
   }
 
 
@@ -92,11 +97,11 @@ public class ScoreDesk extends JFrame {
     try {
       DefaultTableModel model = (DefaultTableModel) rows.getModel();
       model.setRowCount(0);
-      for (Record score : db.query(query.getText()))
+      for (Record score : recordData.query(query.getText()))
         model.addRow(new Object[] {score.id(), score.date(), score.score()});
       model.fireTableStructureChanged();
     }
-    catch (SQLException e) {}
+    catch (Exception e) {}
   }//GEN-LAST:event_queryButtonActionPerformed
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
