@@ -13,8 +13,6 @@ public class ScoringStation extends JFrame {
     initComponents();
     events = new EventMap();
     games = new GamePanel[] {game0, game1, game2, game3, game4, game5};
-    pause.setVisible(false);
-    abort.setVisible(false);
     events.on("maintenanceDone", (e, data) -> {
       maintenance.setBackground(null);
     });
@@ -48,10 +46,9 @@ public class ScoringStation extends JFrame {
     frameLabel = new javax.swing.JLabel();
     bowler = new javax.swing.JLabel();
     frame = new javax.swing.JLabel();
-    pause = new javax.swing.JButton();
-    abort = new javax.swing.JButton();
     maintenance = new javax.swing.JButton();
     game5 = new main.GamePanel();
+    roll = new main.RollPanel();
 
     setTitle("Scoring Station");
 
@@ -74,25 +71,6 @@ public class ScoringStation extends JFrame {
     frame.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     frame.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     frame.setText("1");
-
-    pause.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    pause.setText("Pause Game");
-    pause.setMaximumSize(new java.awt.Dimension(110, 25));
-    pause.setMinimumSize(new java.awt.Dimension(110, 25));
-    pause.setPreferredSize(new java.awt.Dimension(110, 25));
-    pause.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        pauseActionPerformed(evt);
-      }
-    });
-
-    abort.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    abort.setText("Abort Game");
-    abort.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        abortActionPerformed(evt);
-      }
-    });
 
     maintenance.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     maintenance.setText("Call Maintenance");
@@ -122,11 +100,12 @@ public class ScoringStation extends JFrame {
             .addGap(0, 0, Short.MAX_VALUE))
           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
             .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-              .addComponent(pinsetter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-              .addComponent(pause, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(abort, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(maintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(maintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2))
+              .addComponent(pinsetter, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(roll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,9 +133,9 @@ public class ScoringStation extends JFrame {
               .addComponent(frameLabel)
               .addComponent(frame)))
           .addComponent(game0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(1, 1, 1)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
           .addGroup(layout.createSequentialGroup()
+            .addGap(14, 14, 14)
             .addComponent(game1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(game2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,11 +146,10 @@ public class ScoringStation extends JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(game5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
           .addGroup(layout.createSequentialGroup()
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(roll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pinsetter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(pause, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(abort)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(maintenance)))
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -179,12 +157,6 @@ public class ScoringStation extends JFrame {
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
-
-  private void pauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pauseActionPerformed
-  }//GEN-LAST:event_pauseActionPerformed
-
-  private void abortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abortActionPerformed
-  }//GEN-LAST:event_abortActionPerformed
 
   private void maintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maintenanceActionPerformed
     if (lane!=null) lane.status = "paused";
@@ -195,7 +167,6 @@ public class ScoringStation extends JFrame {
 
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton abort;
   private javax.swing.JLabel bowler;
   private javax.swing.JLabel bowlerLabel;
   private javax.swing.JLabel frame;
@@ -208,7 +179,7 @@ public class ScoringStation extends JFrame {
   private main.GamePanel game5;
   private javax.swing.JButton maintenance;
   private javax.swing.JLabel party;
-  private javax.swing.JButton pause;
   private main.PinsetterPanel pinsetter;
+  private main.RollPanel roll;
   // End of variables declaration//GEN-END:variables
 }

@@ -44,7 +44,7 @@ public class PinsetterPanel extends JPanel {
     jLabel5.setText("_");
 
     pinsetterLabel.setBackground(new java.awt.Color(204, 204, 204));
-    pinsetterLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    pinsetterLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
     pinsetterLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     pinsetterLabel.setText("Pinsetter");
     pinsetterLabel.setBorder(new javax.swing.border.MatteBorder(null));
