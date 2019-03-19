@@ -199,7 +199,7 @@ public class PartyDesk extends JFrame {
 
   private void addBowlerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBowlerActionPerformed
     RegistrationDesk registrationDesk = new RegistrationDesk(bowlerData);
-    registrationDesk.events.on("bowlerRegister", (event, value) -> {
+    registrationDesk.events().on("bowlerRegister", (event, value) -> {
       Bowler bowler = (Bowler) value;
       try { bowlerData.add(bowler); }
       catch (Exception e) { e.printStackTrace(); }

@@ -185,6 +185,7 @@ public class RegistrationDesk extends JFrame implements Publisher {
     Bowler bowler = fieldsBowler();
     if (bowler==null) return;
     setVisible(false);
+    bowlers.put(bowler.id(), bowler);
     events.emit("bowlerRegister", bowler);
   }//GEN-LAST:event_registerActionPerformed
   
