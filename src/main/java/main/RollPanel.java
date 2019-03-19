@@ -5,26 +5,25 @@ import javax.swing.*;
 
 
 public class RollPanel extends JPanel implements Publisher {
-  private final Pinsetter pinsetter;
   private final JButton[] pins;
   private final EventMap events;
+  private Pinsetter pinsetter;
   
   
   public RollPanel() {
-    this(new Pinsetter());
-  }
-  
-  public RollPanel(Pinsetter pinsetter) {
     initComponents();
     events = new EventMap();
-    this.pinsetter = pinsetter;
     pins = new JButton[] {pin0, pin1, pin2, pin3, pin4, pin5, pin6, pin7, pin8, pin9};
   }
   
-  
+
   @Override
   public EventMap events() {
     return events;
+  }
+  
+  public void update(Pinsetter pinsetter) {
+    this.pinsetter = pinsetter;
   }
 
   @SuppressWarnings("unchecked")

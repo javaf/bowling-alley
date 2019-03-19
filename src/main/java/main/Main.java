@@ -29,6 +29,9 @@ public class Main extends Thread {
     controlDesk.events().on("close", (e, data) -> {
       System.exit(0);
     });
+    controlDesk.events().on("roll0", (e, data) -> addRoll(lanes.get(0), (Roll)data));
+    controlDesk.events().on("roll1", (e, data) -> addRoll(lanes.get(1), (Roll)data));
+    controlDesk.events().on("roll2", (e, data) -> addRoll(lanes.get(2), (Roll)data));
     controlDesk.events().on("laneComplete", (e, data) -> {
       Lane lane = lanes.get((int)data);
       Party party = lane.party();
@@ -59,15 +62,19 @@ public class Main extends Thread {
         }
         Game game = lane.game();
         Bowler bowler = game.bowler();
+        if (bowler.skill()==0) continue;
         Pinsetter pinsetter = lane.pinsetter();
-        double skill = bowler!=null? bowler.skill() : Math.random();
-        Roll roll = new Roll(pinsetter, skill);
-        lane.addRoll(roll);
-        controlDesk.update(partyQueue, lanes);
-        lane.update();
+        double skill = bowler.skill();
+        addRoll(lane, new Roll(pinsetter, skill));
       }
-      try { Thread.sleep(500); }
+      try { Thread.sleep(1000); }
       catch (InterruptedException e) {}
     }
+  }
+  
+  private static void addRoll(Lane lane, Roll roll) {
+    lane.addRoll(roll);
+    controlDesk.update(partyQueue, lanes);
+    lane.update();
   }
 }

@@ -14,10 +14,11 @@ public class LanePanel extends JPanel {
     initComponents();
     events = new EventMap();
     scoringStation = new ScoringStation();
-    events.on("laneComplete", (event, value) -> {
-      scoringStation.events.emit(event, value);
+    events.on("laneComplete", (e, data) -> {
+      scoringStation.events.emit(e, data);
     });
-    scoringStation.events.on("maintenanceNeeded", (event, value) -> {
+    scoringStation.events.on("roll", (e, data) -> events.emit(e, data));
+    scoringStation.events.on("maintenanceNeeded", (e, data) -> {
       maintenance.setBackground(Color.RED);
       maintenance.setText("Maintenance");
     });

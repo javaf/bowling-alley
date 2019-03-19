@@ -16,6 +16,7 @@ public class ScoringStation extends JFrame {
     events.on("maintenanceDone", (e, data) -> {
       maintenance.setBackground(null);
     });
+    roll.events().on("*", (e, data) -> events.emit(e, data));
   }
   
   public void update(Lane lane) {
@@ -23,6 +24,7 @@ public class ScoringStation extends JFrame {
     party.setText(lane.name());
     bowler.setText(lane.isEmpty()? "?" : lane.game().bowler().id());
     frame.setText(""+lane.progress());
+    roll.update(lane.pinsetter());
     pinsetter.update(lane.pinsetter());
     for (int i=0; i<games.length; i++) {
       Game game = i<lane.size()? lane.get(i) : null;

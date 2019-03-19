@@ -185,6 +185,8 @@ public class PartyDesk extends JFrame implements Publisher {
 
   private void addPartyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartyActionPerformed
     Bowler bowler = bowlers.get(bowlerList.getSelectedValue());
+    System.out.println(bowlerList.getSelectedValue());
+    System.out.println(bowlers);
     if (party.full()) { message.setText("Party is full!"); return; }
     if (bowler==null) { message.setText("Bowler not found!"); return; }
     if (party.contains(bowler)) { message.setText("Bowler already added!"); return; }

@@ -8,6 +8,7 @@ public class BowlerDatabase extends BowlerData {
   private static final String ID = "id";
   private static final String NAME = "name";
   private static final String EMAIL = "email";
+  private static final String SKILL = "skill";
   private final Connection db;
   private final String table;
   
@@ -26,11 +27,12 @@ public class BowlerDatabase extends BowlerData {
 
   @Override
   public void add(Bowler bowler) throws SQLException {
-    String sql = String.format("REPLACE INTO \"%s\" (\"%s\", \"%s\", \"%s\") VALUES (?, ?, ?)", table, ID, NAME, EMAIL);
+    String sql = String.format("REPLACE INTO \"%s\" (\"%s\", \"%s\", \"%s\", \"%s\") VALUES (?, ?, ?, ?)", table, ID, NAME, EMAIL, SKILL);
     PreparedStatement s = db.prepareStatement(sql);
     s.setString(1, bowler.id());
     s.setString(2, bowler.name());
     s.setString(3, bowler.email());
+    s.setDouble(4, bowler.skill());
     s.executeUpdate();
     put(bowler.name(), bowler);
   }
@@ -56,8 +58,9 @@ public class BowlerDatabase extends BowlerData {
       String id = rows.getString(ID);
       String name = rows.getString(NAME);
       String email = rows.getString(EMAIL);
-      Bowler bowler = new Bowler(id, name, email);
-      put(bowler.name(), bowler);
+      double skill = rows.getDouble(SKILL);
+      Bowler bowler = new Bowler(id, name, email, skill);
+      put(bowler.id(), bowler);
     }
   }
   
@@ -68,7 +71,8 @@ public class BowlerDatabase extends BowlerData {
       String id = rows.getString(ID);
       String name = rows.getString(NAME);
       String email = rows.getString(EMAIL);
-      Bowler bowler = new Bowler(id, name, email);
+      double skill = rows.getDouble(SKILL);
+      Bowler bowler = new Bowler(id, name, email, skill);
       bowlers.add(bowler);
     }
     return bowlers;

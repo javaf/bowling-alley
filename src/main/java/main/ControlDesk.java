@@ -20,6 +20,9 @@ public class ControlDesk extends JFrame implements Publisher {
     events = new EventMap();
     lanes = new LanePanel[] {lane0, lane1, lane2};
     this.bowlers = bowlers;
+    lane0.events.on("roll", (e, data) -> events.emit("roll0", data));
+    lane1.events.on("roll", (e, data) -> events.emit("roll1", data));
+    lane2.events.on("roll", (e, data) -> events.emit("roll2", data));
     events.on("laneComplete", (e, data) -> {
       lanes[(int)data].events.emit(e, data);
     });
