@@ -4,27 +4,30 @@ import iiit.util.*;
 import javax.swing.*;
 
 
-public class PartyDesk extends JFrame {
-  public final EventMap events;
+public class PartyDesk extends JFrame implements Publisher {
   public final Party party;
-  private final BowlerData bowlerData;
+  private final BowlerData bowlers;
+  private final EventMap events;
 
   
   public PartyDesk() {
-    this(null);
+    this(new BowlerData());
   }
   
-  public PartyDesk(BowlerData bowlerData) {
+  public PartyDesk(BowlerData bowlers) {
     initComponents();
     events = new EventMap();
     party = new Party();
-    this.bowlerData = bowlerData;
+    this.bowlers = bowlers;
     partyList.setListData(party.ids());
-    if (bowlerData!=null) bowlerList.setListData(bowlerData.ids());
-    JFrames.showCenter(this);
-    setVisible(true);
+    bowlerList.setListData(bowlers.ids());
   }
 
+  
+  @Override
+  public EventMap events() {
+    return events;
+  }
   
   @SuppressWarnings("unchecked")
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -181,7 +184,7 @@ public class PartyDesk extends JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
   private void addPartyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartyActionPerformed
-    Bowler bowler = bowlerData.get(bowlerList.getSelectedValue());
+    Bowler bowler = bowlers.get(bowlerList.getSelectedValue());
     if (party.full()) { message.setText("Party is full!"); return; }
     if (bowler==null) { message.setText("Bowler not found!"); return; }
     if (party.contains(bowler)) { message.setText("Bowler already added!"); return; }
@@ -190,7 +193,7 @@ public class PartyDesk extends JFrame {
   }//GEN-LAST:event_addPartyActionPerformed
 
   private void removePartyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePartyActionPerformed
-    Bowler bowler = bowlerData.get(partyList.getSelectedValue());
+    Bowler bowler = bowlers.get(partyList.getSelectedValue());
     if (party.isEmpty()) { message.setText("Party is empty!"); return; }
     if (bowler==null) { message.setText("Bowler not found!"); return; }
     party.remove(bowler);
@@ -198,13 +201,12 @@ public class PartyDesk extends JFrame {
   }//GEN-LAST:event_removePartyActionPerformed
 
   private void addBowlerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBowlerActionPerformed
-    RegistrationDesk registrationDesk = new RegistrationDesk(bowlerData);
-    registrationDesk.events().on("bowlerRegister", (event, value) -> {
-      Bowler bowler = (Bowler) value;
-      try { bowlerData.add(bowler); }
-      catch (Exception e) { e.printStackTrace(); }
+    RegistrationDesk registrationDesk = new RegistrationDesk(bowlers);
+    JFrames.showCenter(registrationDesk);
+    registrationDesk.events().on("bowlerRegister", (e, data) -> {
+      Bowler bowler = (Bowler)data;
       party.add(bowler);
-      bowlerList.setListData(bowlerData.ids());
+      bowlerList.setListData(bowlers.ids());
       partyList.setListData(party.ids());
     });
   }//GEN-LAST:event_addBowlerActionPerformed
@@ -213,7 +215,6 @@ public class PartyDesk extends JFrame {
     events.emit("partyAdd", party);
     setVisible(false);
   }//GEN-LAST:event_finishedActionPerformed
-
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton addBowler;

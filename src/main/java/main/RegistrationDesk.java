@@ -1,20 +1,19 @@
 package main;
 import iiit.util.*;
-import java.util.*;
 import java.util.regex.*;
 import javax.swing.*;
 
 
 public class RegistrationDesk extends JFrame implements Publisher {
+  private final BowlerData bowlers;
   private final EventMap events;
-  private final Map<String, Bowler> bowlers;
   
 
   public RegistrationDesk() {
-    this(new HashMap<>());
+    this(new BowlerData());
   }
   
-  public RegistrationDesk(Map<String, Bowler> bowlers) {
+  public RegistrationDesk(BowlerData bowlers) {
     initComponents();
     events = new EventMap();
     this.bowlers = bowlers;
@@ -185,7 +184,8 @@ public class RegistrationDesk extends JFrame implements Publisher {
     Bowler bowler = fieldsBowler();
     if (bowler==null) return;
     setVisible(false);
-    bowlers.put(bowler.id(), bowler);
+    try { bowlers.add(bowler); }
+    catch(Exception err) { message.setText(err.getMessage()); }
     events.emit("bowlerRegister", bowler);
   }//GEN-LAST:event_registerActionPerformed
   

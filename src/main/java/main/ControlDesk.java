@@ -6,25 +6,22 @@ import javax.swing.*;
 
 
 public class ControlDesk extends JFrame {
-  public final EventMap events;
   private final LanePanel[] lanes;
-  private final BowlerData bowlerData;
+  private final BowlerData bowlers;
+  public final EventMap events;
   
   
   public ControlDesk() {
-    this(null);
+    this(new BowlerData());
   }
   
-  public ControlDesk(BowlerData bowlerData) {
+  public ControlDesk(BowlerData bowlers) {
     initComponents();
-    lanes = new LanePanel[] {lane0, lane1, lane2};
     events = new EventMap();
-    this.bowlerData = bowlerData;
-    JFrames.showCenter(this);
-    setVisible(true);
-    events.on("laneComplete", (event, value) -> {
-      int i = (int) value;
-      lanes[i].events.emit(event, value);
+    lanes = new LanePanel[] {lane0, lane1, lane2};
+    this.bowlers = bowlers;
+    events.on("laneComplete", (e, data) -> {
+      lanes[(int)data].events.emit(e, data);
     });
   }
   
@@ -133,8 +130,9 @@ public class ControlDesk extends JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
   private void addPartyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartyActionPerformed
-    PartyDesk partyDesk = new PartyDesk(bowlerData);
-    partyDesk.events.on("*", (event, value) -> events.emit(event, value));
+    PartyDesk partyDesk = new PartyDesk(bowlers);
+    JFrames.showCenter(partyDesk);
+    partyDesk.events().on("*", (e, data) -> events.emit(e, data));
   }//GEN-LAST:event_addPartyActionPerformed
 
   private void finishedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishedActionPerformed

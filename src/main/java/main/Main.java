@@ -1,4 +1,5 @@
 package main;
+import iiit.swing.JFrames;
 import java.sql.*;
 import java.util.*;
 
@@ -19,6 +20,7 @@ public class Main extends Thread {
     for (int i=0; i<numLanes; i++)
       lanes.add(new Lane2());
     controlDesk = new ControlDesk(bowlerData);
+    JFrames.showCenter(controlDesk);
     controlDesk.update(partyQueue, lanes);
     controlDesk.events.on("partyAdd", (event, value) -> {
       partyQueue.add((Party) value);
