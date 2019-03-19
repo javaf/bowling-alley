@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -53,11 +53,14 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="game0" min="-2" max="-2" attributes="0"/>
-                  <Component id="game1" min="-2" max="-2" attributes="0"/>
-                  <Component id="game2" min="-2" max="-2" attributes="0"/>
-                  <Component id="game3" min="-2" max="-2" attributes="0"/>
-                  <Component id="game4" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                      <Component id="game0" min="-2" max="-2" attributes="0"/>
+                      <Component id="game1" min="-2" max="-2" attributes="0"/>
+                      <Component id="game2" min="-2" max="-2" attributes="0"/>
+                      <Component id="game3" min="-2" max="-2" attributes="0"/>
+                      <Component id="game4" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="game5" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -93,6 +96,8 @@
                       <Component id="game3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="game4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="game5" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="pinsetter" min="-2" max="-2" attributes="0"/>
@@ -208,6 +213,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="maintenanceActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="main.GamePanel" name="game5">
     </Component>
   </SubComponents>
 </Form>

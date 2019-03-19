@@ -14,7 +14,6 @@ public class ScoreDesk extends JFrame {
   public ScoreDesk(RecordData recordData) {
     initComponents();
     this.recordData = recordData;
-    setVisible(true);
   }
 
 

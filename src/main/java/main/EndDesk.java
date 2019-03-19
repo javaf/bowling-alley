@@ -1,12 +1,12 @@
 package main;
-import iiit.swing.JFrames;
-import iiit.util.EventMap;
+import iiit.swing.*;
+import iiit.util.*;
 import javax.swing.*;
 
-public class EndDesk extends JFrame {
-  public final EventMap events;
+public class EndDesk extends JFrame implements Publisher {
   private final Party party;
   private final RecordData recordData;
+  private final EventMap events;
 
   
   public EndDesk() {
@@ -20,10 +20,13 @@ public class EndDesk extends JFrame {
     events = new EventMap();
     ask.setText(party.name()+" game complete!");
     partyList.setListData(party.ids());
-    JFrames.showCenter(this);
-    setVisible(true);
   }
   
+  
+  @Override
+  public EventMap events() {
+    return events;
+  }
   
   @SuppressWarnings("unchecked")
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -125,6 +128,7 @@ public class EndDesk extends JFrame {
 
   private void viewRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewRecordsActionPerformed
     ScoreDesk scoreDesk = new ScoreDesk(recordData);
+    JFrames.showCenter(scoreDesk);
   }//GEN-LAST:event_viewRecordsActionPerformed
 
 

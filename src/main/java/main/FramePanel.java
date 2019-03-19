@@ -1,6 +1,7 @@
 package main;
 import javax.swing.*;
 
+
 public class FramePanel extends JPanel {
   private final JLabel[] rolls;
   

@@ -5,10 +5,10 @@ import java.util.*;
 import javax.swing.*;
 
 
-public class ControlDesk extends JFrame {
+public class ControlDesk extends JFrame implements Publisher {
   private final LanePanel[] lanes;
   private final BowlerData bowlers;
-  public final EventMap events;
+  private final EventMap events;
   
   
   public ControlDesk() {
@@ -25,12 +25,17 @@ public class ControlDesk extends JFrame {
     });
   }
   
+  
   public void update(PartyQueue partyQueue, List<Lane> lanes) {
     this.partyQueue.setListData(partyQueue.names());
     for (int i=0; i<this.lanes.length; i++)
       this.lanes[i].update(lanes.get(i));
   }
-
+  
+  @Override
+  public EventMap events() {
+    return events;
+  }
 
   @SuppressWarnings("unchecked")
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
