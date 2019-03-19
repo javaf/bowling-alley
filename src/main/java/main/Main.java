@@ -62,6 +62,7 @@ public class Main extends Thread {
         }
         Game game = lane.game();
         Bowler bowler = game.bowler();
+        controlDesk.update(partyQueue, lanes);
         if (bowler.skill()==0) continue;
         Pinsetter pinsetter = lane.pinsetter();
         double skill = bowler.skill();

@@ -10,7 +10,7 @@ public class RegistrationDesk extends JFrame implements Publisher {
   
 
   public RegistrationDesk() {
-    this(new BowlerData());
+    this(null);
   }
   
   public RegistrationDesk(BowlerData bowlers) {

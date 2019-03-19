@@ -138,6 +138,7 @@ public class ControlDesk extends JFrame implements Publisher {
   }// </editor-fold>//GEN-END:initComponents
 
   private void addPartyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartyActionPerformed
+    System.out.println(bowlers);
     PartyDesk partyDesk = new PartyDesk(bowlers);
     JFrames.showCenter(partyDesk);
     partyDesk.events().on("*", (e, data) -> events.emit(e, data));

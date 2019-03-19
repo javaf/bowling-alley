@@ -26,7 +26,7 @@ public class BowlerDatabase extends BowlerData {
   
 
   @Override
-  public void add(Bowler bowler) throws SQLException {
+  public void add(Bowler bowler) throws Exception {
     String sql = String.format("REPLACE INTO \"%s\" (\"%s\", \"%s\", \"%s\", \"%s\") VALUES (?, ?, ?, ?)", table, ID, NAME, EMAIL, SKILL);
     PreparedStatement s = db.prepareStatement(sql);
     s.setString(1, bowler.id());
@@ -34,7 +34,7 @@ public class BowlerDatabase extends BowlerData {
     s.setString(3, bowler.email());
     s.setDouble(4, bowler.skill());
     s.executeUpdate();
-    put(bowler.name(), bowler);
+    super.add(bowler);
   }
   
   public List<Bowler> query(String query) throws SQLException {
@@ -45,7 +45,7 @@ public class BowlerDatabase extends BowlerData {
   
   
   private void createTableIfNotExists() throws SQLException {
-    String sql = String.format("CREATE TABLE IF NOT EXISTS \"%s\" (\"%s\" TEXT PRIMARY KEY, \"%s\" TEXT, \"%s\" TEXT)", table, ID, NAME, EMAIL);
+    String sql = String.format("CREATE TABLE IF NOT EXISTS \"%s\" (\"%s\" TEXT PRIMARY KEY, \"%s\" TEXT, \"%s\" TEXT, \"%s\" REAL)", table, ID, NAME, EMAIL, SKILL);
     PreparedStatement s = db.prepareStatement(sql);
     s.executeUpdate();
   }

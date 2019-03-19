@@ -306,7 +306,7 @@ public class RollPanel extends JPanel implements Publisher {
     boolean _foul = foul.getText().equals("1");
     boolean[] hits = new boolean[pins.length];
     for (int i=0; i<pins.length; i++)
-      hits[i] = pins[i].getBackground()==null;
+      hits[i] = pins[i].getBackground().equals(Color.GRAY);
     events.emit("roll", new Roll(pinsetter, hits, _gutter, _foul));
   }//GEN-LAST:event_performRollActionPerformed
 
