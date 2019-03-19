@@ -1,5 +1,4 @@
 package main;
-import iiit.swing.*;
 import iiit.util.*;
 import java.awt.Color;
 import javax.swing.*;
@@ -14,7 +13,6 @@ public class ScoringStation extends JFrame {
     initComponents();
     events = new EventMap();
     games = new GamePanel[] {game0, game1, game2, game3, game4};
-    JFrames.showCenter(this);
     pause.setVisible(false);
     abort.setVisible(false);
     events.on("maintenanceDone", (event, value) -> {
