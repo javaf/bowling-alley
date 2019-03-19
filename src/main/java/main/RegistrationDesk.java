@@ -192,12 +192,15 @@ public class RegistrationDesk extends JFrame implements Publisher {
   
   private Bowler fieldsBowler() {
     String error = null;
-    if (!patternMatches("^\\w+$", id.getText())) error = "Nickname not valid!";
-    else if (!patternMatches("^[\\w\\s]+$", name.getText())) error = "Fullname not valid!";
-    else if (!patternMatches("^.+@.+\\..+$", email.getText())) error = "Email not valid!";
-    else if (bowlers.containsKey(id.getText())) error = "Nickname already exists!";
+    String _id = id.getText(), _name = name.getText(), _email = email.getText();
+    double _skill = Double.parseDouble(skill.getText());
+    if (!patternMatches("^\\w+$", _id)) error = "Nickname not valid!";
+    else if (!patternMatches("^[\\w\\s]+$", _name)) error = "Fullname not valid!";
+    else if (!patternMatches("^.+@.+\\..+$", _email)) error = "Email not valid!";
+    else if (_skill<0 || _skill>1) error = "Skill is not within 0.0 to 1.0!";
+    else if (bowlers.containsKey(_id)) error = "Nickname already exists!";
     if (error!=null) { message.setText(error); return null; }
-    return new Bowler(id.getText(), name.getText(), email.getText());
+    return new Bowler(_id, _name, _email, _skill);
   }
   
   private static boolean patternMatches(String pattern, String text) {
