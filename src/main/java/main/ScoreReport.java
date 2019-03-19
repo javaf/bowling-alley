@@ -9,7 +9,7 @@ import java.awt.print.*;
 public class ScoreReport {
   private final Bowler bowler;
   private List<Record> scores;
-  private static final RecordData SCORES = new ScoreDatabase(Database.connection());
+  private static final RecordData SCORES = new RecordDatabase(Database.connection());
   
   public ScoreReport(Bowler bowler) {
     this.bowler = bowler;

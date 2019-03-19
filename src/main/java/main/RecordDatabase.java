@@ -3,7 +3,7 @@ import java.sql.*;
 import java.util.*;
 
 
-public class ScoreDatabase extends RecordData {
+public class RecordDatabase extends RecordData {
   private static final String ID = "\"id\" TEXT";
   private static final String DATE = "\"date\" TEXT";
   private static final String VALUE = "\"value\" TEXT";
@@ -11,11 +11,11 @@ public class ScoreDatabase extends RecordData {
   private final String table;
   
   
-  public ScoreDatabase(Connection db) {
+  public RecordDatabase(Connection db) {
     this(db, "scores");
   }
   
-  public ScoreDatabase(Connection db, String table) {
+  public RecordDatabase(Connection db, String table) {
     this.db = db;
     this.table = table;
     try { createTableIfNotExists(); }

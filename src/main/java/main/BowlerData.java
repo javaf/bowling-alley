@@ -3,7 +3,10 @@ import java.util.*;
 
 
 public abstract class BowlerData extends HashMap<String, Bowler> {
+  public abstract BowlerData load() throws Exception;
+  public abstract void add(Bowler bowler) throws Exception;
   
+
   public String[] ids() {
     int i = 0;
     String[] ids = new String[size()];
@@ -11,8 +14,4 @@ public abstract class BowlerData extends HashMap<String, Bowler> {
       ids[i++] = bowler.id();
     return ids;
   }
-  
-  
-  public abstract BowlerData load() throws Exception;
-  public abstract void add(Bowler bowler) throws Exception;
 }

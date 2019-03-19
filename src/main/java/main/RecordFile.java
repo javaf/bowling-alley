@@ -3,11 +3,11 @@ import java.io.*;
 import java.util.*;
 
 
-public class ScoreFile extends RecordData {
+public class RecordFile extends RecordData {
   private final String file;
   
   
-  public ScoreFile(String file) {
+  public RecordFile(String file) {
     this.file = file;
   }
   
