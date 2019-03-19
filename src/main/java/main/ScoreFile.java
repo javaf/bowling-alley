@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.*;
 
 
-public class ScoreFile extends ScoreData {
+public class ScoreFile extends RecordData {
   private final String file;
   
   

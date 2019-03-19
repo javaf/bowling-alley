@@ -3,7 +3,7 @@ import java.sql.*;
 import java.util.*;
 
 
-public class ScoreDatabase extends ScoreData {
+public class ScoreDatabase extends RecordData {
   private static final String ID = "\"id\" TEXT";
   private static final String DATE = "\"date\" TEXT";
   private static final String VALUE = "\"value\" TEXT";
