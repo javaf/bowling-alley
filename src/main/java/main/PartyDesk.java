@@ -1,7 +1,6 @@
 package main;
 import iiit.swing.*;
 import iiit.util.*;
-import java.io.*;
 import javax.swing.*;
 
 
@@ -15,12 +14,10 @@ public class PartyDesk extends JFrame {
     initComponents();
     events = new EventEmitter();
     party = new Party();
-    try { if(BOWLERS.isEmpty()) BOWLERS.load(); }
-    catch (Exception e) { System.err.println(e); }
     partyList.setListData(party.ids());
     bowlerList.setListData(BOWLERS.ids());
     JFrames.screenCenter(this);
-    setVisible(true);;
+    setVisible(true);
   }
 
   
