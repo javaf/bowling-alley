@@ -2,8 +2,10 @@ package main;
 import java.util.*;
 
 
-public abstract class BowlerData extends HashMap<String, Bowler> {
-  public abstract void add(Bowler bowler) throws Exception;
+public class BowlerData extends HashMap<String, Bowler> {
+  public void add(Bowler bowler) throws Exception {
+    put(bowler.id(), bowler);
+  }
   
 
   public String[] ids() {

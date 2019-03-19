@@ -1,24 +1,28 @@
 package main;
-import iiit.swing.*;
 import iiit.util.*;
+import java.util.*;
 import java.util.regex.*;
 import javax.swing.*;
 
 
-public class RegistrationDesk extends JFrame {
-  public final EventEmitter events;
-  private final BowlerData bowlers;
+public class RegistrationDesk extends JFrame implements Publisher {
+  private final EventMap events;
+  private final Map<String, Bowler> bowlers;
+  
 
   public RegistrationDesk() {
-    this(null);
+    this(new HashMap<>());
   }
   
-  public RegistrationDesk(BowlerData bowlers) {
+  public RegistrationDesk(Map<String, Bowler> bowlers) {
     initComponents();
-    events = new EventEmitter();
+    events = new EventMap();
     this.bowlers = bowlers;
-    JFrames.screenCenter(this);
-    setVisible(true);
+  }
+  
+  @Override
+  public EventMap events() {
+    return events;
   }
 
   
@@ -34,6 +38,8 @@ public class RegistrationDesk extends JFrame {
     emailLabel = new javax.swing.JLabel();
     email = new javax.swing.JTextField();
     message = new javax.swing.JLabel();
+    skill = new javax.swing.JTextField();
+    skillLabel = new javax.swing.JLabel();
     register = new javax.swing.JButton();
     cancel = new javax.swing.JButton();
 
@@ -63,6 +69,13 @@ public class RegistrationDesk extends JFrame {
     message.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     message.setText(" ");
 
+    skill.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    skill.setText("0");
+
+    skillLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    skillLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    skillLabel.setText("Skill (for AI)");
+
     javax.swing.GroupLayout newPatronLayout = new javax.swing.GroupLayout(newPatron);
     newPatron.setLayout(newPatronLayout);
     newPatronLayout.setHorizontalGroup(
@@ -86,7 +99,12 @@ public class RegistrationDesk extends JFrame {
             .addGap(0, 0, Short.MAX_VALUE))
           .addGroup(newPatronLayout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(message, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(message, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newPatronLayout.createSequentialGroup()
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(skillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(skill, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
         .addContainerGap())
     );
     newPatronLayout.setVerticalGroup(
@@ -102,9 +120,15 @@ public class RegistrationDesk extends JFrame {
           .addComponent(nameLabel)
           .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(newPatronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addGroup(newPatronLayout.createSequentialGroup()
+            .addGap(3, 3, 3)
+            .addComponent(emailLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(newPatronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(emailLabel)
-          .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(skillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(skill))
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
@@ -191,5 +215,7 @@ public class RegistrationDesk extends JFrame {
   private javax.swing.JLabel nameLabel;
   private javax.swing.JPanel newPatron;
   private javax.swing.JButton register;
+  private javax.swing.JTextField skill;
+  private javax.swing.JLabel skillLabel;
   // End of variables declaration//GEN-END:variables
 }

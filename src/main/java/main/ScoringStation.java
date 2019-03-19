@@ -6,15 +6,15 @@ import javax.swing.*;
 
 
 public class ScoringStation extends JFrame {
-  public final EventEmitter events;
+  public final EventMap events;
   private final GamePanel[] games;
   private Lane lane;
 
   public ScoringStation() {
     initComponents();
-    events = new EventEmitter();
+    events = new EventMap();
     games = new GamePanel[] {game0, game1, game2, game3, game4};
-    JFrames.screenCenter(this);
+    JFrames.showCenter(this);
     pause.setVisible(false);
     abort.setVisible(false);
     events.on("maintenanceDone", (event, value) -> {

@@ -5,7 +5,7 @@ import javax.swing.*;
 
 
 public class PartyDesk extends JFrame {
-  public final EventEmitter events;
+  public final EventMap events;
   public final Party party;
   private final BowlerData bowlerData;
 
@@ -16,12 +16,12 @@ public class PartyDesk extends JFrame {
   
   public PartyDesk(BowlerData bowlerData) {
     initComponents();
-    events = new EventEmitter();
+    events = new EventMap();
     party = new Party();
     this.bowlerData = bowlerData;
     partyList.setListData(party.ids());
     if (bowlerData!=null) bowlerList.setListData(bowlerData.ids());
-    JFrames.screenCenter(this);
+    JFrames.showCenter(this);
     setVisible(true);
   }
 

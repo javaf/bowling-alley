@@ -6,7 +6,7 @@ import javax.swing.*;
 
 
 public class ControlDesk extends JFrame {
-  public final EventEmitter events;
+  public final EventMap events;
   private final LanePanel[] lanes;
   private final BowlerData bowlerData;
   
@@ -18,9 +18,9 @@ public class ControlDesk extends JFrame {
   public ControlDesk(BowlerData bowlerData) {
     initComponents();
     lanes = new LanePanel[] {lane0, lane1, lane2};
-    events = new EventEmitter();
+    events = new EventMap();
     this.bowlerData = bowlerData;
-    JFrames.screenCenter(this);
+    JFrames.showCenter(this);
     setVisible(true);
     events.on("laneComplete", (event, value) -> {
       int i = (int) value;

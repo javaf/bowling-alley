@@ -1,10 +1,10 @@
 package main;
 import iiit.swing.JFrames;
-import iiit.util.EventEmitter;
+import iiit.util.EventMap;
 import javax.swing.*;
 
 public class EndDesk extends JFrame {
-  public final EventEmitter events;
+  public final EventMap events;
   private final Party party;
   private final RecordData recordData;
 
@@ -17,10 +17,10 @@ public class EndDesk extends JFrame {
     initComponents();
     this.party = party;
     this.recordData = recordData;
-    events = new EventEmitter();
+    events = new EventMap();
     ask.setText(party.name()+" game complete!");
     partyList.setListData(party.ids());
-    JFrames.screenCenter(this);
+    JFrames.showCenter(this);
     setVisible(true);
   }
   

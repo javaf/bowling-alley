@@ -5,14 +5,14 @@ import javax.swing.*;
 
 
 public class LanePanel extends JPanel {
-  public final EventEmitter events;
+  public final EventMap events;
   private final ScoringStation scoringStation; 
   private Lane lane;
 
   
   public LanePanel() {
     initComponents();
-    events = new EventEmitter();
+    events = new EventMap();
     scoringStation = new ScoringStation();
     events.on("laneComplete", (event, value) -> {
       scoringStation.events.emit(event, value);
