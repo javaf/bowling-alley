@@ -18,7 +18,7 @@ public class Main extends Thread {
     lanes = new ArrayList<>();
     for (int i=0; i<numLanes; i++)
       lanes.add(new Lane2());
-    controlDesk = new ControlDesk();
+    controlDesk = new ControlDesk(bowlerData);
     controlDesk.update(partyQueue, lanes);
     controlDesk.events.on("partyAdd", (event, value) -> {
       partyQueue.add((Party) value);
