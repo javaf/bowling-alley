@@ -17,6 +17,7 @@ public class PrintableText implements Printable {
 
   @Override
   public int print(Graphics g, PageFormat pageFormat, int pageIndex) {
+    System.out.println("text: "+text.length()+" pageIndex: "+pageIndex);
     if (pageIndex > 0) {
       return NO_SUCH_PAGE;
     }

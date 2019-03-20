@@ -63,6 +63,7 @@ public class ScoreReport {
   }
   
   private static void printText(String content) {
+    System.out.println(content);
     PrinterJob job = PrinterJob.getPrinterJob();
     PrintableText printobj = new PrintableText(content);
     job.setPrintable(printobj);

@@ -44,8 +44,6 @@ public class Main extends Thread {
       EndDesk endDesk = new EndDesk(party, recordData);
       JFrames.showCenter(endDesk);
       endDesk.events().on("partyQueue", (_e, _data) -> partyQueue.addLast((Party)_data));
-      endDesk.events().on("bowlerPrint", (_e, _data) -> new ScoreReport(recordData, (Bowler)_data).print());
-      endDesk.events().on("bowlerEmail", (_e, _data) -> new ScoreReport(recordData, (Bowler)_data).email());
     });
     new Main().start();
   }
@@ -71,7 +69,7 @@ public class Main extends Thread {
         double skill = bowler.skill();
         addRoll(lane, new Roll(pinsetter, skill));
       }
-      try { Thread.sleep(1000); }
+      try { Thread.sleep(500); }
       catch (InterruptedException e) {}
     }
   }

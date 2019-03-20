@@ -84,11 +84,11 @@ public class Roll implements Comparable<Roll> {
   
   @Override
   public String toString() {
+    if(gutter()) return "G";
+    if(foul()) return "F";
     if(strike()) return "X";
     if(spare()) return "/";
     if(miss()) return "-";
-    if(gutter()) return "G";
-    if(foul()) return "F";
     if(split()) return "S"+score();
     if(wide()) return "W"+score();
     return ""+score();

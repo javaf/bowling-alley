@@ -2,11 +2,14 @@ package main;
 import iiit.swing.*;
 import iiit.util.*;
 import javax.swing.*;
+import java.util.*;
+
 
 public class EndDesk extends JFrame implements Publisher {
   private final Party party;
   private final RecordData recordData;
   private final EventMap events;
+  private final Map<String, ScoreReport> reports;
 
   
   public EndDesk() {
@@ -20,6 +23,9 @@ public class EndDesk extends JFrame implements Publisher {
     events = new EventMap();
     ask.setText(party.name()+" game complete!");
     partyList.setListData(party.ids());
+    reports = new HashMap<>();
+    for (Bowler bowler : party)
+      reports.put(bowler.id(), new ScoreReport(recordData, bowler));
   }
   
   
@@ -123,7 +129,7 @@ public class EndDesk extends JFrame implements Publisher {
 
   private void printReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printReportActionPerformed
     Bowler bowler = partyListBowler();
-    if (bowler!=null) events.emit("bowlerPrint", bowler);
+    if (bowler!=null) reports.get(bowler.id()).print();
   }//GEN-LAST:event_printReportActionPerformed
 
   private void viewRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewRecordsActionPerformed
