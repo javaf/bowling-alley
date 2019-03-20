@@ -14,6 +14,7 @@ public class RollPanel extends JPanel implements Publisher {
     initComponents();
     events = new EventMap();
     pins = new JButton[] {pin0, pin1, pin2, pin3, pin4, pin5, pin6, pin7, pin8, pin9};
+    events.on("rollRequest", (e, data) -> performRoll.setBackground(null));
   }
   
 
@@ -307,6 +308,7 @@ public class RollPanel extends JPanel implements Publisher {
     boolean[] hits = new boolean[pins.length];
     for (int i=0; i<pins.length; i++)
       hits[i] = pins[i].getBackground().equals(Color.GRAY);
+    performRoll.setBackground(Color.GRAY);
     events.emit("roll", new Roll(pinsetter, hits, _gutter, _foul));
   }//GEN-LAST:event_performRollActionPerformed
 

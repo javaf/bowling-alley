@@ -14,6 +14,7 @@ public class LanePanel extends JPanel {
     initComponents();
     events = new EventMap();
     scoringStation = new ScoringStation();
+    events.on("rollRequest", (e, data) -> scoringStation.events.emit(e, data));
     events.on("laneComplete", (e, data) -> {
       scoringStation.events.emit(e, data);
     });
@@ -30,7 +31,7 @@ public class LanePanel extends JPanel {
     frame.setText(""+(lane.isEmpty()? 0 : lane.progress()));
     pinsStanding.setText(""+lane.pinsetter().standing());
     setBackground(lane.complete()? null : Color.LIGHT_GRAY);
-    if (scoringStation.isVisible()) scoringStation.update(lane);
+    scoringStation.update(lane);
   }
   
 

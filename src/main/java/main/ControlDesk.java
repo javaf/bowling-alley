@@ -23,9 +23,10 @@ public class ControlDesk extends JFrame implements Publisher {
     lane0.events.on("roll", (e, data) -> events.emit("roll0", data));
     lane1.events.on("roll", (e, data) -> events.emit("roll1", data));
     lane2.events.on("roll", (e, data) -> events.emit("roll2", data));
-    events.on("laneComplete", (e, data) -> {
-      lanes[(int)data].events.emit(e, data);
-    });
+    events.on("rollRequest0", (e, data) -> lane0.events.emit("rollRequest", data));
+    events.on("rollRequest1", (e, data) -> lane1.events.emit("rollRequest", data));
+    events.on("rollRequest2", (e, data) -> lane2.events.emit("rollRequest", data));
+    events.on("laneComplete", (e, data) -> lanes[(int)data].events.emit(e, data));
   }
   
   
